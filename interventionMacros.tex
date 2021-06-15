@@ -1,0 +1,49 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%INTERVENTION MACROS%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[dvipsnames]{xcolor}
+\usepackage{xspace}
+\newcommand{\suffix}{\ensuremath{x}\xspace}            %use for a single action
+\newcommand{\suffixIdx}[1]{\ensuremath{x_{#1}}\xspace}  %use for the index to a single action
+\newcommand{\Suffix}{\ensuremath{X}\xspace}            %use for the sequence
+\newcommand{\Suffixes}{\ensuremath{\mathcal{X}_\Diamond}\xspace} %use for the set of suffixes
+\newcommand{\SuffixUnsafe}{\ensuremath{X_{\textnormal{unsafe}}}\xspace}            %use for the sequence to \undesiarable
+\newcommand{\SuffixSafe}{\ensuremath{X_{\textnormal{safe}}}\xspace}  
+\newcommand{\SuffixesUnsafe}{\ensuremath{\mathcal{X}_{\blacksquare}}\xspace}  			%this is the set of unsafe suffixes
+\newcommand{\SuffixesSafe}{\ensuremath{\mathcal{X}_{\square}}\xspace}		%this is the set of safe suffixes
+
+\newcommand{\desired}{\ensuremath{\mathrm{d}}\xspace}
+\newcommand{\undesired}{\ensuremath{\mathrm{u}}\xspace}
+\newcommand{\dandu}{\ensuremath{\mathrm{u}\cup\mathrm{d}}\xspace}
+
+
+\newcommand{\planDesired}{\ensuremath{\pi_{\desired}}\xspace}
+\newcommand{\planUndesired}{\ensuremath{\pi_{\undesired}}\xspace}
+\newcommand{\PlansDesired}{\ensuremath{\Pi_{\desired}}\xspace}
+\newcommand{\PlansUndesired}{\ensuremath{\Pi_{\undesired}}\xspace}
+
+
+\newcommand{\initialState}{\ensuremath{s_0}\xspace}  % best to avoid $I$, since that's used for the intervention problem
+\newcommand{\historyDef}{\ensuremath{H}\xspace}
+\newcommand{\historyEndState}{\ensuremath{s_{\historyDef}}\xspace}
+\newcommand{\presentedAction}{\ensuremath{o_i}\xspace}  
+
+
+\newcommand{\problemTemplate}[1]{\ensuremath{P_{\textnormal{#1}}}\xspace}
+\newcommand{\domainTemplate}[1]{\ensuremath{D_{\textnormal{#1}}}\xspace}
+\newcommand{\actionsTemplate}[1]{\ensuremath{A_{\textnormal{#1}}}\xspace}
+\newcommand{\factsTemplate}[1]{\ensuremath{F_{\textnormal{#1}}}\xspace}
+
+
+\newcommand{\problemUser}{\problemTemplate{user}}
+\newcommand{\domainUser}{\domainTemplate{user}}
+\newcommand{\factsUser}{\factsTemplate{user}}
+\newcommand{\actionsUser}{\actionsTemplate{user}}
+
+\newcommand{\problemOther}{\problemTemplate{other}}
+\newcommand{\domainOther}{\domainTemplate{other}}
+\newcommand{\factsOther}{\factsUser \cup \factsTemplate{other}}
+\newcommand{\actionsOther}{\actionsTemplate{other}}
+
+\newcommand{\domainObserver}{\domainTemplate{observer}}
+\newcommand{\factsObserver}{\factsOther}
+\newcommand{\actionsObserver}{\actionsUser \cup \actionsOther }
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

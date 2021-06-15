@@ -1,0 +1,279 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Colorado State University LaTeX Thesis Template and Documentation
+%
+% by
+%   Elliott Forney
+%   2017
+%
+% This is free and unencumbered software released into the public domain.
+% 
+% Anyone is free to copy, modify, publish, use, compile, sell, or
+% distribute this software, either in source code form or as a compiled
+% binary, for any purpose, commercial or non-commercial, and by any
+% means.
+% 
+% In jurisdictions that recognize copyright laws, the author or authors
+% of this software dedicate any and all copyright interest in the
+% software to the public domain. We make this dedication for the benefit
+% of the public at large and to the detriment of our heirs and
+% successors. We intend this dedication to be an overt act of
+% relinquishment in perpetuity of all present and future rights to this
+% software under copyright law.
+% 
+% THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+% EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+% MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+% IN NO EVENT SHALL THE AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR
+% OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+% ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+% OTHER DEALINGS IN THE SOFTWARE.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Preamble
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% use the thesis document class
+% this is derived from the standard book class
+% and supports many of the same features
+%\documentclass[master]{thesis}
+%\documentclass[master,showframe]{thesis} % showframe helps troubleshoot margins
+\documentclass[doctor]{thesis} % for a dissertation
+%\documentclass[bachelor]{thesis} % for an honor's thesis
+% fonts
+% use times font by default but you can choose a
+% different font if you would like
+%\usepackage{fourier} % fourier is also a nice choice
+\usepackage{helvet} % sans-serif helvetica works too
+%\renewcommand\familydefault{\sfdefault}
+% ams math packages
+\usepackage[cmex10]{amsmath}
+\usepackage{amsthm,amssymb}
+% graphics packages
+\usepackage[pdftex]{graphicx} % remove pdftex if you are not compiling to pdf
+\graphicspath{{./figures/}} % this places all graphics in the figures subdirectory
+% allowed graphics extensions
+% uncomment if you prefer to add extension in \includegraphics
+\DeclareGraphicsExtensions{.pdf,.png,.jpg}
+% allows the creation of subfigures
+\usepackage[caption=false]{subfig}
+% book tables are simple and look nice
+\usepackage{booktabs}
+% for specifying urls and links
+\usepackage{url}
+\urlstyle{same} % same style as regular text
+% citation and reference formatting
+\usepackage{apacite} % apa style citations, also change bibliographystyle below
+%\usepackage{cite} % math and engineering style citations
+\usepackage{algorithmicx}
+\usepackage{times}
+\usepackage{multirow}
+\usepackage{helvet}
+\usepackage{courier}
+\usepackage{graphicx}
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+\newcommand{\smallurl}[1]{\scriptsize{\url{#1}}}
+\usepackage{verbatim}
+\usepackage{tabularx}
+\usepackage[normalem]{ulem}
+\usepackage{float}
+\usepackage{subfig}
+\usepackage{amssymb}
+\usepackage{enumitem}
+% define custom commands for creating references
+% for tables, figures, equations and such
+\newcommand{\eref}[1]{\eqref{#1}}        % cite equation
+\newcommand{\fref}[1]{Figure~\ref{#1}}   % cite figure
+\newcommand{\cref}[1]{Chapter~\ref{#1}}  % cite chapter
+\newcommand{\sref}[1]{Section~\ref{#1}}  % cite section/sub(sub)section
+\newcommand{\aref}[1]{Appendix~\ref{#1}} % cite appendix
+\newcommand{\tref}[1]{Table~\ref{#1}}    % cite table
+\newcommand{\dref}[1]{Definition~\ref{#1}} % cite definition
+% commands from AAAI paper format
+\DeclareMathAlphabet\mathbfcal{OMS}{cmsy}{b}{n}
+% Use the postscript times font!
+\newenvironment{smallenum}{\setlength{\topsep}{0.0 truein}\begin{enumerate} 
+   \setlength{\leftmargin}{.25 truein}
+   \setlength{\parsep}{0.0 truein}
+   \setlength{\parskip}{0.0 truein}
+   \setlength{\itemsep}{0.0 truein}}{\end{enumerate}}
+\newenvironment{smalldesc}{\setlength{\topsep}{0.0 truein}\begin{description} 
+   \setlength{\leftmargin}{.25 truein}
+   \setlength{\parsep}{0.0 truein}
+   \setlength{\parskip}{0.0 truein}
+   \setlength{\itemsep}{0.0 truein}}{\end{description}}
+\usepackage[dvipsnames,svgnames]{xcolor}
+%known valid colors include: red, blu, ForestGreen, cyan, DarkOrchid
+
+%mak: list with no symbol
+\newenvironment{simplelist}{
+ \begin{list}{}
+  {\setlength{\itemsep}{1pt}
+   \setlength{\parsep}{1pt}
+   \setlength{\topsep}{2pt}
+   \setlength{\partopsep}{1pt}
+   \setlength{\leftmargin}{3em}
+   \setlength{\labelwidth}{3em}
+   \setlength{\labelsep}{0.6em}}}
+  {\end{list}}
+%mak: list with a dash
+\newenvironment{dashlist}{
+ \begin{list}{-}
+  {\setlength{\itemsep}{0pt}
+   \setlength{\parsep}{0pt}
+   \setlength{\topsep}{0pt}
+   \setlength{\partopsep}{1pt}
+   \setlength{\leftmargin}{1.5em}
+   \setlength{\labelwidth}{2em}
+   \setlength{\labelsep}{0.6em}}}
+  {\end{list}}
+\usepackage{amsthm}
+\theoremstyle{plain}
+\newtheorem{definition}{Definition}
+\frenchspacing
+\setlength{\pdfpagewidth}{8.5in}
+\setlength{\pdfpageheight}{11in} 
+
+\input{interventionMacros}
+
+%colors
+\definecolor{light-gray}{gray}{0.95} 
+%
+% Title Page
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% title of your thesis
+\title{Helping Humans and Agents Avoid Undesirable Consequences with Models of Intervention}
+%
+%% author's name
+\author{Sachini Weerawardhana}
+%
+%% author's email address
+%\email{sachini@cs.colostate.edu}
+%
+%% department name
+\department{Department of Computer Science}
+%
+%% semester of completion
+\semester{Summer 2021}
+%
+%% committee member names
+\advisor{Prof. Darrell Whitley}
+\committee{Prof. Indrajit Ray}
+\committee{Prof. Sangmi Pallickara}
+\committee{Prof. Francisco Ortega}
+\committee{Prof. Carol Seger} 
+% Copyright Page
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% here is an example of student copyright declaration
+% note that the \copyright command prints the copyright symbol,
+% so we use the name \mycopyright instead
+%\mycopyright{%
+%Copyright by John M. Doe 20\_\_ \\
+%All Rights Reserved
+%}
+% here is an example of a creative commons copyright license
+% ask the graduate school for more information, if you are interested
+%\mycopyright{%
+%This work is licensed under the Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 United States License.
+%
+%\vspace{3em}
+%
+%To view a copy of this license, visit:
+%
+%\vspace{2em}
+%
+%\url{http://creativecommons.org/licenses/by-nc-nd/4.0/legalcode}
+%
+%\vspace{3em}
+%
+%Or send a letter to:
+%
+%\vspace{2em}
+%
+%Creative Commons
+%
+%171 Second Street, Suite 300
+%
+%San Francisco, California, 94105, USA.
+%}
+% Abstract
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\abstract{%
+%This document aims to get you started typesetting your thesis or dissertation in \LaTeX{}.  It serves both as a sample and as the documentation for this package.  Please review the entire document for helpful tips about formatting your thesis or dissertation.  To get started writing your thesis, copy \textit{sample.tex} to something like \textit{thesis.tex} and begin inserting your own content.
+%}
+% Acknowledgments 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\acknowledgements{%
+%I would like to thank the CSU Graduate Student Council and the CSU Graduate School for initiating, commissioning and supporting this project.  I would also like to thank Nicole Ramo for her support and ensuring that we followed through with this project to completion.  I would like to thank Leif Anderson, who created and supported the previous LaTeX template for a number of years.  Although I have never met Leif, his work was invaluable in the creation of this package and has helped many students get their thesis approved by the CSU graduate school.  Finally, I would like to thank everyone who helps to contribute to this package.  Your work will help many CSU graduate students to create professional, beautiful and compelling theses and dissertations using LaTex.  Last but not least, thank you to the creators and maintaners of \LaTeX{} for creating a fantastic typesetting tool.
+%}
+% Metadata
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% consider using hyperref to insert pdf metadata and make links clickable
+% this is nice but can cause tricky problems, use at your own risk
+%\usepackage[pdfpagelabels,pdfusetitle,colorlinks=false,pdfborder={0 0 0}]{hyperref}
+\begin{document} % preamble is complete, add any custom packages above
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\frontmatter % starts preliminary pages
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\maketitle              % insert title page
+%\makemycopyright        % insert copyright page
+%\makeabstract           % insert abstract page
+%\makeacknowledgements   % insert acknowledgements page
+% any extra preliminary pages can be added here
+% below is an example of a dedication page
+% the dedication page is optional
+%\prelimtocentry{Dedication} % add table of contents entry
+%\begin{flatcenter} % center without extra space
+%
+%    % page title
+%    DEDICATION
+%
+%    %\vspace{3em} % place at top
+%    \vfill % or center on page
+%
+%    \noindent \textit{I would like to dedicate this thesis to my dog fluffy.}
+%    \vfill % fill extra space at bottom
+%\end{flatcenter}
+%%\newpage
+%
+\tableofcontents    % insert table of contents
+\listoftables       % insert list of tables (optional)
+\listoffigures      % insert list of figures (optional)
+\mainmatter % starts thesis body
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{ch1}
+
+\input{ch2}
+
+\input{ch3}
+
+\input{ch4}
+
+\input{ch5}
+
+\input{ch6}
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  Appendices
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\backmatter % starts unnumbered supplementary material
+\appendix
+\input{ap1}
+\input{ap2}
+\input{ap3}
+\input{ap4}
+\input{ap5}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Bibliography
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% unsorted BibTeX style
+% check here for more:  https://www.sharelatex.com/learn/Bibtex_bibliography_styles
+\newpage
+\bibliographystyle{apacite} % apa style bibliography
+\bibliography{refsicaps19.bib}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
