@@ -1049,7 +1049,7 @@ We want to address the following questions:
 \begin{enumerate}
 \item Does the Interactive Human-aware Intervention have an effect on the solution length?
 \item Does the Interactive Human-aware Intervention help move the user closer to the optimal solution?
-\item Does seeing a help video move the user closer to the optimal solution?
+\item Does seeing a help video affect the solution length?
 \end{enumerate}
 
 We introduce the following evaluation metrics.
@@ -1059,12 +1059,14 @@ We introduce the following evaluation metrics.
 \item The latest time a fact landmark is eventually achieved 
 \item The number of times a fact landmark is lost and regained
 \end{enumerate}
-The question 1 is answered using the evaluation metric 1.
-The question 2 is answered using the evaluation metrics 2, 3 and 4.
-The question 3 is answered using the evaluation metrics 2, 3 and 4.
-We use the data from the control and condition groups for the planning tasks P1, P2, P4, P6, P7, P8, P9 and P10 for the evaluation.
+Question 1 is answered using the evaluation metric 1.
+Question 2 is answered using the evaluation metrics 2, 3 and 4.
+Question 3 is answered using the evaluation metrics 1.
+
+For questions 1 and 2, we use the data from the control and condition groups for the planning tasks P1, P2, P4, P6, P7, P8, P9 and P10 for the evaluation.
 We remove the planning tasks P3 and P5 because for those two tasks, the cost optimal solution while moving the forbidden vehicle is shorter than the cost optimal solution without moving the forbidden vehicle.
 We also remove the planning tasks P11, P12 and P13 because these tasks are only used in the condition group.
+For question 3 we use the data from the condition group and include the planning tasks P1 through P13.
 
 \subsubsection{Using the Landmarks}
 \label{sec:usingthelandmarks}
@@ -1156,7 +1158,7 @@ Using the new condensed plan representation for user A's solution to denote the 
 The latest times when the landmarks are achieved by the human subjects attempting the planning tasks P1, P2, P4, P6, P7, P8, P9 and P10 with the Interactive Human-aware Intervention are shown in Tables~\ref{tab:p1landmarkachievement}, ~\ref{tab:p2landmarkachievement}, ~\ref{tab:p4landmarkachievement}, ~\ref{tab:p6landmarkachievement}, ~\ref{tab:p7landmarkachievement}, ~\ref{tab:p8landmarkachievement}, ~\ref{tab:p9landmarkachievement}, and ~\ref{tab:p10landmarkachievement} respectively.
 The number of times a landmark is lost and regained for the planning tasks are shown in Tables~\ref{tab:p1landmarkregain}, ~\ref{tab:p2landmarkregain}, ~\ref{tab:p4landmarkregain}, ~\ref{tab:p6landmarkregain}, ~\ref{tab:p7landmarkregain}, ~\ref{tab:p8landmarkregain}, ~\ref{tab:p9landmarkregain}, and ~\ref{tab:p10landmarkregain}.
 
-\subsubsection{Data Preparation}
+\subsubsection{Data Preparation for Evaluation Question 1}
 We use the R statistical software for our analysis.
 The control group has 113 observations.
 The condition group has 68 observations.
@@ -1314,7 +1316,7 @@ Therefore, at $\alpha=0.05$ we do not reject $H_0$ with respect to the usage of 
 
 
 
-\subsubsection{Computing the Evaluation Metric and the Data Preparation}
+\subsubsection{Computing the Evaluation Metric and the Data Preparation for Evaluation Question 2}
 We use Figure~\ref{fig:latest} as an example to compute the evaluation metric, the latest time the landmarks are achieved.
 In Figure~\ref{fig:latest}, there are three plans for the same planning task produced by an automated planner, user X and user Y respectively.
 The plans are drawn in proportion to the number of steps.
@@ -1455,7 +1457,7 @@ We conduct TukeyHSD post-hoc analysis to identify whether the landmark achieveme
 The result show that the differences in the mean landmark achievement is not significant for any of the three categories.
 
 
-\subsubsection{Computing the Evaluation Metric and the Data Preparation}
+\subsubsection{Computing the Evaluation Metric and the Data Preparation for Evaluation Question 2}
 We use the example illustrated in Figure~\ref{fig:latest} to compute the evaluation metric, the number of times the landmarks are regained.
 In the example, the planner has achieved each landmark L1, L2, L3 only once.
 User X has also achieved each landmark only once.
@@ -1565,16 +1567,136 @@ The  Levene's test also fails for the design that considers the Interactive Huma
 Therefore, we ignore the results and do not draw any conclusions from the ANOVA.
 
 \subsubsection{Effect of Help Video}
+We address the question ``Does seeing a help video move the user closer to the optimal solution?''.
+For the analysis we use the data from the Interactive Human-aware Intervention  human subject study, where 135 participants completed 13 planning tasks.
+Recall that during the experiment the participants were randomly assigned to two groups where one group watched a 44 second help video on how to solve the Rush Hour planning task while avoiding the forbidden vehicle.
+The other group did not watch the help video.
+72 subjects watched the help video, while 63 subjects did not.
+We propose the following study design.
+\begin{itemize}
+\item \textbf{Dependent variable}: Number of moves
+\item \textbf{Independent variables:}
+\begin{itemize}
+\item Used the Interactive Human-aware Intervention (Yes / No)
+\item Watched the help video (Yes/No)
+\item Planning Task Id (P1 through P13)
+\item Planning Task Type (C, E, M)
+\end{itemize}
+\end{itemize}
+We join the two variables: using the Interactive Human-aware Intervention and watching the help video to form one independent variable with 4 levels.
+Level 1, Yes-Yes indicates that the participant used both kinds of help.
+Level 2, Yes-No indicates that the participant used the Interactive Human-aware Intervention but did not watch the video.
+Level 3, No-Yes indicates that the participant did not use the Interactive Human-aware Intervention but watched the help video.
+Level 4, No-No indicates that the participant did not use either kind of help.
+We use this combined variable for our analysis.
+There are 55 users in level 1, 16 in level 2, 52 in level 3 and 12 in level 4.
 
-control and condition group are from the hints study
-use the same evaluation metrics
+Figure~\ref{fig:histvid} illustrates the frequency probability distribution of the number of moves for the solutions produced by the human users in the sample. 
+The data is highly skewed with a skewness factor +4.6.
+\begin{figure}[tpb]
+  \centering
+\includegraphics[width=0.7\columnwidth]{img/histo_video.png}
+  \caption{Frequency probability distribution of the number of moves}
+  \label{fig:histvid}
+\end{figure}
+We remove 8 data points from the sample (5\%) to reduce the skewness and approximate the distribution of the number of moves to a normal distribution.
+This adjustment resulted in 127 observations for the sample.
+The skewness factor of the adjusted sample is +0.67.
+Given the skewness factor and also the sample size 127, greater than the recommended size by the Central Limit Theorem, we assume that this is a normal distribution.
+Figure~\ref{fig:b7} shows the box plot for the distribution of the number of moves before the reduction of observations.
+Figure~\ref{fig:b8} shows the box plot for the same after the reduction.
+We use the adjusted sample for the statistical analyses that follow.
+
+\begin{figure}[tpb]
+\centering
+	\begin{minipage}[b]{0.46\columnwidth}
+	\includegraphics[width=\columnwidth]{img/outliers_vid.png}
+	\caption{Distribution of the number of moves before removing the outliers}			
+	\label{fig:b7}
+	\end{minipage}
+	\quad
+	\begin{minipage}[b]{0.50\columnwidth}
+	\includegraphics[width=\columnwidth]{img/outliers_fixed_vid.png}
+	\caption{Distribution of the number of moves after removing the outliers}
+	\label{fig:b8}
+	\end{minipage}
+\end{figure}
+
+In Figure~\ref{fig:helpsbypid}, the box plots represent the human subjects using the four levels of help for the 13 planning tasks.
+The frequency distribution in the sample for the planning tasks and each category of help type is shown in Table~\ref{tab:help}.
+\begin{table}[tpb]
+\centering
+\resizebox{0.3\textwidth}{!}{%
+\begin{tabular}{|l|c|c|c|c|}
+\hline
+\multicolumn{1}{|c|}{\multirow{2}{*}{\begin{tabular}[c]{@{}c@{}}Planning\\ Task\end{tabular}}} & \multicolumn{4}{l|}{Help Category} \\ \cline{2-5} 
+\multicolumn{1}{|c|}{} & \multicolumn{1}{l|}{YY} & \multicolumn{1}{l|}{YN} & \multicolumn{1}{l|}{NY} & \multicolumn{1}{l|}{NN} \\ \hline
+P1 & 1 & - & 5 & - \\ \hline
+P2 & 4 & - & 4 & - \\ \hline
+P3 & - & 8 & - & 5 \\ \hline
+P4 & 8 & - & 6 & - \\ \hline
+P5 & - & 8 & - & 7 \\ \hline
+P6 & 5 & - & 5 & - \\ \hline
+P7 & 6 & - & 1 & - \\ \hline
+P8 & 6 & - & 3 & - \\ \hline
+P9 & 4 & - & 5 & - \\ \hline
+P10 & 3 & - & 5 & - \\ \hline
+P11 & 6 & - & 7 & - \\ \hline
+P12 & 5 & - & 5 & - \\ \hline
+P13 & 8 & - & 6 & - \\ \hline
+\end{tabular}%
+}
+\caption{Frequency distribution in the sample for the planning task id and the types of help}
+\label{tab:help}
+\end{table}
+
+\begin{figure}[tpb]
+  \centering
+\includegraphics[width=\columnwidth]{img/helpsbypid.png}
+  \caption{Box plot for the number of moves in the sample for the planning task id and the types of help they received}
+  \label{fig:helpsbypid}
+\end{figure}
+
+\begin{figure}[tpb]
+  \centering
+\includegraphics[width=0.7\columnwidth]{img/helpsbytype.png}
+  \caption{Box plot for the number of moves in the sample for each planning task type and the type of help they received}
+  \label{fig:helpsbytype}
+\end{figure}
+Figure~\ref{fig:helpsbytype} shows the effect on the dependent variable by planning task type (C, E, M).
+We verify whether or not the observations for dependent variable between the control and the condition group are statistically significant.
+We define the null ($H_0$) and the alternative ($H_A$) hypotheses as follows:
+\begin{itemize}
+\item $H_0$: there is no difference in the mean number of moves for any help type.
+\item $H_A:$, there is a difference in the mean number of moves for help types.
+\end{itemize}
+We use two-way ANOVA with $\alpha=0.05$.
+
+When using the help type and the planning task type as factors to the dependent variable number of moves, the Levene's Test to test the homogeneity of variance fails ($F=0.02, df=7$) for the design.
+Therefore, we ignore the results and do not draw any conclusions from the ANOVA.
+The  Levene's test passes for the design that considers the help type and the planning task id ($F=0.29, df=25$).
+We report the ANOVA results for this design, which shows that the there is a significant difference in the mean number of moves when considering the four levels of help types ($F=0.001, df=3$).
+The mean number of moves is also significant when considering each planning task ($F<<<0, df=11$).
+However, the mean number of moves difference considering the help type and the planning task interaction is not significant ($F=0.49, df=2$).
+
+Since the planning task type significantly affects the number of moves in a solution, we want to find out for individual planning tasks whether or not using the help type has an effect on the number of moves.
+For example, is the difference in mean number of moves for YY and NY for planning task P1 significant?, is the difference in mean for YY and NY for planning task P2 significant? and so on.
+We conduct the TukeyHSD posthoc analysis to compare the pair-wise means.
+For the planning tasks P1 the mean number of steps used by YY category is lower than the NY category. However, this difference is not statistically significant.
+For the planning task P2, the mean number of steps used by YY category is higher than the NY category. However, this difference is not statistically significant.
+For the planning task P3, the mean number of steps used by YN category is higher than the NN category. However, this difference is not statistically significant.
+For the planning task P4, the mean number of steps used by YY category is higher than the NY category. However, this difference is not statistically significant.
+For the planning task P5, the mean number of steps used by YN category is higher than the NN category. However, this difference is not statistically significant.
+For the planning task P6, the mean number of steps used by YY category is lower than the NY category. However, this difference is not statistically significant.
+For the planning task P7, the mean number of steps used by YY category is higher than the NY category. However, this difference is not statistically significant.
+For the planning task P8, the mean number of steps used by YY category is lower than the NY category. However, this difference is not statistically significant.
+For the planning task P9, the mean number of steps used by YY category is higher than the NY category. However, this difference is not statistically significant.
+For the planning task P10, the mean number of steps used by YY category is slightly lower than the NY category. However, this difference is not statistically significant.
+For the planning task P11, the mean number of steps used by YY category is higher than the NY category. However, this difference is not statistically significant.
+For the planning task P12, the mean number of steps used by YY category is higher than the NY category. However, this difference is not statistically significant.
+For the planning task P13, the mean number of steps used by YY category is higher than the NY category. However, this difference is not statistically significant.
 
 
-///////////////////////////////////////////////////////////////////////////////////////
-
-///////////////////////////////////////////////////////////////////////////////////////
-
-///////////////////////////////////////////////////////////////////////////////////////
 \section{Discussion}
 next best move tells them what to do directly
 remaining + landmark metric is more abstract information
