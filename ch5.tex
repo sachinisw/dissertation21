@@ -196,7 +196,7 @@ Most likely goal & No decision & \desired & \undesired & \undesired & \undesired
 When intervening in unsafe situations (studied in Sections~\ref{sec:recognizing-unsafe-suffixes}--\ref{sec:evaluating-intervention}), the observer analyzes what we call the  Intervention Suffixes \Suffixes to decide whether they avoid \undesired.
 When intervening to help a user (studied in Sections~\ref{sec:human-aware}--\ref{sec:evaluating-hai}), the observer analyzes the history \historyDef to determine if the user is making progress toward \desired (or not) while also avoiding \undesired (or not). 
 Both forms are special cases of a more general definition that incorporates the five components (i.e., \desired, \undesired, \historyDef, \presentedAction, and \Suffixes) but emphasizes them differently based on the needs of the application.
-In this section we outline our main assumptions (Section~\ref{sec:unsafe-suffix-prelim}), discuss the STRIPS planning model (Section~\ref{sec:models}), discuss an important notion of direct or indirect actions leading to \undesired (Section~\ref{sec:suffix}), and define the general form of the Intervention Problem as well as highlight the family of problems we study in this paper (Section~\ref{sec:intervention-family}).
+In this section we outline our main assumptions (Section~\ref{sec:unsafe-suffix-prelim}), discuss the STRIPS planning model (Section~\ref{sec:models}), discuss an important notion of direct or indirect actions leading to \undesired (Section~\ref{sec:suffix}), and define the general form of the Intervention Problem as well as highlight the family of problems we study in this work (Section~\ref{sec:intervention-family}).
 
 \subsection{Preliminaries and Assumptions}
 \label{sec:unsafe-suffix-prelim}
@@ -910,6 +910,7 @@ We begin with the experiment protocol and briefly describe the findings.
 Next, we discuss the learning methods used to predict intervention. Finally, we discuss the accuracy of prediction compared to the Plan Recognition as Planning algorithm proposed by \cite{ramirez2010probabilistic}.
 
 \subsection{Rush Hour Experiment Protocol}
+\label{sec:experimentprotocol1}
 We recruited subjects from a university student population. 
 The sample comprised of college students in Computer Science, Psychology, Agriculture and Business majors. 
 136 participants completed  the study. 
@@ -952,6 +953,7 @@ Type \textbf{M} has the forbidden vehicle in the \textbf{m}iddle. The experiment
 
 
 \subsection{The Learning Methods}
+\label{sec:learningmethods}
 Our solution to the Human-aware Intervention Problem uses machine learning to predict whether \undesired will be reached in $k$ moves, given \historyDef, where $k=\lbrace 1,2,3\rbrace$.
 To produce the learned models, we first partition the 136 human user solution from the experiment into training (70\%) and test (30\%) sets. 
 To produce the \historyDef for a user, the user's solution is pre-processed to only include the moves until one step, two steps and three steps before the forbidden vehicle was moved for the first time. 
@@ -1065,7 +1067,7 @@ $P$(\desired) = 2$\times P$(\undesired) & 0.67 & 0.56 & 0.61 & 0.67 & 0.56 & 0.6
 %%===========================================================================================================
 \section{Discussion}
 \label{sec:discussion}
-In this paper, we formalized a family of Intervention Problems and showed that how these problems can be solved using a combination of Plan Recognition methods and classification techniques to decide when to intervene.
+In this chapter, we formalized a family of Intervention Problems and showed that how these problems can be solved using a combination of Plan Recognition methods and classification techniques to decide when to intervene.
 The Unsafe Suffix Intervention Problem uses automated planners to \textbf{project the remaining suffixes} and extract features that can differentiate unsafe remaining suffixes from the safe remaining suffixes. 
 In contrast, the Human-aware Intervention Problem uses \textbf{only the observed history \historyDef} to extract features that can separate the solutions leading to undesirable state from the solutions that will avoid it.
 We compared the Unsafe Suffix Intervention and Human-aware Intervention using the state-of-art Plan Recognition approaches in the literature as the baseline and found that our learning based intervention solutions dominate the existing Plan Recognition algorithms for both benchmark Intervention Problems and a new intervention benchmark, Rush Hour.
