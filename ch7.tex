@@ -1,0 +1,39 @@
+\chapter{Concluding Remarks}
+In this dissertation we introduce the Intervention Problem and discuss three solutions addressing different properties of the problem.
+Intervention is important when an agent or a human user is executing tasks in an unfamiliar environment and unknown facts about the environment may cause the tasks to have unintended, perhaps dangerous consequences.
+It is also important that upon recognizing that intervention is needed, there is a system in place to guide the agent (or the human user) toward the goal, while avoiding the undesirable consequences.
+Thus, we propose intervention as a utility for online assistive agents and safety critical decision making for human users.
+The underlying assumption about the agent's (or the human user's) environment is that it can be modeled as a state transition system that consists of actions and states.
+Some states in the environment are undesirable and the agent (or the human user) does not have the ability to recognize them.
+An observer monitors what the agent is doing and wants to help the agent avoid the undesirable state.
+
+As illustrated in Figure~\ref{fig:summary}, we model intervention as a two stage process.
+In the first stage, known as \textbf{The Undesirable State Recognition Process}, the observer automatically detects that an undesirable state is developing.
+We present three intervention models each considering the properties: (1) actors in the environment, (2) goals hidden to the observer, (3) types of observations (4) noise in observations and (5) handling intervention recovery.
+In all three models, a key objective we want to address during the recognition process is ensuring the safety while allowing some freedom for the agent.
+\begin{itemize}
+\item \textbf{Intervention by Recognizing Actions Enabling Multiple Undesirable Consequences}: \\ Using the cyber security domain as the motivation, we model an environment consisting of three agents: the user, the attacker and the observer.
+The observer wants to help the user reach a hidden desirable goal, while avoiding multiple undesirable states enabled by an attacker.
+Because the undesirable states are hidden to the user, he becomes an unwitting accomplice to security breaches.
+The observations that are used to make the intervention decision have missing and extraneous actions.
+The intervention recovery process is to simply block the recognized undesirable action by issuing an alert.
+Our approach views the intervention decision as a multi-factor decision problem modeled with three domain-independent metrics: \textbf{certainty}, \textbf{timeliness} and \textbf{desirability}.
+The observer projects the possible plans to reach the undesirable states using automated planning and traces back to find actions that are critical to the occurrence of the undesirable states.
+We simulate the trade-off between the safety and freedom of the agent (or the human user) when selecting actions requiring intervention by factoring in the domain-independent metrics with varying degrees of importance.
+Our experiments find that the certainty and desirability  metrics deal well with noise in the observation trace, while the timeliness metric is sensitive to the missing actions.
+
+\item Intervention as Planning
+\item Human-aware Intervention
+\end{itemize}
+In the second stage, known as \textbf{The Recovery Process}, we go beyond the typical preventive measures to help the agent recover from intervention and gradually guide the agent toward safety using a new feedback technique called the \textbf{Interactive Human-aware Intervention}.
+
+\begin{figure}[tpb]
+ \centering{\includegraphics[width=\columnwidth]{img/summary.pdf}}
+   \caption{The Intervention Framework}
+\label{fig:summary}
+\end{figure}
+
+WE use automated planning
+
+
+\section{Future Work}

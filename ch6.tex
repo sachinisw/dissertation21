@@ -507,7 +507,7 @@ We refer to the first group as the \textbf{control group}.
 We discussed the findings of this study in Chapter~\ref{chap:ch5}.
 In this chapter, we discuss the findings of the second experimental condition where the human users solved the Rush Hour planning tasks with hints.
 We refer to the second group as the \textbf{condition group}.
-Therefore, we have a between group experimental design to evaluate the effect of using hints between the control and the condition group.
+Therefore, we have a between group experimental design to evaluate the effect of using the Interactive Human-aware Intervention between the control and the condition group.
 We present the summary statistics for the number of moves in the solutions in the control and the condition groups and compare the solutions that moved the forbidden vehicle and the solutions that did not.
 Next we compare the
 
@@ -533,7 +533,6 @@ So we were unable to collect demographic data on them.
 We also asked the participants to rate the hints in 5 point rating scale (1 being the lowest rating and 5 being the highest) based on how helpful the hints were in helping them avoid the forbidden vehicle.
 Table~\ref{tab:phase2ratings} summarizes the mean and the standard deviation of the subjective ratings.
 It can be seen that across all three puzzle types,  the hint ``\textbf{Show the next best move}'' has the highest subjective helpfulness rating.
-This indicates that when human users are stuck during the Rush Hour planning task (i.e., getting close to moving the forbidden vehicle) they subjectively prefer information that tells directly them what to do next.
 Considering the puzzle types C, E and M, we could not find unique subsets of hints the participants preferred the most.
 
 \begin{table}[tbp]
@@ -594,7 +593,7 @@ P8  & 18 & 9  & 12  & 9.3   & 0.8   & -  & -  & -   & -    & -    \\
 P9  & 2  & 21 & 27  & 24    & 4.2   & 14 & 29 & 169 & 66.3 & 39.0 \\
 P10 & -  & -  & -   & -     & -     & 9  & 44 & 158 & 81.2 & 39.2 \\ \hline
 \end{tabular}
-\caption{Frequency, minimum, maximum, mean and std. deviation number of moves in users' solutions for the Rush Hour planning tasks P1 through P10 \textbf{solved without using hints}}
+\caption{Frequency, minimum, maximum, mean and std. deviation number of moves in users' solutions for the Rush Hour planning tasks P1 through P10 \textbf{solved without using the Interactive Human-aware Intervention}}
 \label{tab:usersolutions}
 \end{table}
 
@@ -640,7 +639,7 @@ P11                  & 1     & 61  & 61  & 61   & -         & 2      & 50  & 95 
 P12                  & 1     & 41  & 41  & 41   & -         & -      & -   & -   & -     & -        \\
 P13                  & 6     & 24  & 40  & 29.5 & 6.3       & 6      & 30  & 55  & 41.2  & 9.6      \\ \hline
 \end{tabular}
-\caption{Frequency, minimum, maximum, mean and std. deviation number of moves in users' solutions for the Rush Hour planning tasks P1 through P13 \textbf{solved using hints}}
+\caption{Frequency, minimum, maximum, mean and std. deviation number of moves in users' solutions for the Rush Hour planning tasks P1 through P13 \textbf{solved using the Interactive Human-aware Intervention}}
 \label{tab:usersolutionsphase2}
 \end{table}
 
@@ -1055,10 +1054,11 @@ We want to address the following questions:
 We introduce the following evaluation metrics.
 \begin{enumerate}
 \item The number of moves in the human user's solution
-\item The difference from the cost optimal solution (defined later)
-\item The latest time a fact landmark is eventually achieved 
-\item The number of times a fact landmark is lost and regained
+\item The difference from the cost optimal solution
+\item The latest time a fact landmark is eventually achieved (landmark achievement)
+\item The number of times a fact landmark is lost and regained (landmark regain)
 \end{enumerate}
+The definitions for these metrics will be presented later.
 Question 1 is answered using the evaluation metric 1.
 Question 2 is answered using the evaluation metrics 2, 3 and 4.
 Question 3 is answered using the evaluation metrics 1.
@@ -1676,6 +1676,7 @@ When using the help type and the planning task type as factors to the dependent 
 Therefore, we ignore the results and do not draw any conclusions from the ANOVA.
 The  Levene's test passes for the design that considers the help type and the planning task id ($F=0.29, df=25$).
 We report the ANOVA results for this design, which shows that the there is a significant difference in the mean number of moves when considering the four levels of help types ($F=0.001, df=3$).
+Thus we reject $H_0$.
 The mean number of moves is also significant when considering each planning task ($F<<<0, df=11$).
 However, the mean number of moves difference considering the help type and the planning task interaction is not significant ($F=0.49, df=2$).
 
@@ -1698,6 +1699,59 @@ For the planning task P13, the mean number of steps used by YY category is highe
 
 
 \section{Discussion}
-next best move tells them what to do directly
-remaining + landmark metric is more abstract information
+We introduce four properties of the solution to the observer's planning problem $P_{observer}$ as hints: \textbf{the number of remaining moves}, \textbf{the next best move}, \textbf{the vehicles that must be moved} and \textbf{restart planning task}.
+The subjective preference ratings the human subjects gave for the helpfulness of the hints agree with the frequency the users requested the hint.
+For all there planning task types (C, E, M), the human subjects rated the ``\textbf{Show the next best move}'' as the highest in helpfulness.
+When considering the actual use of hints the hint ``Show the next best move'' hint was the most frequently requested hint for all three planning task types (C, E, M).
+This finding indicates that when human users are stuck during the Rush Hour planning task (i.e., getting close to moving the forbidden vehicle) they subjectively prefer information that tells directly them what to do next.
+In contrast, the ``Number of remaining moves'' and the ``Vehicles that must be moved'' are \textit{heuristic information} of the planning problem $P_{observer}$.
+The heuristic information forces the human user to think deeply about the planning task instead of giving direct instructions.
+Our experiments show that the human users do not respond well to heuristic related information about the Rush Hour planning problem when they are offered as help.
 
+We introduce four metrics to evaluate whether or not the Interactive Human-aware Intervention has been successful in helping the user find the solution to the planning task, while avoiding the forbidden vehicle as follows:
+\begin{itemize}
+\item The number of moves in the human user's solution
+\item The difference from the cost optimal solution
+\item The landmark achievement
+\item The landmark regain
+\end{itemize}
+Although the 13 planning tasks we selected for this study produce optimal solutions having approximately the same number of moves (except for P8), the experiments show that the human users have difficulty getting closer to the optimal solution even with the use of hints.
+The longer the human users spend exploring the search space of the planning task, the higher the likelihood that he/she will also move the forbidden vehicle.
+When examining the cost optimal plans produced by an automated planner, we see that the landmarks are typically achieved in clusters.
+However, when examining the solutions produced by the human users, we see that they lose and regain the landmarks several times before eventually achieving them.
+The closer the human user's solution resembles the solution produced by the automated planner in terms of when the landmark clusters are achieved, the closer the number of moves will be to that of the optimal solution for that planning task.
+Therefore, information intended to guide the human user toward the solution to the Rush Hour planning task must be designed to help the user achieve the landmarks quicker.
+Furthermore, the guiding information needs to be presented to the user as direct instructions.
+
+Let us now revisit the questions we intended to answer through our evaluation.
+\begin{enumerate}
+\item Does the Interactive Human-aware Intervention have an effect on the solution length?
+\item Does the Interactive Human-aware Intervention help move the user closer to the optimal solution?
+\item Does seeing a help video affect the solution length?
+\end{enumerate}
+When we resolve question 1 using the number of moves as the evaluation metric, we find that for some planning tasks the Interactive Human-aware Intervention pushes the user closer to the optimal solution. However, the effect is not statistically significant considering the $\alpha=0.05$ for the study sample.
+When we resolve question 2 using the difference from the cost optimal solution, the landmark achievement and the landmark regain as evaluation metrics, we find that the differences from the cost optimal solution and the landmark achievement between those who used Interactive Human-aware Intervention and those who did not are not statistically significant.
+The distribution of landmark regain for the sample violated the homogeneity  of variances assumption for ANOVA. 
+Therefore, we do not report the results for that metric to answer question 2.
+We also find that metrics number of moves, difference to the optimal and landmark achievement change significantly considering planning task ids.
+The change is also statistically significant.
+When we resolve question 3 using the number of moves as the evaluation metric, we find that there is a statistically significant difference between the types of help used (video and hints) between the 13 planning tasks.
+However, because each planning task is different from one another (even within the same category C, E, M) we want to find out if the number of moves differ significantly for the subjects attempting the same planning task, while using different help types.
+Posthoc analysis did not reveal a significant difference in the number of moves for the pair-wise comparisons for this question.
+I think reducing the number of planning tasks to one each from the categories C, E, M will help us yeild more conclusive results on the effects of the Interactive Human-aware Intervention.
+
+
+For the experiment, we categorized the Rush Hour planning tasks into three types by the position of the forbidden vehicle.
+However, when examining the solutions produced by the human users there are large variances in the number of moves within the planning tasks that fall into one category.
+For example, consider the planning task P2 and P8 in the same category where the forbidden car is placed in the corner of the board.
+The minimum number of moves in a plan produced by a human user for task P2 is 67 and the maximum number of moves is 419.
+For task P8 the minimum number of moves is 9 and the maximum number of moves is 14.
+This allows us to draw the conclusion that there are yet undiscovered factors  about the Rush Hour planning task, besides the position of the forbidden vehicle, which contribute to the difficulty the human users experience in finding the solution.
+Some example factors that may determine the difficulty may be how blocked the forbidden vehicle is on the board, the number of vehicles blocking the path of the goal car.
+It is also likely that the difficulty may be determined by a combination of these factors.
+
+We set a threshold for the number of steps for the Human-aware Intervention to start making predictions. 
+The threshold is required to generate enough data for the classifier to predict intervention and minimize the false alarms early on in the planning task, which may cause the user to turn off the alerts.
+However, it was observed that many human users moved the forbidden vehicle within the window in which predictions were absent.
+This indicates that the human users need guidance early on in the planning task.
+It may be helpful to design intervention prediction models to reduce the size of this window.
