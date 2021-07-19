@@ -12,7 +12,8 @@ The agent (or the human user), in order to achieve a desirable outcome, executes
 For simplicity, henceforth we refer to the agent in the environment as \textit{the user}.
 Some states in the environment are undesirable and the user does not have the ability to recognize them. 
 The intervening agent, henceforth referred to as \textit{the observer}, wants to help the user in the environment avoid the undesirable state.
-In the first stage, which we refer to as \textit{\textbf{the undesirable state recognition process}}, the observer monitors what the user doing.
+
+In the first stage of the intervention process, which we refer to as \textit{\textbf{the undesirable state recognition process}}, the observer monitors what the user doing.
 The observations may consist of actions and/or the states resulting from the actions that the user executes. 
 \textit{Using the model of the environment and the observations as evidence, how can the observer automatically detect that an undesirable state is developing and decide when to intervene in order to help the user}? In this dissertation, we present \textbf{three intervention models} to answer this question.
 \begin{figure}[ptb]
@@ -20,8 +21,9 @@ The observations may consist of actions and/or the states resulting from the act
    \caption{The stages of intervention}
 \label{fig:stages}
 \end{figure}
-The second stage is \textit{\textbf{the intervention recovery process}}. 
-It is natural to envision the intervention decision to manifest as a block or an alert message for the agent in the intervention feedback loop. 
+
+The second stage of the intervention process is \textit{\textbf{the intervention recovery process}}. 
+It is natural to envision the intervention decision to manifest as an alert message for the agent in the intervention feedback loop. 
 The simplest case of helping the user through intervention is to adopt a preventive measure such as blocking the recognized dangerous action or displaying an alert.
 This approach makes sense in domains like cyber-security because once the attack is complete, reverting back to a safe state may be difficult. 
 Furthermore, the user may not even be aware that an attack has taken place until long after. 
@@ -42,12 +44,12 @@ In this dissertation, we explore how automated planning can be used in:
 \end{itemize}
 Automated planning is integral to the design of the intervening agent. 
 First, planning is used to model the intervention environment as a state transition system comprised of preconditions and post-conditions of actions. 
-Second, to achieve some goal in the environment, the user executes many actions; while a few of them incur much risk, some are pivotal in triggering the undesirable consequence. 
+Second, to achieve some goal in the environment, the user executes many actions; while a few of them incur risk, some are pivotal in triggering the undesirable consequence. 
 Therefore, in order to identify when intervention is needed the observer must be able to generate alternative plans to find the many possible ways to reach the undesirable consequence. 
 Third, when intervention occurs the user may still be incapable of deciding what to do next on his own, mainly because of hidden information about the domain or the actions of an adversary that the user can not control. 
-Therefore, planning can be used to even implement preventive measures such as blocking. 
+Therefore, planning can be used to implement preventive measures such as blocking. 
 Once the paths leading to an undesirable consequence have been identified, the planner can be provided with intervention actions that negates the states leading to the undesirable consequence. 
-The preconditions of an intervention action are any states that are on the path to the undesirable consequence and the post-conditions of the intervention action negates that specific state. 
+The preconditions of an intervention action are  states that are on the path to the undesirable consequence and the post-conditions of the intervention action negates that specific state. 
 In situations where the user needs more help than a simple preventive measure, as we will show in this dissertation, automated planning can be used to help guide the user toward a plan that avoids the undesirable consequence.
 Good intervention actions are those that block multiple undesirable consequences, are low cost to execute and do not interfere with the user’s needs or preferences. 
 In this dissertation, we discuss three intervention models that address two of the aforementioned requirements, blocking multiple undesirable consequences and not interfering with the user's needs. 
@@ -57,7 +59,8 @@ The observer has knowledge about the user's desirable goal and the unsafe state 
 We discuss the design of an observer that can intervene and guide a user toward a desirable outcome while avoiding undesirable outcomes or frustration.
 When recognizing where intervention is required, the observer considers both the user's goal and the undesirable state.
 Furthermore, the observer needs to allow the user reach his goal and not be constantly interrupted.
-We present two intervention models that combine automated planning and machine learning the observer can adopt to help the user reach the desirable goal while avoiding the undesirable state.
+We present two intervention models that combine automated planning and machine learning. 
+The observer can adopt these models to help the user reach the desirable goal while avoiding the undesirable state.
 \item [Recognition of actions that enable multiple undesirable consequences : ] Using a cyber-security application, we study intervention when the observer is not aware of the user's goal, but still needs to help the user avoid multiple undesirable states in the environment. 
 Because the user's goal is unknown, the observer cannot determine when to intervene based on the user's goal and the undesirable state. Therefore, we frame the observer's decision to recognize when intervention is required as a function of objective metrics. The objective metrics capture the timeliness and criticality of actions that must be flagged for intervention in order to help the observer identify at an opportune time, the actions that may cause the most damage. 
 We also investigate how the missing and extraneous actions in the observation trace affects the intervention decision.
@@ -95,13 +98,18 @@ When there are other agents working to achieve goals that are different to the u
 We can not assume that only the other agent's actions will always result in the undesirable state.
 Sometimes, the other agents may execute actions that enable the undesirable state, but the undesirable state does not actually manifest until much later, possibly when the user executes an action that appear to be harmless. 
 For example, consider a phishing attack. 
-The attacker enables the attack vector by sending the phishing email to steal the user's password. However, the user's password does not get stolen until the user clicks on the link (a  harmless action) to visit the phishing site and submits the information.
+The attacker enables the attack vector by sending the phishing email to steal the user's password. However, the user's password does not get stolen until the user clicks on the link (normally, a  harmless action) to visit the phishing site and submits the information.
 Recognizing these enabling actions allows the observer to intervene the user in advance and give the user some time to recover.
 \item [Goals hidden to the observer :] To help the user trade-off benefits versus risks, the observer needs to know what the user thinks he/she is trying to accomplish.  
 Using automated planning, we can categorize goals of the user and other actors in the environment in terms of  actions and their post conditions. 
 However, in certain cases, specifying the user's goal may be difficult. 
-For example, consider a home computer user preparing a document to send as an attachment in an email, while listening to music. In this situation, the home computer user will not be able to explicitly state his goals as post conditions of actions to the observer as required by planning.
-Therefore, observer must also be able to make the intervention decision considering only the undesirable states the user wants to avoid.
+For example, consider a home computer user preparing a document to send as an attachment in an email, while listening to music. 
+In this situation, the home computer user will not be able to explicitly state his goals as post conditions of actions to the observer as required by planning.
+At different times, the human user may change the order in which he wants to achieve the goals. 
+For example, at the start he may want to play music in the background (as a secondary goal) while preparing the document (primary goal).
+However, if he hears a song he doesn't like he may want to pause the document preparation task and change the song on the music player.
+In this situation, the user's priorities change.
+Therefore, in certain cases, the observer must also be able to make the intervention decision considering only the undesirable states the user wants to avoid.
 \item [Types of observations :] In the example shown in Figure~\ref{fig:stages}, the observer makes the intervention decision based on actions presented by the actors. 
 We make the differentiation between observations of actions and observations of state because in some intervention scenarios, the observer may not be able to observe the action itself but will be able to perceive the post conditions of the action in the environment. 
 For example, consider the situation where a remote attacker sends a phishing email to the user. The observer may not be able to observe the action of sending the email.
@@ -113,10 +121,10 @@ This is because the user does not intentionally want to trigger the undesirable 
 This means that the plans that lead to the undesirable states may not encompass the user's goal and as a result, the observations will contain not only the undesirable actions, but also the desirable actions.
 In addition to extraneous actions, the observer may miss some actions executed by the actors because of faulty sensors. 
 Using the cyber-security domain as case study, we explore the impact of noise in the observation trace in making a correct intervention decision.
-\item [Intervention recovery :] In this work, we model the observer as an observer who can intervene to help the user reach the desirable goal safely. We present two intervention models with different intervention recovery processes.
+\item [Intervention recovery :] In this work, we model the observer as an agent who can intervene to help the user reach the desirable goal safely. We present two intervention models with different intervention recovery processes.
 In one form of intervention, the observer considers the remaining plans in safe and unsafe partitions to learn to recognize unsafe suffixes in order to help the user avoid the undesirable state.
 In this case, the observer can help the user by only accepting actions into the observation history that will safely advance the user toward the user's desirable goal.
-In the second form of intervention, the observer learns to recognize that the user is not making progress toward \desired by analyzing the \historyDef when a suffix is not available. In this case,  the observer must offer enough help to \textit{guide} the user toward \desired without giving the solution. 
+In the second form of intervention, the observer learns to recognize that the user is not making progress toward \desired by analyzing the observation history when a suffix is not available. In this case,  the observer must offer enough help to \textit{guide} the user toward \desired without giving the solution. 
 The second intervention model is particularly useful when the user is a human and it can be difficult evaluate progress with heuristics like a normal planning agent.
 \end{description}
 
@@ -155,7 +163,7 @@ Intervention recovery  & block action & Offer helpful hint   \\ \hline
 \end{table}
 
 \subsection{Intervention in Cyber-security}
-In the cyber-security domain, we model an attacker attempting trick the user into compromising his security/privacy during day-to-day computing tasks.
+In the cyber-security domain, we model an attacker attempting to trick the user into compromising his security/privacy during day-to-day computing tasks.
 The attacker creates opportunities for phishing and malware attacks by making them to appear as common harmless tasks such as email and installing software.
 Unable to recognize these attacks in advance, the user becomes an unwitting accomplice to security breaches. 
 The Intervention Problem for the cyber-security domain consists of three actors: the human user, the attacker (human/machine) and the observer. 
@@ -174,19 +182,19 @@ Our second case study is a puzzle solving task called Rush Hour, which simulates
 We use the Rush Hour puzzle to approximate the case where human users learn to use a new software application and also it helps motivate the users to actually do the task in experiment conditions. 
 The Rush Hour domain only has the human user and the observer. 
 Unlike the cyber-security use case, the observer is aware of the desirable goal the user is trying to achieve (i.e., solve the puzzle by moving the target vehicle to the exit) and also the undesirable state (i.e., forbidden vehicle moves).
-Similar to the cyber-security use case, the Rush Hour domain also contains multiple undesirable states: state resulting from a legal move of the forbidden vehicle. 
+Similar to the cyber-security use case, the Rush Hour domain also contains multiple undesirable states. All states resulting from legal moves of the forbidden vehicle are undesirable.
 The observations are actions the user executes to solve the puzzle. In this case, the observations are not noisy.
 Our intervention solution for this case uses machine learning algorithms to recognize when the user is about to move the forbidden vehicle and intervene.
 As the recovery process, we explore how to help the human user decide what to do next by offering further assistance as helpful hints.
 In both cases the user actively pursues his own goal. 
-The threats are triggered because the user did not know about those consequences (phishing/malware vulnerabilities) or was not actively aware of them (hidden forbidden vehicle in Rush Hour). 
+The threats are triggered because the user did not understand the consequences of reaching the undesirable state (phishing/malware vulnerabilities) or was not aware of the undesirable state from the start (hidden forbidden vehicle in Rush Hour). 
 The observer makes the decision to intervene upon recognizing actions in the observations that enable or satisfy the undesirable state.
  
 \section{Distinguishing Intervention From Plan Recognition}
 Plan recognition is the closest to our Intervention Problem. 
 In the literature the plan recognition is defined as the problem of taking as input a sequence of actions performed by an actor and inferring the goal pursued by the actor and also organizing the sequence as a plan structure \cite{kautz1986generalized,schmidt1978}. 
 The solution to the plan recognition problem is given by the set of goals that produces a plan that is compatible with the observations. 
-The online version of the plan recognition problem uses observations as and when they happen as input. 
+The online version of the plan recognition problem uses observations as they happen as input. 
 The offline version requires the complete observation to be available in advance. 
 At first glance, it might seem that intervention is a variant of Plan Recognition for the user's desirable goal and the undesirable states the user wants to avoid. 
 However, there are several subtleties that make intervention unique, which we now discuss.
@@ -206,10 +214,10 @@ The user and the competitor are modeled with different domain definitions.
 When the agents have distinct views of the problem and they can not satisfy the undesirable state on their own, conditions will arise such that the agents working together will enable the undesirable state.
 The user wants to satisfy the desirable goal state, while avoiding the \textit{hidden} undesirable state.
 The competitor is trying to subvert the user’s goal by enabling preconditions for the undesirable state without the user's knowledge.
-When the user and the competitor (if present) reveal their plan(s) incrementally, the observer needs to decide whether the revealed actions make it impossible for the user to avoid the undesirable state considering the plans from the user's and the competitor's domain definitions collectively. 
-Any action that make it impossible for the user to avoid the undesirable state must be for flagged for intervention and not accepted into the observation history.
+When the user and the competitor reveal their plan(s) incrementally, the observer needs to decide whether the revealed actions make it impossible for the user to avoid the undesirable state considering the plans from the user's and the competitor's domain definitions collectively. 
+Any action that make it impossible for the user to avoid the undesirable state must be flagged for intervention and not accepted into the observation history.
 If the plans for the undesirable state and desirable goal share a long common prefix, 
-it will be difficult for the observer to disambiguate between the goals, using plan recognition algorithms in time to help the user avoid the undesirable state.
+it will be difficult for the observer to disambiguate between the goals and to use plan recognition algorithms in time to help the user avoid the undesirable state.
 \item \textbf{Partitioned suffixes (with known desirable goal).}
 When the desirable goal is known, the observer should allow the user to pursue suffixes leading to the desirable goal and intervene when actions are presented from suffixes that get ``too close'' to the undesirable state. 
 Our key insight is to model the  ``goals'' of the user and competitor, which justifies our use of planning to find these suffixes. 
@@ -231,8 +239,8 @@ Learning the differences between the plan partitions will allow us to address th
 \item \textbf{Suffix analysis with unknown desirable goal.}
 When the desirable goal is unknown, the observer only has the space of plans leading to the undesirable goals to make the intervention decision when the agents reveal their plans incrementally.
 Plan recognition over the undesirable goals does not really     apply because it is     focused on matching actions to  prior plans     to determine the goals the      user is trying  to achieve.     
-In other words, the observer presupposes that the actions in the observation history are from likely plans the user is executing to reach the undesirable goals. 
-This is contrary to the assumption that the user wants to avoid the undesirable state.
+In other words, the observer assumes that the user is executing some plan to reach the undesirable state.
+In reality, the user wants to avoid the undesirable state and reach a different (desirable) goal, which may be unknown to the observer.
 Therefore, when analyzing partition suffixes with known desirable goal, the observer uses the knowledge of the user's goal to determine which are critical actions that require intervention.   
 In contrast, with unknown desirable goal, the observer analyzes the remaining undesirable suffixes to identify actions that cause the most damage to intervene the user.
 \item \textbf{Goal priors cannot be estimated reliably.}  
@@ -242,7 +250,7 @@ For example, the undesirable state is hidden from the user, who does not intend 
 In contrast, a competitor, when present, intends to achieve the undesirable state (i.e., prior probability $\approx 1$).
 When the priors are not accurate, the observer (using Plan Recognition) may not be able to  disambiguate between likely goals (and recognize the correct plan) in time to avoid the undesirable state.
   
-\item \textbf{Emphasis on intervention recovery}
+\item \textbf{Emphasis on intervention recovery.}
 In Plan Recognition, the observer uses an observation trace to derive the user's likely plan. 
 The observation trace can be either an ordered sequence of actions  \cite{ramirez2009plan,ramirez2010probabilistic} or an ordered sequence of states \cite{sohrabi2016plan}.
 Plan Recognition does not define a method for the user to recover when the observer recognizes a plan leading to the undesirable state. 
@@ -257,7 +265,7 @@ The main objective of this research is to study different intervention models th
 We address this question considering the dimensions of an intervention problem, summarized in Table~\ref{tab:properties}.
 
 Our intervention models are based on identifying actions in an observation trace that either satisfy the undesirable state or enable it. 
-This requires the observer to evaluate the current state (i.e., state resulting from the observed actions) based on how critical it is to cause the undesirable state considering the user's desirable goal (if available) and the undesirable state.
+This requires the observer to evaluate the current state (i.e., state resulting from the observed actions) based on it's importance to causing the undesirable state considering the user's desirable goal (if available) and the undesirable state.
 In the two intervention use cases, criticality of the current state is evaluated using two different methods. 
 For the cyber-security domain we identify salient features by analyzing the plan space. 
 We model the cyber-security domain as a planning problem and use an existing automated planner to  sample the possible solutions (plans) that project possible undesirable outcomes and then trace back to actions critical to their occurrence. 
@@ -275,7 +283,7 @@ Using a revised feature set more appropriate to human behavior, we produce a lea
 \item[How should information be displayed to effectively inform users following intervention?] Using the Rush Hour domain, we study how an intervention model can be extended to help users continue a cognitively engaging task by providing helpful hints. 
 In the context of the Rush Hour puzzle solving task, a hint is a piece of information about the Rush Hour search problem. 
 We design helpful hints to allow the user to carefully probe the search space of the Rush Hour search problem, while avoiding the undesirable state.
-We monitor how human users achieve planning landmarks of the Rush Hour problem when intervention is supported by hints against intervention without hints to evaluate the effectiveness of our intervention recovery process.
+We monitor how human users achieve planning landmarks of the Rush Hour problem when intervention is supported by hints compared to intervention without hints to evaluate the effectiveness of our intervention recovery process.
 
 \item[How to design tools to study intervention in activities with human user participation?]
 To identify pivotal events, the appropriate system states and user actions must be monitored and compared to a model of actions that can lead to the undesirable state. 
@@ -298,10 +306,10 @@ The rest of this dissertation is organized as follows:
 We formulate the Intervention Problem as a  planning problem of three domain independent objective metrics: timeliness, which captures how soon the undesirable state may occur; certainty, which captures how frequently the undesirable state may be seen; and desirability, which captures the user’s preference for continuing the current action despite the increased risk. 
 Against an ideal baseline, we examine trade-offs in choosing the ``correct'' intervention point by varying the weights associated with these objective metrics, the observability of actions, and the presence of extraneous actions.
 \item \textbf{Chapter 5}: We study two kinds of Intervention Problems in environments where an observer monitors a user (and a competitor) and help the user achieve a desirable goal, while avoiding an undesirable state. 
-In Unsafe Suffix Intervention, the observer uses automated planners to project the remaining suffixes and extract features that can differentiate between safe and unsafe plans. 
+In ``\textbf{Unsafe Suffix Intervention}'', the observer uses automated planners to project the remaining suffixes and extract features that can differentiate between safe and unsafe plans. 
 We evaluate the recognition accuracy of Unsafe Suffix Intervention on benchmark planning
 problems. 
-In Human-aware Intervention, the observer uses the observed partial solution to extract features that can separate safe and unsafe solutions. 
+In ``\textbf{Human-aware Intervention}'', the observer uses the observed partial solution to extract features that can separate safe and unsafe solutions. 
 We evaluate the accuracy of Human-aware Intervention on a new Intervention Planning benchmark Rush Hour.
 \item \textbf{Chapter 6}: We present an intervention recovery process for the Human-aware Intervention model based on automated planning. 
 We discuss the findings of a human subject study where human users solved a cognitively engaging Rush Hour puzzle task while being guided by a human-aware intervention agent. 
