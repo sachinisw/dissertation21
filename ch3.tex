@@ -7,14 +7,15 @@ The findings of this study motivated our work on plan intervention.
 In the next chapters we discuss three plan intervention models that can automatically detect an undesirable state developing and decide when to intervene.
 Furthermore, our findings of this study support the claim that security solutions designed for end users to practice safe computing need to assess two information sources: 
 \begin{itemize}
-\item The human user's decision making context and the factors that affect the user's decision making ability
+\item The human user's decision making context 
+\item The factors that affect the user's decision making ability
 \item Observational data like system logs and user action sequences
 \end{itemize}
 
 \section{Introduction}
 The 2016 American Community Survey found that 89\% of all households had a computer, including smartphones, making it a common feature of everyday life \cite{ryan2016}. 
 Also, 81\% had a broadband subscription. 
-The Internet impacts many areas of the daily life, from performing routine tasks like shopping, banking to connecting with family and friends. 
+The Internet impacts many areas of the daily life; from performing routine tasks like shopping, banking and connecting with family and friends. 
 The Internet has become an avenue for pursuing formal education (e.g., online degree programs) as well as informal learning (e.g., how-to videos on cooking, household repairs etc.) and allows us to collaborate across many physical barriers. 
 Whether we realize it or not, we are routinely  deciding whether or not to take risks in security and privacy when we interact with computer systems online.
 
@@ -27,7 +28,8 @@ make more \textit{immediate} security and privacy decisions, such as whether to 
 We distinguish two decision making contexts for home computer users: unwittingly taking action that may lead to undesirable consequences (e.g., clicking on links in phishing emails) and deciding to accept the possibility of undesirable consequences (e.g., financial transactions on trusted sites or P2P software installations). 
 In the first case, the user does not recognize that the situation may have undesirable
 consequences. 
-Thus, our research in the unwitting context will be to initially assist the user in better identifying possible undesirable consequences of action; we will do this by designing methods for automatically recognizing security/privacy risks. 
+Thus, our research in the ``\textbf{unwitting context}'' will be to initially assist the user in better identifying possible undesirable consequences of action. 
+We will do this by designing methods for automatically recognizing security/privacy risks. 
 We discuss intervention solutions that address this requirement in Chapters 4 and 5.
 In contexts where the user recognizes the consequence, the research will address how to help users frame their decisions: determining what alternatives are available for the user to take as next steps.
 We discuss an intervention solution that address this requirement in Chapter 6 of this dissertation.
@@ -40,7 +42,7 @@ Because of the diversity of the population and decision contexts, we favor a per
 
 The study discussed in this chapter makes several contributions:
 \begin{itemize}
-\item Analyses backed by human subject studies relating what human users think is happening to what they actually do. This is critical to understanding how much information about user's decision making context can be inferred from surveys.
+\item Analyses and human subject studies relating what human users think is happening to what they actually do. This is critical to understanding how much information about user's decision making context can be inferred from surveys.
 \item Studies and analyses relating perceptions, actions and some user characteristics to possible interventions.
 \item Software framework to support home computer user security/privacy studies. We create a lightweight, sandbox software system, which simulates the Microsoft Windows environment on desktops and laptops. The simulator supports a small set of vulnerabilities and the scenarios that could possibly trigger them.
 \end{itemize}
@@ -48,8 +50,10 @@ The study discussed in this chapter makes several contributions:
 The decision of when to flag a problem for intervention also relies on the knowledge about the user. 
 We refer to this as the \textbf{\textit{user's decision making context}}. 
 Success of the intervention model will depend on not bothering the user unnecessarily. 
-For example, users who have the skill for recognizing computer security threats like phishing attacks, spoofing attacks and care about the negative consequences of these threats need less monitoring. 
-In contrast, users who are less aware of the threats require more help. 
+
+For example, consider cyber-security threats like phishing attacks and spoofing attacks.
+If users have the skill for recognizing these cyber-security threats and understand the consequences, then they need less monitoring.
+In contrast, users who are less aware of the computer security threats require more help. 
 So, the question we need to address is \textit{what type of users make particular computer security decisions}. 
 We answer this question by drawing from health related behavioral models to explain security behavior. 
 Health behavior is a natural analogy to how human users respond to cyber-security threats. 
@@ -62,7 +66,7 @@ In this work, we study the influence of two user characteristics when making sec
 We are adopting the HBM for studying user characteristics that affect computer security decision making because the HBM (specifically self-efficacy and cues-to-action) has been studied in prior work, which looked into computer security practices of the home user. 
 Studies on self efficacy found that \cite{urbanska2013,aytes2004,milne2009} knowledge about how to practice safe computing increases the rate of safe behavior. 
 However, having knowledge alone does not guarantee practice of computer security. 
-For example, rapid advances in new security technologies make it harder for user to keep up with the latest updates that must be made to ensure safety of his computer. 
+For example, rapid advances in new security technologies make it harder for a user to keep up with the latest updates that must be made to ensure safety of his computer. 
 Cues-to-action triggers are advice received from external entities like friends, co-workers, media reports, laws and regulations etc. 
 Studies on cues-to-action \cite{claar2010,ng2007} find that these types of cues do not have a significant effect on human users practicing computer security.  
 However, these studies mainly use self-reports to evaluate the effects of self-efficacy and cues-to-action on users' decision making. 
@@ -73,16 +77,17 @@ Considerable research has addressed human decision making about risk.
 An individual’s risk tolerance and perception is likely to be context specific; Weber et al. \citeyear{weber2002} divided contexts into: ethical, financial, health/safety, recreational and social. 
 Computer security and privacy decisions share features of several of these. 
 Like some health/safety decisions, the consequences may be delayed (e.g., information theft) or unnoticed (e.g., malware), the probability of risk may be perceived as low, the actions may be routine (e.g., reading email), and the immediate primary effects (e.g., playing a new game or looking at a photo of a relative) may be recreational. 
-Unlike health/safety, the cost of the threat is not as high (e.g., slow down of machine) or not as imminent (e.g., bot installed on machine). 
-Like social, the user may experience peer pressure to take some action and be unwilling to admit when something goes wrong. 
-Like ethical, risky actions may be violating laws (e.g., copyright in peer to peer file sharing) or putting others at risk (e.g., bots).
+Unlike health/safety decisions, the cost of the threat is not as high (e.g., slow down of machine) or not as imminent (e.g., bot installed on machine). 
+From the social context, the user may experience peer pressure to take some action and be unwilling to admit when something goes wrong. 
+Like ethical decisions, risky actions may be violating laws (e.g., copyright in peer to peer file sharing) or putting others at risk (e.g., bots).
 Additionally, the perception of cost for avoiding risk may be high (e.g., time spent learning about security), and the right actions may not be obvious (e.g., which security software to install or how best to make settings in browser). 
 Moreover, given the disclosure of industry and government breaches, users may simply feel helpless.
 
-In addition, the work by Davison and Sillence \cite{davinson2010} shows that human users' security related behavior often does not match their stated intentions. 
-Human users often state the intention of being secure online but than perform actions that put their system at risk. 
-Furthermore, studies that have been able to verify user's reports on their computers have uncovered lower actual than reported rates of some behaviors \cite{govani2005, national2010}. 
-Therefore, developing user-friendly security solutions requires observing users performing actions rather than relying on self reporting, which acts as a proxy for actual behavior. Ideally, the home computer user should be studied at home for an extended period of time to be able to accurately gauge the computer security related behavior patterns. 
+In addition, the work by Davison and Sillence \citeyear{davinson2010} shows that human users' security related behavior often does not match their stated intentions. 
+Human users often state the intention of being secure online but then perform actions that put their system at risk. 
+Two studies \cite{govani2005, national2010} have been able to verify that the self reported values for some human user computer behaviors are in fact higher than the actual values.
+This finding confirms that human users are unable to recognize  on their own that they need help while using computers, and would benefit from automated solutions that can help them during the decision making.
+To this end, developing user-friendly security solutions requires observing users performing actions rather than relying on self reporting, which acts as a proxy for actual behavior. Ideally, the home computer user should be studied at home for an extended period of time to be able to accurately gauge the computer security related behavior patterns. 
 However, these requirements pose many logistical and practical problems. 
 For example, the software system used in such studies should be a background process with minimal intrusion to the user's normal computing activities while collecting the necessary system/behavior information at different levels of granularity (e.g., system calls, process information, user action sequences). 
 Knowledge of having these computer security monitoring software installed in their personal computers may force users to practice computer security more thoroughly than they would normally, which will lead to artificial behavior data.  
@@ -105,21 +110,28 @@ We now discuss human behavior models that are commonly adopted in studies about 
 \subsection{Modeling User Behavior for Computer Security}
 Users adopting computer security concepts share many similarities with how they respond in a health related scenario. 
 For example, consider a user installing an antivirus software to protect his computer against malicious. 
-This is very similar to someone adopting a healthy diet to avoid diseases. HBM, developed in the 1950s after the failure of a tuberculosis screening program attempted to explain and predict health behaviors. HBM consists of six core constructs that affect an individual's core beliefs on some health related concept. These constructs are: susceptibility, severity, benefits, barriers, cues-to-action, and self-efficacy of performing a given health behavior. Let us translate the HBM for a scenario where the user is trying to protect his computer against a virus attack using antivirus software. HBM states that the user's behavior will depend on the user believing that there is a high probability that his computer will be affected by a virus (susceptibility), the user believes that the negative effect of the virus attack is a serious problem for him (severity), the user believes that having an antivirus software is helpful in preventing virus attacks (benefits), the user believes that there is little difficulty in getting a good antivirus software and using it (barriers) ,the user believes that he can recognize external trigger events indicating the computer may be at risk (cues-to-action), the user believes that he is confident in his ability to install and use an antivirus software to protect his computer (self-efficacy).
+This is very similar to someone adopting a healthy diet to avoid diseases. HBM was developed in the 1950s after the failure of a tuberculosis screening program attempted to explain and predict health behaviors. HBM consists of six core constructs that affect an individual's core beliefs on some health related concept. These constructs are: susceptibility, severity, benefits, barriers, cues-to-action, and self-efficacy of performing a given health behavior. Let us translate the HBM for a scenario where the user is trying to protect his computer against a virus attack using antivirus software. HBM states that the user's behavior will depend on the user believing that there is a high probability that his computer will be affected by a virus (susceptibility), the user believes that the negative effect of the virus attack is a serious problem for him (severity), the user believes that having an antivirus software is helpful in preventing virus attacks (benefits), the user believes that there is little difficulty in getting a good antivirus software and using it (barriers) ,the user believes that he can recognize external trigger events indicating the computer may be at risk (cues-to-action), the user believes that he is confident in his ability to install and use an antivirus software to protect his computer (self-efficacy).
 
 HBM has been adopted in several studies about computer security practices of human users. Ng et al. \citeyear{ng2007} study the effects of HBM constructs operationalized to the security practice of exercising care when reading emails with attachments. They evaluate the effects of HBM constructs using self-reported behavior of users. Unlike our study, which focus on home computer users, this study is conducted in the organizational context. The study finds that when exercising care while opening email attachments, self efficacy, susceptibility and benefits are determinants of user behavior. They further find that barriers, cues-to-action and perceived severity are not significant determinants of security behavior. However, they note that although the cues they have evaluated (e.g., organizational awareness programs) are not effective in prompting secure behavior in users, other types of cues could prove to be effective. In our study, we intend to address this by evaluating cues that can be presented from within the computing environment (e.g., browser notifications, secure URLs) to promote secure behavior in users.
 
-Claar et al. \citeyear{claar2010} studies the effects of HBM constructs in the context of using computer security software anti-virus, firewall, and  anti-spyware. Like to our study, this study also focus on computer security behavior of the home computer user. Claar also extended the HBM by adding moderating variables gender, age, education, prior experience on the effect of computer software usage. Participants were recruited from university students and Internet groups and were administered a survey. The results show that self-efficacy, barriers, susceptibility influence computer security usage. This study also found that cues-to-action did not support computer security usage.
+Claar et al. \citeyear{claar2010} studies the effects of HBM constructs in the context of using computer security software anti-virus, firewall, and  anti-spyware. Like our study, this study also focus on computer security behavior of the home computer user. Claar also extended the HBM by adding moderating variables gender, age, education, prior experience on the effect of computer software usage. Participants were recruited from university students and Internet groups and were administered a survey. The results show that self-efficacy, barriers, susceptibility influence computer security usage. This study also found that cues-to-action did not support how human users practice computer security.
 
 Attack graphs \cite{ammann2002} have been proposed as a methodology of modeling how a security vulnerability (goal state) can be reached starting from an initial state through a set of state transitions. Urbanska et al. \citeyear{urbanska2013} propose an extension of the attack graphs that factors in the user's interactions  with the system (in addition to the attacker) that leads to the manifestation of vulnerabilities. This state/action model is referred to as a Personalized Attack Graph (PAG). The PAG provides a basis for answering two questions related to trigger identification: (a) Which are the ``appropriate'' system states that must be monitored? and, (b) Which user actions are predicted to possibly lead to a vulnerability? A PAG explicitly ties the dependencies between known vulnerabilities existing in a standalone system and the system configuration (including characteristics of the user), to the user activities, system actions and attacker actions that can lead to an exploit of a vulnerability. The personalized aspect of the PAG comes from incorporating information about the user as \textit{user attributes}. These attributes include, user actions, preferences and assets. The authors use a Bayesian network model influenced by HBM to assign probabilities to the user attributes. User attribute probabilities for a specific user is calculated from values assigned to the six primary factors in the HBM and six additional factors (prior knowledge, experience, gender, age, socio-economic and education). However, the PAG model is evaluated using synthetic data and expert opinion. In this work, we produce actual human subject data that can be used to accurately estimate these probability values for two of the HBM constructs: self-efficacy and cues-to-action.
 
 
 \subsection{Challenges in Security User Studies}
-Many studies on assessing human decision making in practicing computer security including the studies cited in the previous section, report that one major challenge in conducting security user studies is the disparities between self-reported and actual observations. Howe et al. \citeyear{howe2012psychology} observed that most studies that look into computer security practices of users relying on self reported surveys suffered from issues such as respondent bias, socially desirable responding and peer perception. The authors posited that experiments based on simulation, which place the participant in the actual situation that is monitored can help reduce such issues and also be leveraged to assess the emotional reactions of users to interventions and warnings. 
+Many studies on assessing human decision making in practicing computer security (including the studies cited in the previous section), report that one major challenge in conducting security user studies is the disparities between self-reported and actual observations. Howe et al. \citeyear{howe2012psychology} observed that most studies that look into computer security practices of users relying on self reported surveys suffered from issues such as respondent bias, socially desirable responding and peer perception. The authors posited that experiments based on simulation, which place the participant in the actual situation that is monitored can help reduce such issues and also be leveraged to assess the emotional reactions of users to interventions and warnings. 
 
-Questions asked in self-reporting surveys induces respondent bias. For example in Ng et al. study \citeyear{ng2007}, the user is asked the question ``\textit{I am confident of recognizing suspicious email headers. (agree/disagree)}'' to measure self-efficacy. Users may find it difficult to estimate there skill level for some task and often times overestimate. Furthermore, asking about computer security practices primes the user for security, which may be difficult for researchers to control. A human subject study that looked into effectiveness of SSL warnings that appear during Web browsing tasks \cite{sotirakopoulos2011} attempts to minimize the priming effect by designing tasks for the Web browsers the participants normally used and simulating the same look and feel of the native Web browsers. This study also used deception. The researchers did not reveal the true purpose of the study until the tasks were completed. The results of this study also confirms that there is a disparity between self-reported  and observed actions in computer security studies. We follow the same principles in our sandbox environment design and the administering the experiment. The sandbox environment has the same look and feel as the typical Microsoft Windows Desktop. We adopted deception by presenting the participants with a cover story, which stated that we were evaluating the participants on their ability to perform day-to-day computing tasks like checking email and web browsing. We also use a combination of surveys and observational data to identify predictors of user actions. Surveys are issued to participants at the beginning and at the end of the study to more accurately gauge what the users report and what they had actually done.
+Questions asked in self-reporting surveys induces respondent bias. For example in Ng et al.  \citeyear{ng2007}, the user is asked the question ``\textit{I am confident of recognizing suspicious email headers. (agree/disagree)}'' to measure self-efficacy. 
+Users may find it difficult to estimate there skill level for some task and often overestimate their abilities. 
+Furthermore, asking about computer security practices primes the user for security, which may be difficult for researchers to control. A human subject study that looked into effectiveness of SSL warnings that appear during Web browsing tasks \cite{sotirakopoulos2011} attempts to minimize the priming effect by designing tasks for the Web browsers the participants normally used and simulating the same look and feel of the native Web browsers. This study also used deception. The researchers did not reveal the true purpose of the study until the tasks were completed. The results of this study also confirms that there is a disparity between self-reported  and observed actions in computer security studies. We follow the same principles in our sandbox environment design and the administering the experiment. 
 
-While the sandbox offers a controlled environment, in situ affords realism and the ability to conduct longitudinal studies. This is particularly important in practicing computer security, which must continue beyond the initial adoption. The sandbox study we are proposing only looks into computer security practices in laboratory conditions and the study is administered only once. Accessing a user's computer in an unobtrusive way for a long period of time presents considerable challenges. Warkentin et al. \citeyear{warkentin2016} attempt to address this issue and presents a model that explains continuous intention to practice computer security. The researchers, measured the usage of an anti-malware software over nine weeks. The software was installed in the subjects' computers and usage data was sent to a web based server periodically. The study finds that in order to form an intention to continue the use of security software the effects of threat severity, susceptibility and self-efficacy are significant contributing factors.
+The sandbox environment has the same look and feel as the typical Microsoft Windows Desktop. We adopted deception by presenting the participants with a cover story, which stated that we were evaluating the participants on their ability to perform day-to-day computing tasks like checking email and web browsing. We also use a combination of surveys and observational data to identify predictors of user actions. Surveys are issued to participants at the beginning and at the end of the study to more accurately gauge what the users report and what they had actually done.
+
+While the sandbox offers a controlled environment, it also affords realism and the ability to conduct longitudinal studies. 
+This is particularly important in practicing computer security, which must continue beyond the initial adoption. 
+Our sandbox study only looks into computer security practices in laboratory conditions and the study is administered only once. 
+Accessing a user's computer in an unobtrusive way for a long period of time presents considerable challenges. Warkentin et al. \citeyear{warkentin2016} attempt to address this issue and presents a model that explains continuous intention to practice computer security. The researchers, measured the usage of an anti-malware software over nine weeks. The software was installed in the subjects' computers and usage data was sent to a web based server periodically. The study finds that in order to form an intention to continue the use of security software the effects of threat severity, susceptibility and self-efficacy are significant contributing factors.
 
 Another challenge in human subject studies in computer security practices is the sample bias. Characteristics of the study participants vary from the general population of computer users.  Many studies use university students as the subject pool \cite{sotirakopoulos2011, warkentin2016} in order to draw a representative sample to the best of their ability. However, typical computer users are young, old, tech-savvy, non-tech-savvy, educated, uneducated, male, female and so on. The diversity of the sample should lead to more generalizable data. In our study, we also use the university students as a sample mainly because it is a sample of convenience. We however restricted the student sample to consist of non computer science majors so that we can better approximate an average home computer user.
 
@@ -134,7 +146,7 @@ We had several design objectives. First, the environment needs to be as realisti
 \subsection{Simulating Common Computing Activities in a Familiar Context}
 Microsoft Windows is one of the most widely used desktop computing platforms accounting for 88\% of the market \cite{zdnet2020}. Thus, the look-and-feel of the Windows desktop and common applications is important to instilling familiarity for subjects. When a subject starts, he/she sees a Desktop as shown in Figure \ref{fig:desktop}. The Desktop provides application icons, e.g., a web-browser and a file-browser. Subjects can click these icons to launch the corresponding applications.
 
-\begin{figure}[!ht]
+\begin{figure}[tpb]
   \centering
 \includegraphics[width=\columnwidth]{img/desktop.png}
   \caption{Simulated Microsoft Windows desktop environment}
@@ -146,9 +158,9 @@ Figure \ref{fig:browser}). The browser not only guided the subjects through the 
 
 For the browser, we used FireFox (version 34.0.5) because it is open source, which allows us to customize the software to enable only the features we need for the simulated environment (forward/backward page navigation buttons, download button, address bar). To maintain the experience as being focused on computer interaction, web pages were used to collect pre and post interaction survey data. For our study, the data included demographic information as well as reports that could be compared against behavior as the subjects executed their tasks. To make the pages realistic, the URL bar in the PHP stub displayed the expected URLs (e.g., https://twitter.com) with an associated padlock to indicate that the HTTP connection was secure, when appropriate. The URL bar could be changed to test subject sensitivity to cues such as these. The browser also allowed for multiple tabs to be open for the experiment landing page and the various applications that are run within the browser.
 
-Studies on global Internet users show that checking email, sending/receiving direct messages/chat, browsing for information/research and social media activities account for the bulk of the online activities \cite{furnell2007, worldinternet2018}. Thus, simulating these activities was a priority for our tool; the current version includes simulated applications of email and Twitter. Because ``google and click'' is so open ended, we did not include it in the current version of the tool.
+Studies on global Internet users show that checking email, sending/receiving direct messages (chat), browsing for information/research and social media activities account for the bulk of the online activities \cite{furnell2007, worldinternet2018}. Thus, simulating these activities was a priority for our tool; the current version includes simulated applications of email and Twitter. Because ``google and click'' is so open ended, we did not include it in the current version of the tool.
 
-\begin{figure}[!ht]
+\begin{figure}[tpb]
   \centering
 \includegraphics[width=\columnwidth, keepaspectratio=true]{img/browser.png}
   \caption{Simulated Mozilla Firefox Web browser}
@@ -156,7 +168,7 @@ Studies on global Internet users show that checking email, sending/receiving dir
 \end{figure}
 
 Our email application was based off of SquirrellMail (version 1.4.22). SquirrelMail includes built-in PHP support for the IMAP and SMTP protocols and all pages render in pure HTML. These configurations fit perfectly to the technologies behind our simulated environment and therefore we could easily integrate it as an add-on service to the desktop environment. Our version of mail supports login and message functions. Subjects login using provided usernames and passwords and then can change their password. They can look at a list of messages, read and answer them. For purposes of this study, the email accounts can be populated with a set of email messages. Figure \ref{fig:mail} shows three emails that were used in our study and that were related to the other applications in the experiment protocol.
-\begin{figure}[!ht]
+\begin{figure}[tpb]
   \centering
 \includegraphics[width=\columnwidth, keepaspectratio=true]{img/mail.png}
   \caption{Simulated SquirrelMail email client}
@@ -164,14 +176,14 @@ Our email application was based off of SquirrellMail (version 1.4.22). SquirrelM
 \end{figure}
 
 As with email, our Twitter application supports login and message functions. Each participating user was provided with a twitter handle and a password. Three messages were posted in their respective Twitter inboxes (see Figure \ref{fig:twithome}). One of the three messages as shown in Figure \ref{fig:twitmsg}, which appears to link to a phishing website; if they click on the link, they are taken to a site which requested subjects to provide their Twitter username and password. 
-\begin{figure}[ht]
+\begin{figure}[tpb]
   \centering
 \includegraphics[width=\columnwidth, keepaspectratio=true]{img/twitterhome.png}
   \caption{Simulated Twitter home page with three direct messages in the inbox}
   \label{fig:twithome}
 \end{figure}
 
-\begin{figure}[ht]
+\begin{figure}[tpb]
   \centering
 \includegraphics[width=\columnwidth, keepaspectratio=true]{img/twitter.png}
   \caption{Simulated Twitter direct message}
@@ -229,9 +241,19 @@ process sends over all captured data to the server side using SFTP/SCP, cleans a
 As per the regulations of the Institutional Review Board (IRB) of the Colorado State University, the researchers are required to store subject data in a safe and secure manner. Moreover, to run enough subjects, we needed to allow multiple subjects to participate simultaneously. Consequently, a secure remote server also stored experiment data in a safe manner. To preserve anonymity, the data were associated with the IDs (login names), which were assigned randomly when subjects arrived for the study and were never associated with specific individuals.
 
 \subsubsection{Configuration and Extensions for Other Studies}
-Microsoft Windows and Visual Studio Framework are required to install and use PsychoRithm. The web applications (Twitter, Software download pages are implemented using HTML/AJAX/JQuery. The Anti-virus mock-up software is implemented using Java. For this study, the simulator only supports Web browsing (restricted only to predefined URLS), file browsing (restricted only to personalized \textit{Downloads} directory) and email (restricted only to SquirrelMail webmail application) applications. Access to other Windows applications are restricted through the simulated desktop and the web application shown in Figure \ref{fig:browser}. 
+\sloppy
+Microsoft Windows and Visual Studio Framework are required to install and use PsychoRithm. 
+The web applications (Twitter, Antivirus Software Download) pages are implemented using HTML/AJAX/JQuery. 
+The Anti-virus mock-up software is implemented using Java. 
+For this study, the simulator only supports Web browsing (restricted only to predefined URLS), file browsing (restricted only to personalized \textit{Downloads} directory) and email (restricted only to SquirrelMail webmail application) applications. Access to other Windows applications are restricted through the simulated desktop and the web application shown in Figure \ref{fig:browser}. 
 
-Because Firefox is an existing application, it must be started at the beginning of an experiment session and cannot be stopped during the course of the experiment. As a result, the subjects were only allowed to minimize the application and restore it via the taskbar button. All menu operations, including right-click menu operations, were disabled. In this study, our main focus is on evaluating users' behavior with regard to self-efficacy and cues-to-action while performing common tasks on the computer. There are other behavior models, which describe many other factors that affect user's computer security behavior. In situ evaluations for these factors may require simulations for additional, more complected tasks. In this case, future add-on Windows applications can be developed using the aforementioned technologies and integrated as plug-ins.
+Because Firefox is an existing application, it must be started at the beginning of an experiment session and cannot be stopped during the course of the experiment. 
+As a result, the subjects were only allowed to minimize the application and restore it via the taskbar button. 
+All menu operations, including right-click menu operations, were disabled. 
+In this study, our main focus is on evaluating users' behavior with regard to self-efficacy and cues-to-action while performing common tasks on the computer. 
+There are other behavior models describing many other factors that affect user's computer security behavior. 
+When evaluating the factors beside the two we are testing in this study, in their real usage context, the simulator software may require extensions for additional, more complicated tasks. 
+In this case, future add-on Windows applications can be developed using the aforementioned technologies and integrated as plug-ins.
 
 
 \subsection{Studying Behavior In Situ}
@@ -265,9 +287,9 @@ In Spring 2015, we collected data from 61 university undergraduates as participa
 Although selected as a sample of convenience, the sample was representative of home computer users from a critical group: young adults with easy access to computers. Prior studies have shown that high school and college aged adults, age between 18 and 34 report the highest level of Internet usage \cite{census2012}. 56\% of participants in this study were female. 74\% were less than 20 years of age, 25\% were aged 20-25 years and the remaining participant was aged 26-30. 98\% were working toward a Bachelor's degree.
 
 \subsubsection*{Surveys}
-We presented two surveys. The pre-study survey shown in Appendix \ref{apx:cypre} asks three questions (questions 1 - 3) about demographics and 10 questions about computer experiences (questions 4 - 13). Although we would have liked to directly assessed self-efficacy, the standard questions, as pioneered by \cite{ng2007, claar2010}, asked about level of confidence when executing specific tasks in different contexts. We did not wish to prime the participants to be thinking about computer security during the on-line portion of the study. Instead, we followed the tone of Mannan and van Oorschot \cite{mannan2008}, which asked about their experience with computers (questions 4 - 8), what challenges they perceive (question 9), where they obtain help (questions 10 - 11) and what software they have installed (questions 12 - 13). These questions were selected to relate more clearly to the cover story.
+We presented two surveys. The pre-study survey shown in Appendix \ref{apx:cypre} asks three questions (questions 1 - 3) about demographics and 10 questions about computer experiences (questions 4 - 13). Although we would have liked to directly assessed self-efficacy, the standard questions, as pioneered by \cite{ng2007, claar2010}, asked about level of confidence when executing specific tasks in different contexts. We did not wish to prime the participants to be thinking about computer security during the on-line portion of the study. Instead, we followed the tone of Mannan and van Oorschot \citeyear{mannan2008}, which asked about their experience with computers (questions 4 - 8), what challenges they perceive (question 9), where they obtain help (questions 10 - 11) and what software they have installed (questions 12 - 13). These questions were selected to relate more clearly to the cover story.
 
-For the post-study survey shown in Appendix \ref{apx:cypost}, we adopt the standard survey instruments, which evaluate self-efficacy for computer security practices from \cite{ng2007, compeau1995}. Instruments that measure cues-to-action are adopted from \cite{ng2007}. It must be noted that our idea of cues refer to security notifications available in the computing environment such as SSL lock icon in URLs, web site content/look and feel as opposed to external information sources like news, help-desks etc. in Ng et al.\cite{ng2007}. Questions 2 - 11 evaluate the self-efficacy of the anti-virus software usage. Questions 12 - 19 evaluate self-efficacy of safe communication over social media (Twitter). Questions 21 - 24 evaluate self-efficacy of using email and managing passwords. Questions 20, 25-29 are about awareness of secure and private information collection. Questions 30 - 35 evaluate cues-to-action on practicing computer security on the Internet. The first question asks for the pseudonym which allows us to connect the on-line portion's data with the post-survey data. The main purpose of these questions was to establish whether or not the actions in the online portion of the study corresponded to what they thought that they did.
+For the post-study survey shown in Appendix \ref{apx:cypost}, we adopt the standard survey instruments, which evaluate self-efficacy for computer security practices from \cite{ng2007, compeau1995}. Instruments that measure cues-to-action are adopted from \cite{ng2007}. It must be noted that our idea of cues refer to security notifications available in the computing environment such as SSL lock icon in URLs, web site content/look and feel as opposed to external information sources like news, help-desks etc. in Ng et al.\citeyear{ng2007}. Questions 2 - 11 evaluate the self-efficacy of the anti-virus software usage. Questions 12 - 19 evaluate self-efficacy of safe communication over social media (Twitter). Questions 21 - 24 evaluate self-efficacy of using email and managing passwords. Questions 20, 25-29 are about awareness of secure and private information collection. Questions 30 - 35 evaluate cues-to-action on practicing computer security on the Internet. The first question asks for the pseudonym which allows us to connect the on-line portion's data with the post-survey data. The main purpose of these questions was to establish whether or not the actions in the online portion of the study corresponded to what they thought that they did.
 
 
 \subsubsection*{Experiment Procedure}
@@ -295,7 +317,7 @@ In the first scenario, participants were directed to install, configure and run 
   \begin{minipage}{0.8\columnwidth}
   \textbf{ Task: Install Anti-virus Software}\\
   \setlength{\hangindent}{15pt}
-	\textit{Please read the following description before you begin}
+	\textit{Please read the following description before you begin.}
 	
 	\textit{You may have noticed that the computer does not have any anti-virus software installed. You are concerned about this lack because the computer will be shared among your family members. Your  task is to install and configure an anti-virus software to be used in this computer. Names of software you will see during tasks are fictitious.}
 
@@ -334,14 +356,14 @@ A mock-up version of a popular social media application (Twitter) was implemente
 A web based email client was used for the email scenario. Users were given personal email accounts and a common default password designated for the study. They were told ``The email account is unique to you. However, the default password is being shared by all users of the computer.'' The email task comprised two sub tasks. First, to study their ability to choose strong passwords, participants were instructed to change the default password of their email accounts to a new password of their choice. Second, users were instructed to compose a new email message, read email messages and respond to unread messages.
 
 As shown in Figure \ref{fig:emails}, three new messages were placed in the inbox: one safe message and two unsafe messages. One of the two unsafe messages was a phishing message with a URL that would direct the user to a phishing website upon clicking. The phishing website was masked as the web-mail client itself. The other unsafe message contained an attachment: a harmful zip file. The message content was patterned after actual phishing email messages. The phishing websites and zip file attachments were mock-ups within the sandbox; thus, they did not pose an actual security threat to the computer or to the participant's personal data. 
-\begin{figure}[htb]
+\begin{figure}[tpb]
   \centering
 \includegraphics[width=\columnwidth, keepaspectratio=true]{img/emails.png}
   \caption{Email messages presented as part of the online portion of the study.}
   \label{fig:emails}
 \end{figure}
 
-We designed the phishing website to follow examples we had seen before and also placed several cues in line with commonly recognized properties of online phishing attacks \cite{ftc2019} for both the social media phishing attempt and email phishing attempt. First, in the case of Twitter, although the message sender's name was ``Twitter'', the Twitter handle (i.e., message sender's twitter account name) was not similar to the legitimate Twitter account's Twitter handle. The legitimate account's Twitter handle is \texttt{@Twitter}. The phishing message was sent from the Twitter handle \texttt{@iwitter} (i.e., Twitter misspelled). Second, the message said that some log-in attempts have been noticed. Third, the message content requested that the recipient confirm some personal information, specifically the user's Twitter account user name and password. If the user failed to recognize these cues and clicked on the link, the user is directed to a web page, which contains a log in page but looks different from the legitimate Twitter log in page. Users had already seen the legitimate log in page at the start of the Twitter task and ideally should be able to recognize that the current web page is different. We added several cues to this page as well. We changed the Twitter logo and the color scheme of the phishing web page. The URL did not contain the SSL lock icon and was \texttt{http://iwitter.com}, whereas the legitimate web site's URL was \texttt{https://twitter.com}. If the user did not recognize the phishing web site given all these cues and submitted the user name and the password, the user was directed to a landing page, which displayed a message that the user's personal information has now been compromised. Then the user was directed to the next task.
+We designed the phishing website to follow examples we had seen before and also placed several cues in line with commonly recognized properties of online phishing attacks \cite{ftc2019} for both the social media phishing attempt and email phishing attempt. First, in the case of Twitter, although the message sender's name was ``Twitter'', the Twitter handle (i.e., message sender's twitter account name) was not similar to the legitimate Twitter account's Twitter handle. The legitimate account's Twitter handle is \texttt{@Twitter}. The phishing message was sent from the Twitter handle \texttt{@iwitter} (i.e., Twitter misspelled). Second, the message said that some log-in attempts have been noticed. Third, the message content requested that the recipient confirm some personal information, specifically the user's Twitter account user name and password. If the user failed to recognize these cues and clicked on the link, the user is directed to a web page, which contains a log in page but looks different from the legitimate Twitter login page. Users had already seen the legitimate login page at the start of the Twitter task and ideally should be able to recognize that the current web page is different. We added several cues to this page as well. We changed the Twitter logo and the color scheme of the phishing web page. The URL did not contain the SSL lock icon and was \texttt{http://iwitter.com}, whereas the legitimate web site's URL was \texttt{https://twitter.com}. If the user did not recognize the phishing web site given all these cues and submitted the user name and the password, the user was directed to a landing page, which displayed a message that the user's personal information has now been compromised. Then the user was directed to the next task.
 
 A similar approach was taken to handle security attacks that occur via email. The phishing message on email was masqueraded to appear as if it was being sent by the Anti-virus software vendor. Recall that, in the sequence of tasks, when the user reaches the email task, they would have already completed the anti-virus task and is familiar with the Anti-virus vendor's name. We embedded the same discrepancies between the legitimate vendor's information and the phishing website as the Twitter phishing scenario as cues for the email phishing use case. If the user clicked the phishing link, the same sequence of events took place as in the case of the Twitter phishing scenario. There were several cues to recognize the malware email such as the generic greeting from the sender (``Dear User''), an enticement to open an attachment (get the new password by opening the attachment), information review check (password change) and undisclosed recipient (``Mail Support''). If the user clicked the attachment, the user was directed to a web page, which displayed a message that the computer system's safety is now compromised.
 
@@ -354,9 +376,17 @@ debriefing explanation. We also offered them the opportunity to further discuss 
 This study has two main components that evaluate users' computer security behavior: self-report surveys and the sandbox activities. Therefore, we divided the analysis as within component (only surveys and only sandbox) and across component (surveys and sandbox). We first present the analysis on single components.
 
 \subsection{Pre-Survey Findings}
-Table \ref{tab:cypre} shows a summary of the pre-survey findings. Although the participants had a lot of prior experience with computers (66\% with more than 9 years), they had little formal training (59\% had none) and turned to the Internet for help as their primary source (92\%). Most (82\%) owned multiple devices. Nearly all (95\%) had installed multiple applications, i.e., Chrome, Office, Flash, Skype and Acrobat. Given the participant recruitment method, it was not surprising that nearly all had laptops and used their computers for educational activities. With respect to computer security, more than half (67\%) found it challenging to identify harmful actions and take steps to ensure safety. Yet most (77\%) had anti-virus software on their computers.
+The survey can be found in the Appendix~\ref{apx:cypre}, page~\pageref{apx:cypre}.
+Table \ref{tab:cypre} shows a summary of the pre-survey findings. 
+Although the participants had a lot of prior experience with computers (66\% with more than 9 years), they had little formal training (59\% had none) and turned to the Internet for help as their primary source (92\%). 
+Most (82\%) owned multiple devices. 
+Nearly all (95\%) had installed multiple applications, i.e., Chrome, Office, Flash, Skype and Acrobat. 
+Given the participant recruitment method, it was not surprising that nearly all had laptops and used their computers for educational activities. With respect to computer security, more than half (67\%) found it challenging to identify harmful actions and take steps to ensure safety. 
+Yet most (77\%) had anti-virus software on their computers.
 
-\begin{table}[ht]
+\begin{table}[tpb]
+ \caption{Summary data from the pre-study survey questions. Each row is a question with its number and short description. Highest values in each row are in bold.}
+\label{tab:cypre}
  \resizebox{\columnwidth}{!}{
 \begin{tabular}{|ll|}
 \hline
@@ -380,8 +410,6 @@ Anti-virus usage &  \textbf{Yes: 77\%}, No: 23\% \\ \hline
 Installations &  \begin{tabular}[c]{@{}l@{}}\textbf{Google Chrome: 89\%}, Office: 85\%, Flash: 75\%, Skype: 62\%, Acrobat: 57\%, \\ Firefox: 33\%, QuickTime: 25\%, VLC Media Player: 21\%, Thirdparty email: 10\%,\\ Other: 7\%, Opensource Office: 3\%\end{tabular} \\ \hline
 \end{tabular}
 }
-\caption{Summary data from the pre-study survey questions. Each row is a question with its number and short description. Highest values in each row are in bold.}
-\label{tab:cypre}
 \end{table}
 
 
@@ -390,9 +418,13 @@ Installations &  \begin{tabular}[c]{@{}l@{}}\textbf{Google Chrome: 89\%}, Office
 We analyzed the data to identify any differences that may appear between male and female participants. For questions that could be coded as numbers, we ran
 two sample, two tailed T-tests. For questions that had categorical answers, we constructed $2 \times R$ contingency tables, where $R$ was the number of categories, and ran Pearson's chi-squared tests. All analyses were performed using the R statistical package. 
 
-Table \ref{tab:cypregender} shows the results for gender on questions 4, 5, 6, 7, 9 and 13. We coded years of experience (question 4) as 5 for 4 - 6 years, 8 for 7-9, and 10 for $>$ 9. We coded hours/day (question 5) as 2 for $<$ 3, 4.5 for 3 - 6, 8.5 for 7 - 10 and 11 for $>$ 10. For questions 6, 7, 9 and 13, we counted the number of answers given by each participant. Although the means on each of these questions shows some differences between female and male participants, that difference is significant for only one question: the number of challenges. The female participants reported 2.68 on average, where the male participants reported 1.70. Thus, the perception of self-efficacy in computer usage for the females was clearly lower than for males.
+Table \ref{tab:cypregender} shows the results for gender on questions 4, 5, 6, 7, 9 and 13 (page~\pageref{apx:cypre}). 
+We coded years of experience (question 4) as 5 for 4 - 6 years, 8 for 7-9, and 10 for $>$ 9. We coded hours/day (question 5) as 2 for $<$ 3, 4.5 for 3 - 6, 8.5 for 7 - 10 and 11 for $>$ 10. For questions 6, 7, 9 and 13, we counted the number of answers given by each participant. Although the means on each of these questions shows some differences between female and male participants, that difference is significant for only one question: the number of challenges. The female participants reported 2.68 on average, where the male participants reported 1.70. Thus, the perception of self-efficacy in computer usage for the females was clearly lower than for males.
 
-\begin{table}[ht]
+\begin{table}[tpb]
+\caption{Comparing male and female participants on questions coded as numbers, Rows show mean
+for females, mean for males and p value for T-test.}
+\label{tab:cypregender}
  \resizebox{\columnwidth}{!}{
 \begin{tabular}{|l|l|l|l|l|l|l|}
 \hline
@@ -402,14 +434,13 @@ Mean Male           & 9.07           & 4.20          & 2.33    & 3.70         & 
 p-value \textless{} & 0.66           & 0.33          & 0.53    & 0.69         & 0.002      & 0.73          \\ \hline
 \end{tabular}
 }
-\caption{Comparing male and female participants on questions coded as numbers, Rows show mean
-for females, mean for males and p value for T-test.}
-\label{tab:cypregender}
 \end{table}
 
 Questions 6 - 13 had categorical answers. For these, we used each of the pre-specified answers as categories. We had few cases in which ``Other'' was used and so did not include that as a separate category. Table \ref{tab:cypreusage} summarizes our findings. The last column lists the category that showed the largest percentage difference and lists the percentage after the category name. For installs, no females and only 2 males installed OpenOffice, so we did not list it as the largest difference.
 
-\begin{table}[ht]
+\begin{table}[tpb]
+\caption{Results from Pearson's Chi-Squared test on gender for questions 6 - 13. Columns show $\chi$-squared value, degrees of freedom (df), p value and the category with the largest \% difference between females and males (negative indicates lower value for females. $\alpha<0.05$}
+\label{tab:cypreusage}
  \resizebox{0.7\columnwidth}{!}{
 \begin{tabular}{|l|l|l|l|l|}
 \hline
@@ -424,8 +455,6 @@ Help sources  & 6.29                & 3  & 0.10         & Relatives 29.2        
 Installations & 9.50                & 9  & 0.39         & VLC -21.6                        \\ \hline
 \end{tabular}
 }
-\caption{Results from Pearson's Chi-Squared test on gender for questions 6 - 13. Columns show $\chi$-squared value, degrees of freedom (df), p value and the category with the largest \% difference between females and males (negative indicates lower value for females. $\alpha<0.05$}
-\label{tab:cypreusage}
 \end{table}
 
 Only two questions showed possibly significant differences due to gender in the chi-squared tests. Participants reported a considerable difference in formal training: 76.5\% females had no formal training compared to 37\% of the males. Anti-virus installation was more common for females (88.2\%) versus 62.9\% for males. One hypothesis could be that less formal training leads people to take more action with respect to security. To see whether the association might be due to the lack of formal training, we constructed a $2\times 2$ contingency table of Training (Yes/No) versus Antivirus Installation (Yes/No). A chi-squared test yielded P < 0.637 which suggests that the effect is not likely due to the lack of formal training. As a next step, we examined whether lack of formal training leads to more perceived challenges. To test this, we ran a two sample T-test on number of challenges for those with no training versus those with some training. The mean for no training was 2.47 and with some training was 1.92; the p-value from the T-test was 0.08, suggesting a marginal effect. Gender appears to exert more of an effect than training on the perception of challenges.
@@ -436,7 +465,9 @@ Only 30 participants completed the antivirus software installation task.
 For this task, 76.7\% of the participants chose the questionable anti-virus software, only 1 participant clicked on the EULA and 46.7\% of participants successfully removed all infected files by running the anti-virus software correctly.
 
 
-\begin{table}[ht]
+\begin{table}[tpb]
+\caption{Percentage of responding and visiting link for Twitter tasks. Also rate of submitting password for the phishing message.}
+\label{tab:twittertask}
 \begin{tabular}{|l|r|r|r|}
 \hline
 Message & \multicolumn{1}{l|}{\% Responded} & \multicolumn{1}{l|}{\% Visited Link} & \multicolumn{1}{l|}{\% Submitted Password} \\ \hline
@@ -444,8 +475,6 @@ Safe Message 1   & 41.0 & 59.0 & N/A  \\
 Safe Message 2   & 32.8 & 57.4 & N/A  \\
 Phishing Message & 19.7 & 75.4 & 68.3 \\ \hline
 \end{tabular}
-\caption{Percentage of responding and visiting link for Twitter tasks. Also rate of submitting password for the phishing message.}
-\label{tab:twittertask}
 \end{table}
 
 For the Twitter task, the participants were asked to read and possibly respond to three messages. 61 participants preformed parts of the task. As shown in Table \ref{tab:twittertask}, participants were most likely to
@@ -457,7 +486,9 @@ The safe messages did not ask for their passwords. So we compared following the 
 
 For the email task, participants were asked to change their password, compose a new email message and respond to messages. Two of the three messages were unsafe. 41 participants executed this task. As Table \ref{tab:emailtask} shows most participants did take unsafe actions in these scenarios.
 
-\begin{table}[ht]
+\begin{table}[tpb]
+\caption{Percentage of participants responding, visiting link and downloading for Email tasks.}
+\label{tab:emailtask}
 \begin{tabular}{|l|r|r|r|}
 \hline
 Message & \multicolumn{1}{l|}{\% Responded} & \multicolumn{1}{l|}{\% Visited Link} & \multicolumn{1}{l|}{\% Downloaded Attachment} \\ \hline
@@ -465,14 +496,15 @@ Phishing Message & 19.7 & 73.8 & 65.6 \\
 Twitter Reset    & N/A  & N/A  & 29.3 \\
 Safe Message     & N/A  & 46.3 & N/A  \\ \hline
 \end{tabular}
-\caption{Percentage of participants responding, visiting link and downloading for Email tasks.}
-\label{tab:emailtask}
 \end{table}
 
 \subsection{Post-Survey Findings}
 Tables \ref{tab:postavefficacy}, \ref{tab:posttwitefficacy}, \ref{tab:postemailefficacy}, and \ref{tab:postgenefficacy} show summaries of the post-survey answers for the Antivirus task, Twitter task, Email task and general security questions, respectively. Questions 2 - 24 and 30 are answered on a 5 point scale and are encoded from 1 to 5 (higher is better). For questions 3 - 11, 13 - 24 and 30, from Strongly Disagree to Strongly Agree. For questions 2 and 12, the answers varied from Very Hard to Very Easy. Questions 25 - 29 allowed answers of ``Yes'', ``No'' and ``I don't know''. Questions 33 and 35 allowed ``Yes'' and ``No''. Questions 31, 32, and 34 had categorical answers.
 
-\begin{table}[ht]
+\begin{table}[tpb]
+\caption{Summary data from the post-study survey questions concerning the antivirus task. Each
+row is a question with its number and short description. Questions 3 - 7 assess confidence. Numbers are means followed by standard deviations in parenthesis. Values closer to five indicate high confidence or very easy.}
+\label{tab:postavefficacy}
 \begin{tabular}{|ll|}
 \hline
 2. Difficulty with installation and configuration             & 3.623 (1.186) \\ \hline
@@ -486,9 +518,6 @@ Tables \ref{tab:postavefficacy}, \ref{tab:posttwitefficacy}, \ref{tab:postemaile
 10. Using software that is configured to preferences          & 3.492 (1.043) \\ \hline
 11. Importance of software for identifying and removing files & 4.098 (0.907) \\ \hline
 \end{tabular}
-\caption{Summary data from the post-study survey questions concerning the antivirus task. Each
-row is a question with its number and short description. Questions 3 - 7 assess confidence. Numbers are means followed by standard deviations in parenthesis. Values closer to five indicate high confidence or very easy.}
-\label{tab:postavefficacy}
 \end{table}
 
 As shown in Table \ref{tab:postavefficacy}, for the antivirus task, the highest level of confidence was in configuring and using the antivirus software. The lowest was in removing suspicious files without help, but even here, they still felt more confident than not (values greater than 3 which is neutral). Questions 6 and 7 distinguish ability with and without help. A paired sample T-test comparing the responses to questions 6 and 7 shows a significant difference (p < 0.014), which suggests that many participants were concerned about their ability to perform the task on their own. Similarly, questions 4 and 9 address different aspects of selecting antivirus software: whether the software matches requirements and whether
@@ -496,7 +525,10 @@ it can be customized to do so. A paired sample T-test comparing the answers to t
 P < 1.0 The highest variance was in how difficult it was to install and configure the software. The lowest variance was in choosing software that is customizable. However, the variances were all approximately 1.
 
 As Table \ref{tab:posttwitefficacy} shows, the participants are a little more confident in their use of Twitter than the antivirus tasks. The highest level of confidence was in responding to messages; the lowest was in checking links. Paired sample T-tests comparing the responses to questions 14 with 15 and 14 with 16 show no significant difference (P > .09).
-\begin{table}[ht]
+\begin{table}[tpb]
+\caption{Summary data for the post-study survey questions concerning the Twitter task. Each
+row is a question with its number and short description. Numbers are means followed by standard deviations in parenthesis}
+\label{tab:posttwitefficacy}
 \begin{tabular}{|ll|}
 \hline
 12. Difficulty in responding to direct messages         & 4.361 (0.708) \\ \hline
@@ -508,14 +540,15 @@ As Table \ref{tab:posttwitefficacy} shows, the participants are a little more co
 18. Practicing caution in following links               & 3.984 (0.904) \\ \hline
 19. Not following links if the content looks suspicious & 4.098 (0.943) \\ \hline
 \end{tabular}
-\caption{Summary data for the post-study survey questions concerning the Twitter task. Each
-row is a question with its number and short description. Numbers are means followed by standard deviations in parenthesis}
-\label{tab:posttwitefficacy}
 \end{table}
 
 As Table \ref{tab:postemailefficacy} shows, the participants are confident in their use of email. The highest level of confidence was in choosing a strong password; the lowest was in the security warnings. Paired sample T-tests comparing the responses to questions 21 with 22 shows no significant difference (P > 0.71).
 
-\begin{table}[ht]
+\begin{table}[tpb]
+\caption{Summary data for the post-study survey questions concerning the Email task and 5 point
+scale Security questions. Each row is a question with its number and short description. Numbers
+are means followed by standard deviations in parenthesis}
+\label{tab:postemailefficacy}
 \begin{tabular}{|ll|}
 \hline
 20. Security warnings stop web site visits   & 3.639 (0.932) \\ \hline
@@ -525,16 +558,14 @@ As Table \ref{tab:postemailefficacy} shows, the participants are confident in th
 24. Confidence in choosing a strong password & 4.213 (0.878) \\ \hline
 30. Helpful descriptions                     & 3.721 (0.933) \\ \hline
 \end{tabular}
-\caption{Summary data for the post-study survey questions concerning the Email task and 5 point
-scale Security questions. Each row is a question with its number and short description. Numbers
-are means followed by standard deviations in parenthesis}
-\label{tab:postemailefficacy}
 \end{table}
 
 Table \ref{tab:postgenefficacy}
  summarizes answers from the general security questions. Although the majority indicated they could recognize secure pages and verify secure sites, they were less sure about whether the Twitter page was secure or whether they had downloaded the antivirus software from a secure site. The cue most recognized for legitimate pages was ``HTTPS'' in the URL which suggests they have some idea of its meaning. They also were aware of the significance of an unrecognizable address in harmful email. The most common reason for not reading EULAs was they are too long.
 
-\begin{table}[ht]
+\begin{table}[tpb]
+\caption{Summary data for the categorical post-study survey questions concerning security behavior generally. Each row is a question with its number and short description. Answers are provided with percentages.}
+\label{tab:postgenefficacy}
 \begin{tabular}{|ll|}
 \hline
 25. Recognizing secure pages   & \textbf{Yes: 67.2}\%, No: 11.5\%, I Don't Know: 21.3\% \\ \hline
@@ -551,8 +582,6 @@ Table \ref{tab:postgenefficacy}
   \begin{tabular}[c]{@{}l@{}}\textbf{Too long: 47.5\%}, Too technical: 6.6\%, No harm: 4.9\%, No\\ choice: 19.7\%, Not relevant: 1.6\%, Did read it: 19.7\%\end{tabular} \\ \hline
 35. Read EULA for anti-virus   & Yes: 21.3\%, \textbf{No: 78.7\%}                      \\ \hline
 \end{tabular}
-\caption{Summary data for the categorical post-study survey questions concerning security behavior generally. Each row is a question with its number and short description. Answers are provided with percentages.}
-\label{tab:postgenefficacy}
 \end{table}
 
 
@@ -562,7 +591,9 @@ By looking across components, we could examine 1) whether their reports of self-
 
 In the pre-survey, question 9 asked about what tasks they found most challenging. We analyzed the data to whether specific self-reported challenging tasks translated into lowered confidence in executing the tasks in the experiment. For example, did participants who reported that finding software was a challenge also have lower confidence in how they performed the antivirus task? For the analysis, we treated each task as a binary, either the participant reported it as a challenge or did not. We then ran two sample T-tests comparing those who did view it as a challenge to those who didn't for post-survey questions 2 - 7 (anti-virus), 12 - 16 (Twitter) and 24 (email). Due to the number of comparisons, we report only those with P < .01 as possibly significant differences in Table \ref{tab:prepostchallenges}.
 
-\begin{table}[ht]
+\begin{table}[tpb]
+\caption{Possibly significant relationships between self-reported challenges in pre-survey and self-reported confidence in post-survey}
+\label{tab:prepostchallenges}
 \begin{tabular}{|lll|}
 \hline
 Challenge        & \multicolumn{1}{c}{Post-survey Question}            & P     \\ \hline
@@ -573,26 +604,47 @@ Using help       & Removing files using antivirus software w/o help    & 0.002 \
 Identify harmful & Removing files using antivirus software             & 0.005 \\
 Identify harmful & Removing files using antivirus software w/o help    & 0.007 \\ \hline
 \end{tabular}
-\caption{Possibly significant relationships between self-reported challenges in pre-survey and self-reported confidence in post-survey}
-\label{tab:prepostchallenges}
 \end{table}
 
 
 \subsection{Between Sandbox and Post-Survey Findings}
-We now compare the users' actual sandbox activities against what they reported in the post-study survey for the three tasks: using anti-virus, communicating on Twitter and email communication. Figure \ref{fig:tasks} illustrates the task breakdown for the sandbox scenarios. Although the illustration is shown as a sequence (complies with the script that was given to the participants at the beginning of the study), we found that some participants did not follow the sequence. They skipped a sub-task to come back to it later. Other times, the participants tried the same sub-task several times.
+We now compare the users' actual sandbox activities against what they reported in the post-study survey for the three tasks: using anti-virus, communicating on Twitter and email communication. 
+The post-study survey can be found in the Appendix~\ref{apx:cypost}, page~\pageref{apx:cypost}.
+Figure \ref{fig:tasks} illustrates the task breakdown for the sandbox scenarios. 
+Although the illustration is shown as a sequence (complies with the script that was given to the participants at the beginning of the study), we found that some participants did not follow the scripted sequence. 
+They skipped a sub-task to come back to it later. Other times, the participants tried the same sub-task several times.
 
-\begin{figure}[ht]
+\begin{figure}[tbp]
   \centering
 \includegraphics[width=1.1\columnwidth, keepaspectratio=true]{img/tasks.png}
   \caption{Sandbox task breakdown}
   \label{fig:tasks}
 \end{figure}
 
+\subsubsection{Self-efficacy}
 The anti-virus task consisted of three sub-tasks: (1) given a legitimate and an illegitimate antivirus software, the user was asked to choose one (choice), (2) install the selected software and configure it to be used in the computer (install) and (3) run the software on the computer and remove threats (scan). In the post-survey, question 4 measures self-efficacy of the choice, question 9 measures the self-efficacy of the install and question 6 measures the self-efficacy of the scan. From the 62 participants only 11 completed all three sub-tasks, while 32 participants skipped the anti-virus task altogether. Those who did not complete the task skipped the install or scan or both. All 11 participants who completed all three sub-tasks installed the legitimate anti-virus software. This shows that users who practice computer security typically execute similar actions when they are placed in similar situations.
 
-Table \ref{tab:avefficacy} shows the result of the two-tailed T-test that compares the self-reported efficacy between those who completed the choice task and those who did not is significant (P > 0.05). The same can be observed for the scan activity. However, the self-reported efficacy is not significant for the install task. This shows that for certain tasks that involve anti-virus software usage, users can incorrectly assess their self-efficacy when practicing computer security in self-reports.
+Listed below are the three questions we provided for the participants to  subjectively rate their efficacy to use Antivirus software.
+Within parenthesis next to each subjective rating value is the numerical score we assigned for that particular rating.
+When computing the mean efficacy for an activity in the Completed group, we sum the numerical scores of the subjective ratings given by the participants and divide by the number of participants in the Completed group who have answered that question.
+For example assume three participants in the Completed group rated the efficacy of the Choice task as $[$ \textit{Neutral}, \textit{Disagree}, \textit{Agree} $]$.
+Then, the mean efficacy for the Choice task in the Completed group is $\frac{3 + 2 + 4}{3} = 3$.
+The mean efficacy for an activity in the Incomplete group is calculated similarly.
+\begin{itemize}
+\item (\textbf{efficacy of choice}) I feel confident in my ability to select an antivirus software that matches my security requirements.
+\par Strongly Disagree (1) \hspace{0.5cm} Disagree (2)\hspace{0.5cm}Neutral (3)\hspace{0.5cm} Agree (4)\hspace{0.5cm} Strongly agree (5)
+\item (\textbf{efficacy of install}) I choose an antivirus software, which allows me to customize its features to match my security requirements.
+\par Strongly Disagree (1) \hspace{0.5cm} Disagree (2)\hspace{0.5cm}Neutral (3)\hspace{0.5cm} Agree (4)\hspace{0.5cm} Strongly agree (5)
+\item (\textbf{efficacy of scan}) I feel confident in my ability to identify and remove suspicious files on my computer using an antivirus software without help.
+\par Strongly Disagree (1) \hspace{0.5cm} Disagree (2)\hspace{0.5cm}Neutral (3)\hspace{0.5cm} Agree (4)\hspace{0.5cm} Strongly agree (5)
+\end{itemize}
+Table \ref{tab:avefficacy} shows the result of the two-tailed T-test that compares the self-reported efficacy between those who completed the choice task and those who did not is significant (P < 0.05). 
+The same can be observed for the scan activity. 
+However, the self-reported efficacy is not significant for the install task. This shows that for certain tasks that involve anti-virus software usage, users can incorrectly assess their self-efficacy when practicing computer security in self-reports.
 
-\begin{table}[ht]
+\begin{table}[tpb]
+\caption{Self reported self-efficacy differences between those who completed all anti-virus sub-tasks and those who did not complete the task.}
+\label{tab:avefficacy}
 \begin{tabular}{|l|l|l|l|}
 \hline
 Activity & \begin{tabular}[c]{@{}l@{}}Completed \\ Efficacy Mean (SD)\end{tabular} & \begin{tabular}[c]{@{}l@{}}Incomplete \\ Efficacy Mean (SD)\end{tabular} & P \\ \hline
@@ -600,13 +652,23 @@ Choice  & 4.181 (0.603) & 2.944 (0.998) & 0.00096 \\
 Install & 3.6 (1.055)   & 3.428 (0.851) & 0.636   \\
 Scan    & 4.0 (0.707)   & 2.875 (1.147) & 0.005   \\ \hline
 \end{tabular}
-\caption{Self reported self-efficacy differences between those who completed all anti-virus sub-tasks and those who did not complete the task.}
-\label{tab:avefficacy}
 \end{table}
 
-Our post survey contained 3 questions (questions 14 - 16), which evaluated self efficacy of communicating safely on Twitter. As seen in Figure \ref{fig:tasks} the Twitter task contained the least number of steps. Furthermore, the action ``Respond to messages'' is a repetitive action. The action makes the user to read and respond to the three messages in their Twitter inbox. All 61 participants who completed the task opened/responded to at least one of the three messages.
-
-\begin{table}[ht]
+Our post survey contained 3 questions (questions 14 - 16), which evaluated self efficacy of communicating safely on Twitter. 
+As seen in Figure \ref{fig:tasks} the Twitter task contained the least number of steps. Furthermore, the action ``Respond to messages'' is a repetitive action. The action makes the user to read and respond to the three messages in their Twitter inbox. All 61 participants who completed the task opened/responded to at least one of the three messages.
+Listed below are the three questions we provided for the participants to  subjectively rate their efficacy to use Twitter safely.
+Within parenthesis next to each subjective rating value is the numerical score we assigned for that particular rating.
+\begin{itemize}
+\item (\textbf{Question 14}) I feel confident in my ability to identify suspicious messages on Twitter.
+\par Strongly Disagree (1) \hspace{0.5cm} Disagree (2)\hspace{0.5cm}Neutral (3)\hspace{0.5cm} Agree (4)\hspace{0.5cm} Strongly agree (5)
+\item (\textbf{Question 15}) I feel confident in my ability to identify suspicious messages on Twitter without help.
+\par Strongly Disagree (1) \hspace{0.5cm} Disagree (2)\hspace{0.5cm}Neutral (3)\hspace{0.5cm} Agree (4)\hspace{0.5cm} Strongly agree (5)
+\item (\textbf{Question 16}) I feel confident in my ability to identify suspicious messages on Twitter even if it is the first time I had seen one.
+\par Strongly Disagree (1) \hspace{0.5cm} Disagree (2)\hspace{0.5cm}Neutral (3)\hspace{0.5cm} Agree (4)\hspace{0.5cm} Strongly agree (5)
+\end{itemize}
+\begin{table}[tpb]
+\caption{Self reported self-efficacy means (standard deviation in parenthesis) between those who visited the phishing link and did not visit the phishing link during the Twitter task}
+\label{tab:twitvisitedphishing}
 \begin{tabular}{|l|l|l|l|}
 \hline
 Question &
@@ -617,30 +679,85 @@ Question &
 15 & 4.13 (1.20) & 3.93 (0.96) & 0.571 \\
 16 & 4.31 (0.87) & 3.84 (0.85) & 0.075 \\ \hline
 \end{tabular}
-\caption{Self reported self-efficacy means (standard deviation in parenthesis) between those who visited the phishing link and did not visit the phishing link during the Twitter task}
-\label{tab:twitvisitedphishing}
 \end{table}
-Table \ref{tab:twitvisitedphishing} shows the result of the two-tailed T-test that compares the self-reported efficacy between those who visited the phishing web page following the link that appeared on their Twitter direct message and those who did not. We compute separate p-values for each question that asks the user to rate their self-efficacy. It can be seen that the participants evaluated their self efficacy to recognize phishing attempts while communicating on Twitter higher than it actually was. There is no significant difference between the self-efficacy ratings participants who clicked the phishing link and the participants who did not, P > 0.05 for all questions.
+Table \ref{tab:twitvisitedphishing} shows the result of the two-tailed T-test that compares the self-reported efficacy between those who visited the phishing web page following the link that appeared on their Twitter direct message and those who did not. 
+We compute separate p-values for each question that asks the user to rate their self-efficacy. 
+It can be seen that the participants evaluated their self efficacy to recognize phishing attempts while communicating on Twitter higher than it actually was. 
+There is no significant difference between the self-efficacy ratings participants who clicked the phishing link and the participants who did not, P > 0.05 for all questions in Table \ref{tab:twitvisitedphishing}.
 
-\begin{table}[ht]
+\begin{table}[tpb]
+\caption{Self reported self-efficacy means (standard deviation in parenthesis) between those who visited the phishing site and did not submit their passwords and those who visited the site and submitted their passwords while using Twitter. P value is the two-tailed T-test}
+\label{tab:twitvisitedphishingpass}
 \begin{tabular}{|l|l|l|l|}
 \hline
-Question & \begin{tabular}[c]{@{}l@{}}Mean (SD)\\ Visited-No Passwd\end{tabular} & \begin{tabular}[c]{@{}l@{}}Mean (SD)\\ Visited-Yes Passwd\end{tabular} & P \\ \hline
+Question & \begin{tabular}[c]{@{}l@{}}Mean (SD)\\ Visited-No Password\end{tabular} & \begin{tabular}[c]{@{}l@{}}Mean (SD)\\ Visited-Yes Password\end{tabular} & P \\ \hline
 14 & 4.25 (0.9) & 4.02 (0.85) & 0.335 \\
 15 & 4.25 (0.9) & 3.90 (0.97) & 0.316 \\
 16 & 4.25 (0.9) & 3.80 (0.84) & 0.305 \\ \hline
 \end{tabular}
-\caption{Self reported self-efficacy means (standard deviation in parenthesis) between those who visited the phishing site and did not submit their passwords and those who visited the site and submitted their passwords. P value is the two-tailed T-test}
-\label{tab:twitvisitedphishingpass}
 \end{table}
 
-A similar observation can be made for the situation where the participant visited the phishing site and submitted their password information. Table \ref{tab:twitvisitedphishingpass} shows that although there is no statistically significant difference between self reported self-efficacy ratings for the participants who visited the phishing site and also submitted their password and those visited the site but did not submit the password, those who submitted the password further compromised their security. 
+A similar observation can be made for the situation where the participant visited the phishing site and submitted their password information when using Twitter. 
+Questions 14, 15 and 16 are also used to collect the self-efficacy subjective ratings for this task.
+Table \ref{tab:twitvisitedphishingpass} shows that although there is no statistically significant difference between self reported self-efficacy ratings for the participants who visited the phishing site and also submitted their password and those visited the site but did not submit the password.
+The phishing task has different risk levels.
+Visiting the phishing website has a lower risk level compared to visiting the website and submitting the password.
+Users who submitted the password to the phishing site further compromised their security by enabling the attacker to steal private information.
 
-Users found it difficult to correctly assess their self-efficacy in practicing caution when communicating with email. Questions 21 and 22 in the post-survey asked users to rate their self efficacy. When encountered with an email containing a phishing link, two tailed T-test showed that there is no statistical significance between self-efficacy ratings given by users who did not follow the phishing link against the users who did (P > 0.05). All users, who visited the phishing link, except one submitted their login credentials to the phishing web site. The users who submitted their login credentials had a mean self-efficacy rating 3.89 (SD=0.90). Similar observation can be made from users who downloaded malicious attachments that come with email. Two tailed T-test revealed that there is no statistical significance (P > 0.05) between the self-efficacy ratings given by users who downloaded malicious attachments  from email against the users who did not.
+Users found it difficult to correctly assess their self-efficacy in practicing caution while communicating with email. 
+Questions 21 and 22 in the post-survey asked users to rate their self efficacy. 
+Within parenthesis next to each subjective rating value is the numerical score we assigned for that particular rating.
+\begin{itemize}
+\item (\textbf{Question 21}) I practice caution when responding to email from senders I am not familiar with.
+\par Strongly Disagree (1) \hspace{0.5cm} Disagree (2)\hspace{0.5cm}Neutral (3)\hspace{0.5cm} Agree (4)\hspace{0.5cm} Strongly agree (5)
+\item (\textbf{Question 22}) I practice caution downloading attachments in emails from senders I am not familiar with.
+\par Strongly Disagree (1) \hspace{0.5cm} Disagree (2)\hspace{0.5cm}Neutral (3)\hspace{0.5cm} Agree (4)\hspace{0.5cm} Strongly agree (5)
+\end{itemize}
+When encountered with an email containing a phishing link, two tailed T-test showed that there is no statistical significance between self-efficacy ratings given by users who did not follow the phishing link compared to the users who did (P > 0.05). 
+All who visited the phishing link, with the exception of one participant,  submitted their login username and the password to the phishing web site. 
+The users who submitted their login username and the password had a mean self-efficacy rating 3.89 (SD=0.90). 
+Similar observation can be made from users who downloaded malicious attachments that come with email. Two tailed T-test revealed that there is no statistical significance (P > 0.05) between the self-efficacy ratings given by users who downloaded malicious attachments  from email against the users who did not.
 
+\subsubsection{Cues-to-Action}
 We focus on cues that are available on the computer system to evaluate how cues-to-action affect the user's computer security behavior. For the anti-virus usage task, we focused on two cues: (1) whether or not the download page was secure (has HTTPS with SSL lock icon), and (2) software provider/web page appears to be legitimate (look and feel, content etc.). Secure download was tested with post-survey question 29 and legitimate provider cue was tested with post-survey question 8. The Twitter task cues were tested with questions 17, 18, 19, 26. We considered cues such as: (1) unknown sender, (2) suspicious message content, (3)shortened URL links that appear in twitter messages and (4) secure HTTPS Twitter login page. For the email task we used two cues: (1) secure HTTPS web pages and (2) Firefox expired certificate warning. The post-survey questions 20 and 28 evaluated whether or not users picked up on these cues for email.
 
-In the anti-virus task, we used user responses to question 8 to compare self-reports of ability to recognize safety of anti-virus software by looking at the provider's web page. Participants' mean self-report value was 3.86 (SD=0.94) for the safe software and 3.00 (SD=1.00) for the unsafe software. Two tailed, T-test between the users who selected the safe software vs. the unsafe software showed that the mean difference is significant (P < 0.05). This allows us to conclude that the web page content cue helps users to select a safe anti-virus software. Question 29 had categorical responses. We used the Chi-square test of independence to determine whether the HTTPS cue is associated with users selecting a safe software. Results showed we can reject the null hypothesis that the HTTPS cue is not associated with users selecting safe software (P=0.002, df=2).
+Listed below are the questions we provided for the participants to  subjectively rate their ability to detect cues-to-action when using the Twitter application.
+Within parenthesis next to each subjective rating value is the numerical score we assigned for that particular rating.
+\begin{itemize}
+\item (\textbf{Question 17}) Before following a link on Twitter, I first check if it was sent by an unknown sender or contains suspicious information.
+\par Strongly Disagree (1) \hspace{0.5cm} Disagree (2)\hspace{0.5cm}Neutral (3)\hspace{0.5cm} Agree (4)\hspace{0.5cm} Strongly agree (5)
+\item (\textbf{Question 18}) I practice caution when I follow links sent to me on messages on Twitter as they may expose me to a security threat.
+\par Strongly Disagree (1) \hspace{0.5cm} Disagree (2)\hspace{0.5cm}Neutral (3)\hspace{0.5cm} Agree (4)\hspace{0.5cm} Strongly agree (5)
+\item (\textbf{Question 19}) I do not follow links sent to me on Twitter messages, if the content looks suspicious.
+\par Strongly Disagree (1) \hspace{0.5cm} Disagree (2)\hspace{0.5cm}Neutral (3)\hspace{0.5cm} Agree (4)\hspace{0.5cm} Strongly agree (5)
+\item (\textbf{Question 26}) Was Twitter.com page you saw during the experiment a secure web page?
+\par Yes \hspace{1cm} No \hspace{1cm} I do not know
+\end{itemize}
+
+Listed below are the questions we provided for the participants to  subjectively rate their ability to detect cues-to-action when using email.
+\begin{itemize}
+\item (\textbf{Question 20}) When I see a message warning me about the security of a web site (e.g., expired certificate, http:// instead of https://) I am about to visit, I do not visit that web site.
+\par Strongly Disagree \hspace{1cm} Disagree\hspace{1cm}Neutral\hspace{1cm} Agree\hspace{1cm} Strongly agree
+\item (\textbf{Question 28}) When you submit private information (passwords, email addresses) to websites, do you verify that the site is secure and your information is safe?
+\par Yes \hspace{1cm} No \hspace{1cm} I do not know
+\end{itemize}
+
+In the anti-virus task, we used user responses to question 8 to compare self-reports of ability to recognize safety of anti-virus software by looking at the provider's web page.
+\begin{itemize}
+\item (\textbf{Question 8}) Before choosing a source to download software, I first check if it is hosted by a trustworthy provider as it may expose me to a security threat.
+\par Strongly Disagree (1) \hspace{0.5cm} Disagree (2)\hspace{0.5cm}Neutral (3)\hspace{0.5cm} Agree (4)\hspace{0.5cm} Strongly agree (5)
+\end{itemize}
+Participants' mean self-report value was 3.86 (SD=0.94) for the safe software and 3.00 (SD=1.00) for the unsafe software. 
+Two tailed, T-test between the users who selected the safe software vs. the unsafe software showed that the mean difference is significant (P < 0.05). This allows us to conclude that the web page content cue helps users to select a safe anti-virus software. 
+Listed below are is the question we provided for the participants to  subjectively rate their ability to detect cues-to-action to recognize secure web sites when downloading software from the Internet.
+The specific cue we are checking is the HTTPS URL with the padlock icon on the browser address bar.
+\begin{itemize}
+\item (\textbf{Question 29}) During the experiment did you download the antivirus software from a secure web page?
+\par Yes \hspace{1cm} No \hspace{1cm} I do not know
+\end{itemize}
+Question 29 had categorical responses. 
+We used the Chi-square test of independence to determine whether the HTTPS cue is associated with users selecting a safe software. 
+Results showed we can reject the null hypothesis that the HTTPS cue is not associated with users selecting safe software (P=0.002, df=2).
 
 In the Twitter task question 17 evaluated the unknown sender cue. Question 18 evaluated the shortened URL links in the message cue. Question 19 evaluated the suspicious message content cue. Question 26 evaluated the HTTPS with SSL padlock icon cue. Two tailed T-test for ability to recognize cues for questions 17, 18 and 19 between participants who visited the phishing link and participants who did not were not significant (P > 0.05). Question 26 contained categorical responses. We used the Chi-square test of independence to determine whether the HTTPS cues is associated with user with users following unsafe links on Twitter. Results showed we can not reject the null hypothesis that the HTTPS cue is not associated with users following unsafe links on Twitter (P=0.84, df=2).
 
@@ -650,11 +767,15 @@ In the email task question 20 evaluated the cue of the expired certificate warni
 \section{Discussion}
 The results of our study validate the conclusions in previous studies, which states that human users' security related behavior often does not match their stated intentions \cite{davinson2010, govani2005, national2010}. 
 For the software installation tasks, the Twitter task and the email task, the participants overestimated their efficacy to recognize undesirable consequences. This shows that the home computer users do not think about the post conditions of the actions they execute in the computer and therefore can benefit from an intervention system that help them identify actions leading to undesirable consequences.
-Furthermore, the cues-to-action we have discussed in this study are preconditions that exist in the computer system. For example, identifying whether the web page the user is visiting contains the HTTPS SSL padlock icon, or whether the user is opening an email sent by an unknown (not in address book) sender. Although we expected users to recognize the preconditions (cues) leading to undesirable consequences all the time, this study concludes that it is not the case. We found that the users can recognize certain preconditions that exist in the system (e.g., the web page that they are visiting to download a software is secure) to help them avoid undesirable consequences. However, in other situations they miss these cues (e.g., recognizing unsafe web pages on Twitter) and as a result may end up compromising security.
+Furthermore, the cues-to-action we have discussed in this study are preconditions that exist in the computer system. 
+For example, identifying whether the web page the user is visiting contains the HTTPS SSL padlock icon, or whether the user is opening an email sent by an unknown (not in address book) sender are preconditions that can be checked by  the human user before completing the task (downloading software, clicking a link on the email).
+Although we expect human users to recognize the preconditions (cues) leading to undesirable consequences all the time, this study concludes that it is not the case. 
+We found that the users can recognize certain preconditions that exist in the system (e.g., the web page that they are visiting to download a software is secure) to help them avoid undesirable consequences. 
+However, in other situations they miss these cues (e.g., recognizing unsafe web pages on Twitter) and as a result may end up compromising security.
 Therefore, the design of software to assist home computer users in avoiding security and privacy vulnerabilities should be motivated by careful studies of their behavior and perceptions.
 
 PsychoRithm sandbox environment allowed us to place human users in simulated scenarios that compromised their security/privacy and record their actual responses and at the same time capture the self-reported data on how users perceive their confidence in identifying risky situations (self-efficacy) and recognize cues that indicate danger (cues-to-action). Although, we are measuring factors that affect the computer security behavior of users (extracted from the Health Belief Model), our objective in this study is not to validate the model, but rather highlight that regardless the perceived self-efficacy and availability of cues, human users can still end up compromising their security. 
-When the threat is immediate, if the user is not interrupted they may end up putting their safety in even more risk. 
+When the threat is immediate, if the user is not interrupted they may end up putting their safety at even more risk. 
 To this end, the intervention models presented in this dissertation target helping human users avoid undesirable consequences.
 
 In this study we mainly looked at three common home computer user tasks:
@@ -670,7 +791,7 @@ The implication of this observation is that intervention systems that monitor us
 Furthermore, any partially complete task (i.e., a sequence of actions) that has been safe upto now may quickly turn unsafe. 
 This means that the intervention decisions need to be made online. 
 Users perform a large number of actions; while few of them incur much risk, some are pivotal in triggering vulnerabilities. For example, from our using email task, opening email action itself is not a risky action. 
-However, when the email is from an unknown sender and contains suspicious attachments, preconditions to a malware vulnerability have manifested within the system. In this state, the opening email, although a normal action for a human user, is actually high risk action.
+However, when the email is from an unknown sender and contains suspicious attachments, preconditions to a malware vulnerability have manifested within the system. In this state,  opening email is actually high risk action.
 This means that intervention models need to search for multiple ways for accomplishing the same task. Modeling the problem as a state/action transition system using automated planning allows us to accomplish this requirement. When the problem is modeled as a planning domain, automated planners can be used to generate diverse plans, to sample the space of possible plans that can lead to one or more vulnerabilities and help
 estimate the probability that particular actions lead to triggering the vulnerabilities.
 

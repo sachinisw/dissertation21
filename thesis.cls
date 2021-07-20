@@ -369,7 +369,7 @@
 
             \vspace{\fill}
 
-            %In partial fulfillment of the requirements
+            In partial fulfillment of the requirements
 
             % for bachelor, master or doctor
             \ifCLASSOPTIONbachelor
