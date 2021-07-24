@@ -1242,12 +1242,15 @@ Then, we define the null ($H_0$) and the alternative ($H_A$) hypotheses as follo
 \end{itemize}
 Throughout, we use two-way ANOVA with the type \RomanNumeralCaps{3} correction to account for the unbalanced group design with $\alpha=0.05$.
 
-When considering the planning task id and the usage of the Interactive Human-aware Intervention as factors, the effect of the planning task id on the number of moves is significant ($F<<<0, df=7$).
+When considering the planning task id and the usage of the Interactive Human-aware Intervention as factors, ANOVA shows that the effect of the planning task id on the number of moves is significant ($F<<<0, df=7$).
 However, the effect of the usage of the Interactive Human-aware Intervention is not significant ($F=0.52, df=1$).
 The interaction effect of the usage of the Human-aware Intervention and the planning task id is also not significant ($F=0.31, df=7$).
-However, the Levene's Test to test the homogeneity of variance fails ($F=0.0007, df=15$) when considering the planning task id and the usage of the Human-aware Intervention as factors.
+However, the Levene's Test to test the homogeneity of variance fails ($F=0.0007, df=15$) when considering the factors planning task id and the usage of the Human-aware Intervention on the number of moves.
 The homogeneity of variance is a critical requirement for the ANOVA test.
-As it fails for this design, we ignore the results and do not draw any conclusions from the analysis.
+Furthermore the levels in the independent variable task id (P1, P2, $\ldots$) is associated with the levels of the independent variable type (C, E, M).
+For example, type C contains task ids P2, P4, P6, P8.
+Therefore, we can not report ANOVA considering task id as a factor.
+Because of these concerns, for the design that evaluates the effect on task id on on the number of moves, we ignore the results and do not draw any conclusions from the analysis.
 
 In contrast, considering the planning task type and the usage of the Interactive Human-aware Intervention as factors, the Levene's Test to test the homogeneity of variance passes ($F=0.43, df=5)$.
 Therefore, we report the conclusions from this design.
@@ -1448,7 +1451,10 @@ Then, we define the null ($H_0$) and the alternative ($H_A$) hypotheses as follo
 Throughout, we use two-way ANOVA with the type \RomanNumeralCaps{3} correction to account for the unbalanced group design with $\alpha=0.05$.
 
 When using Interactive Human-aware Intervention and the planning task id as factors to the dependent variable landmark achievement, the Levene's Test to test the homogeneity of variance fails ($F=0.0001, df=15$) for the design.
-Therefore, we ignore the results and do not draw any conclusions from the ANOVA.
+Furthermore the levels in the independent variable task id (P1, P2, $\ldots$) is associated with the levels of the independent variable type (C, E, M).
+For example, type C contains task ids P2, P4, P6, P8.
+Therefore, we can not report ANOVA considering task id as a factor.
+Because of these reasons, we ignore the results and do not draw any conclusions from the ANOVA.
 
 In contrast, considering the planning task type and the usage of the Interactive Human-aware Intervention as factors, the Levene's Test to test the homogeneity of variance passes ($F=0.14, df=5)$.
 Therefore, we report the conclusions from this design.
