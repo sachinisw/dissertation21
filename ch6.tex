@@ -4,6 +4,9 @@ Using the Rush Hour domain, we study how an intervention model can be extended t
 In the context of the Rush Hour puzzle solving task, a hint is a piece of information about the Rush Hour planning problem. 
 We design helpful hints to allow the user to carefully probe the search space of the Rush Hour STRIPS planning task described in Section~\ref{sec:rushhourstrips} in
 Chapter~\ref{chap:ch5} while avoiding the undesirable state.
+In the Human-aware Intervention model described in Chapter~\ref{chap:ch5}, we assume that the user keeps presenting actions from plan he started off with and does not replan.
+In the Interactive Human-aware Intervention model, we relax this assumption.
+The intervening agent helps the user modify the current trajectory of the plan by providing the hints about the search space of the planning problem.
 Existing plan and goal recognition algorithms do not define a method for the user (or the software agent) to recover when the observer recognizes an undesirable state is developing and/or imminent.
 In this chapter, we address that limitation by designing four helpful hints the observer presents to the user after intervening.
 \begin{itemize}

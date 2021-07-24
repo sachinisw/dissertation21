@@ -1,6 +1,7 @@
 \chapter{Intervention by Recognizing Actions That Enable Multiple Undesirable Consequences}
 \label{chap:ch4}
 In this chapter, we discuss the first intervention model for an observer who intervenes to help the user avoid multiple undesirable consequences.
+We introduce the \textbf{Undesirable Consequence Recognition Function}, that uses three domain-independent metrics to measure the importance of an observed action towards contributing to the undesirable state.
 The dimensions of the Intervention Problem presented in this chapter are summarized in Table~\ref{tab:dim2}.
 
 \begin{table}[ptb]
@@ -22,7 +23,7 @@ The threats are triggered because the user did not understand the consequences o
 The implication of this finding is that the observer needs to recognize on time that the plan the user is following will have an undesirable consequence.
 In Chapter~\ref{chap:ch2}, we discussed Plan Recognition as the problem of inferring the goal(s) of an actor by constructing a plan from a sequence of actions or observations.
 To recognize actions that may lead to undesirable consequences, we propose a variant on plan recognition, where the undesirable consequences prediction problem is viewed as a form of reverse planning; it leverages plan graphs from an existing planner to project possible undesirable outcomes and then trace back to actions critical to their occurrence.
-We formulate the Undesirable Consequence Recognition problem as a planning problem of three domain independent, weighted metrics: \textbf{timeliness}, \textbf{certainty} and \textbf{desirability}. 
+We formulate the Undesirable Consequence Recognition problem as a planning problem of three domain independent, weighted metrics: \textbf{Timeliness}, \textbf{Certainty} and \textbf{Desirability}. 
 Against an ideal baseline, we examine the trade-offs in choosing the correct intervention point by varying the weights associated with the metrics, the observability and the noise in observations.
 
 \section{Background}
@@ -39,12 +40,13 @@ The Personalized Attack Graph (PAG) extends the attack graph model \cite{Sheyner
 Attacker actions do not include actions that cannot be observed on the home computer. System states can include levels of partial compromise (e.g., access to the password key-chain), configuration information (e.g., operating system), and state changes achieved on specific system components (e.g., implanting a keystroke logger).
 
 In this work, we examine how well an algorithm can determine the best intervention point for the cyber-security application, calling it a ``\textit{critical trigger action}'' because it may lead to an undesirable state. 
-As each situation may have a unique definition of the ideal intervention point, we formulate intervention as a combination of three domain independent metrics: (1) \textbf{timeliness}, which quantifies how soon the undesirable state may occur, (2) \textbf{certainty}, which highlights frequently occurring actions as important, and (3) \textbf{desirability}, which measures the contribution of the action to user's own objective. The desirability metric helps separate common harmless actions that further the user's actual goal from harmful actions to be avoided. A critical trigger action is a user action that maximizes the linear combination of these three metrics.
+As each situation may have a unique definition of the ideal intervention point, we formulate intervention as a combination of three domain independent metrics: (1) \textbf{Timeliness}, which quantifies how soon the undesirable state may occur, (2) \textbf{Certainty}, which highlights frequently occurring actions as important, and (3) \textbf{Desirability}, which measures the contribution of the action to user's own objective. The Desirability metric helps separate common harmless actions that further the user's actual goal from harmful actions to be avoided. A critical trigger action is a user action that maximizes the linear combination of these three metrics.
 
 Given a PDDL domain model, a set of undesirable states to avoid, and an observation trace of actions, our algorithm identifies critical trigger actions. An intervention is correct if, compared to a ground truth trace, the algorithm (1) ignores extraneous actions (i.e., as true-negatives) and, (2)
 identifies actions leading to undesirable state (i.e., as true-positives). We begin with a study of traces taken from a human subject study for computer security. We then generalize our results to four benchmark planning domains and
-consider the impact of missing and extraneous observations of actions and test the algorithm. Across all benchmark domains, certainty and desirability metrics perform well in ignoring extraneous actions, while the timeliness metric and
-it's combinations with certainty and desirability perform well in identifying true positives. Thus, in this work we have identified two metrics that are sensitive to noise in action based observation traces and a metric that is sensitive to partial observability of actions.
+consider the impact of missing and extraneous observations of actions and test the algorithm. 
+Across all benchmark domains, the Certainty and the Desirability metrics perform well in ignoring extraneous actions, while the Timeliness metric and
+it's combinations with the Certainty and the Desirability metrics perform well in identifying true positives. Thus, in this work we have identified two metrics that are sensitive to noise in action based observation traces and a metric that is sensitive to partial observability of actions.
 
 
 
@@ -54,18 +56,18 @@ Suppose a user wants to  achieve the goal $G$ (e.g., \texttt{read email}) but th
 Figure~\ref{fig:cybersecproblem} illustrates the \emph{possible} manifestation of $U$. 
 The user has executed actions $a_1, a_2, a_3$ (e.g., \texttt{start email application, enter username/password, open inbox}) from the initial state $S_0$ in order to achieve  $G$.
 Actions $a_1$, $a_2$, $a_3$ have resulted in the post conditions $S_{1}, S_{2}, S_3$ respectively. 
-An intervening agent is observing the actions executed by the user and must intervene upon recognizing that the user has executed an action that will lead to $U$.
+An observer is monitoring the actions executed by the user and must intervene upon recognizing that the user has executed an action that will lead to $U$.
 
-In order to intervene, the intervening agent considers possible plans that lead to $U$.
+In order to intervene, the observer considers possible plans that lead to $U$.
 We denote a plan as a sequence of actions  followed in brackets by the undesirable state that results $(a_i, a_j, \ldots, [U])$.
 We will call these \emph{undesirable plans} identified as $\Pi_U$ and denote a plan in the set as $\pi_{U}$.
 Ideally, the user would continue toward achieving $G$ and not execute plans in $\Pi_U$.
 However, by mistake or undue influence, the user may deviate from pursuing $G$ and unwittingly follow paths in $\Pi_U$. 
-In the example in Figure~\ref{fig:cybersecproblem}, the intervening agent has observed the action sequence $O$ = $\{a_1, a_2, a_3\}$ the user has executed. 
+In the example in Figure~\ref{fig:cybersecproblem}, the observer has seen the action sequence $O$ = $\{a_1, a_2, a_3\}$ the user has executed. 
 In state $S_{3}$, the user may reach $U$ through a set of undesirable plans $\Pi_{U}=\{(a_5, a_8, a_7[U]), (a_5, a_8, a_6, a_{14}[U]), (a_{4}, a_{10}[U]), (a_4, a_9, a_{16}[U]), (a_4, a_9, a_{12}, a_{11}, a_{13}[U]),\\ (a_4, a_9, a_{11}, a_{12}, a_{15}, a_{16}[U]), (a_{12}, a_{13}[U]), (a_{12}, a_{15}, a_{16}[U]), (a_{12}, a_{15}, a_{11}, a_{12}, a_{13}[U]), \\ (a_{12}, a_{15}, a_{11}, a_{12}, a_{15}, a_{16}[U])\}$.
 The actions in the plans in $\Pi_U$ are the \textbf{candidate trigger actions}.
 A candidate trigger action is an action that appears in at least one plan in $\Pi_U$.
-The intervening agent's question is: \textit{given the current state $S_{3}$, which action in the set of candidate trigger actions is the best action to intervene if observed?}
+The observer's question is: \textit{given the current state $S_{3}$, which action in the set of candidate trigger actions is the best action to intervene if observed?}
 
 \begin{figure}[tpb]\centering{\includegraphics[width=0.8\columnwidth]{img/undesirable.pdf}}
 	\caption{An application domain where a user executes the actions $a_1, a_2, a_3 $ to transform initial state $S_0$ to a goal state $G$. An undesirable state $U$ may develop from state $S_{3}$ after $a_3$ has been executed, following the plans ($\Pi_U$) indicated by the dotted paths towards $U$.}
@@ -148,11 +150,11 @@ We recognize two forms of candidate trigger actions in the observation trace: st
 A strong trigger can actively contribute to causing the state (e.g., as an effect or by satisfying a required precondition) or allow another actor to cause it. 
 A trigger may also weakly contribute to the causation of the undesirable state(s) and may not be worth intervening to prevent. 
 Consequently, we add a layer to the intervention problem to support application specific ranking about which actions are most ``critical'', i.e., helpful in preventing the undesirable state(s). 
-The key addition is an objective function that allows a tunable combination of metrics.
+The key addition is the Undesirable Consequence Recognition function that allows a tunable combination of metrics.
 
 Our focus is on identifying the intervention point as early as  \textit{helpful} when a user may be triggering an undesirable state. 
 The concept of helpful is similar to the value of alerts described in \cite{Wilkins2003} which recognized that it is important to be judicious in interrupting a user in scenarios where humans and machine agents interact with each other: ``don't ignore but don't annoy''. 
-To this end, we start by defining a function composed of three  metrics to quantify the notion of helpfulness: \textbf{certainty}, \textbf{timeliness} and \textbf{desirability}. 
+To this end, we start by defining a function composed of three  metrics to quantify the notion of helpfulness: \textbf{Certainty}, \textbf{Timeliness} and \textbf{Desirability}. 
 These metrics are calculated based on a set $\Pi_U$.
 
 
@@ -164,10 +166,10 @@ This is especially important in long-running processes with complex traces or wh
 \label{eq:certainty}
 Certainty (a|\Pi_U)  = \frac{|\pi_U \in \Pi_U \textup{ in which}\; a\; \textup{occurs}|}{|\Pi_U|}
 \end{equation}
-Actions occurring frequently in $\Pi_U$ indicate the importance of that action toward causing $U$. For example, if an action $a$ occurs in all plans $\Pi_U$, the certainty metric will assign a high value to $a$, giving it a higher probability of being selected as a critical trigger compared to a less frequent action. 
+Actions occurring frequently in $\Pi_U$ indicate the importance of that action toward causing $U$. For example, if an action $a$ occurs in all plans $\Pi_U$, the Certainty metric will assign a high value to $a$, giving it a higher probability of being selected as a critical trigger compared to a less frequent action. 
 
 {\it Timeliness} requires knowing what actions could yet be observed, which might effect the causation of the undesirable state. 
-For this study, timeliness is measured by the maximum normalized steps remaining in $\Pi_U$ in which the action a occurs. 
+For this study, Timeliness is measured by the maximum normalized steps remaining in $\Pi_U$ in which the action a occurs. 
 Timeliness quantifies how soon an observation will trigger the undesirable state. 
 Therefore, we compute the maximum in discrete time as opposed to the minimum because it indicate that an undesirable state is developing but not imminent and allows time to recover. 
 Let $n$ be the remaining number of steps in $\pi_U \in \Pi_U$ after some action $a$. Then,
@@ -179,33 +181,35 @@ Timeliness (a|\Pi_U) = \max_{\pi_U \in \Pi_U}\left(\frac{
 \end{equation}
 
 {\it Desirability} measures the effect of an action on user's goals, which is ignored in the other two metrics. 
-In the Intervention by Undesirable Consequence Recognition problem the intervening agent is only aware of the undesirable state the user wants to avoid.
-Although the user's goal is hidden to the intervening agent, the intervention decision must also consider how the candidate trigger actions contribute toward the user's goal to allow some freedom for the user.
+In the Intervention by Undesirable Consequence Recognition problem the observer is only aware of the undesirable state the user wants to avoid.
+Although the user's goal is hidden to the observer, the intervention decision must also consider how the candidate trigger actions contribute toward the user's goal to allow some freedom for the user.
 In Chapter~\ref{chap:ch3}, we showed that in the cyber-security domain, most actions users execute to accomplish a goal are harmless actions while only a few of them put the user at risk.
 We capture this property with the Desirability metric and separate common harmless actions (e.g., user opening web browser) from avoidable ones and connects the observations to knowledge of the user's goals.
 If an action appears often in the candidate trigger actions then that action is a common, harmless action and more desirable.
 In contrast, actions that appear less often in the candidate trigger actions are comparatively more undesirable.
-The intervening agent must consider the undesirable actions with higher priority.
-Consequently we downgrade the contribution of the desirable actions to criticality by defining Desirability as a negative metric.
+The observer must consider the undesirable actions with higher priority.
+Consequently we downgrade the contribution of the desirable actions to criticality by defining the Desirability as a negative metric.
 \begin{equation}
 \label{eq:desirability}
 Desirability (a|\Pi_U) = - \left( \frac{|\textup{appearance of}\; a\; \textup{ in } \Pi_U|}{\sum_{i=1}^{|\Pi_U|}\left | \pi_i \right |} \right)
 \end{equation}
-Together, these metrics define the function $V(a)$ for candidate trigger action $a$ for a weighting provided by $\alpha$, where $\alpha$ $=\lbrack\alpha_1, \ldots, \alpha_m \rbrack$, $\alpha_i$ is in the range $\lbrack0,1\rbrack$, $m$ is the number of objectives and $\sum_{1}^{m}\alpha_i = 1$:
+
+\subsubsection{The Undesirable Consequence Recognition Function}
+Together, these metrics define the function $V(a)$ for candidate trigger action $a$ for a weighting provided by $\alpha$, where $\alpha$ $=\lbrack\alpha_1, \ldots, \alpha_m \rbrack$, $\alpha_i$ is in the range $\lbrack0,1\rbrack$, $m$ is the number of metrics and $\sum_{1}^{m}\alpha_i = 1$:
 \begin{equation}
 \label{eq:function}
 V(a) = (\alpha_1 \times Certainty (a|\Pi_U)) + (\alpha_2 \times Timeliness (a|\Pi_U)) + (\alpha_3 \times Desirability (a|\Pi_U))
 \end{equation}
 
-Table \ref{tab:metrics}, shows how the critical trigger action is identified using the proposed objective function for the example in Figure \ref{fig:cybersecproblem} given the observation sequence of actions $O=\{a_1, a_2, a_3\}$. 
-In state $S_{3}$, assuming equal weighting of metrics, the algorithm identifies $a_{12}$ to be the action that maximizes the objective function, and returns it as a possible point of intervention. 
-Table \ref{tab:metrics} also shows how this decision is affected by the choice of $\alpha$. If only certainty metric is used ($\alpha=\lbrack1,0,0\rbrack$) action $f$ gets selected as the intervention point. 
-Using only timeliness metric ($\alpha=\lbrack0,1,0\rbrack$) yields three possible intervention points: $a_{12}$, $a_5$ and $a_4$. 
-Finally, using only desirability yields four possible intervention points: $a_{10}$, $a_6$, $a_7$ and $a_{14}$.
+Table \ref{tab:metrics}, shows how the critical trigger action is identified using the proposed Undesirable Consequence Recognition function for the example in Figure \ref{fig:cybersecproblem} given the observation sequence of actions $O=\{a_1, a_2, a_3\}$. 
+In state $S_{3}$, assuming equal weighting of metrics, the algorithm identifies $a_{12}$ to be the action that maximizes the Undesirable Consequence Recognition function, and returns it as a possible point of intervention. 
+Table \ref{tab:metrics} also shows how this decision is affected by the choice of $\alpha$. If only the Certainty metric is used ($\alpha=\lbrack1,0,0\rbrack$) action $f$ gets selected as the intervention point. 
+Using only the Timeliness metric ($\alpha=\lbrack0,1,0\rbrack$) yields three possible intervention points: $a_{12}$, $a_5$ and $a_4$. 
+Finally, using only the Desirability yields four possible intervention points: $a_{10}$, $a_6$, $a_7$ and $a_{14}$.
 
 \begin{table}[tpb]
 	\centering
-		\caption{Certainty (C), timeliness (T), desirability (D) computations for each candidate trigger action for the example in Figure \ref{fig:cybersecproblem}. $V(a)$ is the value returned by the critical trigger multi-objective function assuming equal weighting ($\alpha=\lbrack0.33,0.33,0.33\rbrack$), only C ($\alpha=\lbrack1,0,0\rbrack$), only T ($\alpha=\lbrack0,1,0\rbrack$) and only D ($\alpha=\lbrack0,0,1\rbrack$) for each candidate trigger action.}
+		\caption{Certainty (C), Timeliness (T), Desirability (D) computations for each candidate trigger action for the example in Figure \ref{fig:cybersecproblem}. $V(a)$ is the value returned by the Undesirable Consequence Recognition Function assuming equal weighting ($\alpha=\lbrack0.33,0.33,0.33\rbrack$), only C ($\alpha=\lbrack1,0,0\rbrack$), only T ($\alpha=\lbrack0,1,0\rbrack$) and only D ($\alpha=\lbrack0,0,1\rbrack$) for each candidate trigger action.}
 \label{tab:metrics}
 	\resizebox{\textwidth}{!}{
 		\begin{tabular}{|c|l|l|l|c|c|c|c|}
@@ -230,8 +234,8 @@ Finally, using only desirability yields four possible intervention points: $a_{1
 	}%
 \end{table}
 
-Intervention is different from the typical plan recognition problem because the intervening agent assumes that the user pursues some desirable goal but wants to also avoid any undesirable state. 
-Furthermore, the intervening agent has no knowledge about the user's desirable goal and knows only the set of undesirable states the user should avoid. 
+Intervention is different from the typical plan recognition problem because the observer assumes that the user pursues some desirable goal but wants to also avoid any undesirable state. 
+Furthermore, the observer has no knowledge about the user's desirable goal and knows only the set of undesirable states the user should avoid. 
 Our model views the user's attempt to achieve a desirable goal as a planning process. 
 Plan recognition approaches that use plan library representation do not apply for the Intervention problem because they are focused on matching observed actions to prior plans to determine what goals the user is trying to achieve.
 The problems with that are: (1) the observations may contain extraneous actions and (2) the plans that lead to the undesirable states may not encompass the user's goal (the user does not want to trigger the vulnerability, but rather to do something useful with his computer).
@@ -246,7 +250,7 @@ Our solution employs PDDL and the Mosaic planner \cite{roberts2014} to sample po
 For each observation, the algorithm outputs whether or not it is a critical trigger action. 
 
 \subsection{Undesirable State Recognition Algorithm}
-Figure~\ref{fig:components} shows the seven-step decision cycle of the algorithm. As defined in the problem statement, the process takes as input: a PDDL domain, an initial state, a set of undesirable states and the objective function weights. 
+Figure~\ref{fig:components} shows the seven-step decision cycle of the algorithm. As defined in the problem statement, the process takes as input: a PDDL domain, an initial state, a set of undesirable states and the metric weights for the Undesirable Consequence Recognition Function. 
 
 \textbf{Step 1:} We assume the full observation trace is known in advance, with actions made available one at a time to identify the intervention point. However, the algorithm does not utilize information that can be gleaned from the full trace to yield the decision. Input to the algorithm in this step can also be replaced with application specific sensors.  
 
@@ -262,7 +266,7 @@ Mosaic is built on top of the LAMA planner \cite{richterWestphal10.jair.LAMA}  w
 
 \textbf{Step 4:} Extract unique actions in $\Pi_U$ as candidate trigger actions. Actions include the action name and the instantiated parameter values.
 
-\textbf{Step 5:} Compute Certainty, Timeliness and Desirability for each candidate trigger action by iterating over the plans in $\Pi_U$, as defined in Function \ref{eq:function}. 
+\textbf{Step 5:} Compute the Certainty, Timeliness and Desirability for each candidate trigger action by iterating over the plans in $\Pi_U$, as defined in Function \ref{eq:function}. 
 
 \textbf{Step 6:} Rank candidate actions by $V$. Flag the highest ranked actions as critical triggers corresponding to the current observation. Step 6 also evaluates the accuracy of the identified critical trigger by comparing against the observation. 
 We use a ground-truth \textbf{u}ndesirable \textbf{p}lan (called UP) that achieves the undesirable state and assume that all actions in the ground-truth undesirable plan are critical triggers. 
@@ -281,13 +285,15 @@ Then, each action in that plan are executed (i.e., adding add effects, removing 
 \label{fig:components}
 \end{figure}
 
-\section{Evaluating the Undesirable Consequence Recognition}
+\section{Evaluating the Undesirable Consequence Recognition Function}
 We examine which factors impact the performance of detecting critical trigger actions using our metric function $V$. The \emph{independent variables} of the study are summarized in Table~\ref{tab:exp}, and include the weights for V, the problems, the percentage of extraneous actions, and the percentage of actions ``removed'' to emulated partial observability.
 
-Objective weights vary between a single metric, pairs of metrics and all three metrics with equal weights. We decided on these objective weight settings in order to identify which metrics (or their combinations) are sensitive to partial observability and extraneous actions separately. 
+The metric weights vary between a single metric, pairs of metrics and all three metrics with equal weights. 
+We decided on these metric weight settings in order to identify which metrics (or their combinations) are sensitive to partial observability and extraneous actions separately. 
 
 
-We begin with results from a user study on cyber-security that motivated our work. This domain will be referred to as the \texttt{PAG} in our evaluation. For traces from the user study, we examine the impact of the objective weights (OW) used for in the objective function. Noisy sensing can lead to extraneous actions or missed observations, which complicates intervention. So we generalize these results to a set of benchmark domains from \cite{ramirez2009plan}, where greater experimental control allows us to evaluate the impact of extraneous actions (EA) and partial observability (PO). Thus, we expect some degradation in performance as the noise increases and observability decreases; the question is by how much? 
+We begin with results from a user study on cyber-security that motivated our work. This domain will be referred to as the \texttt{PAG} in our evaluation. For traces from the user study, we examine the impact of the metric weights (MW) used for in the Undesirable Consequence Recognition function. 
+Noisy sensing can lead to extraneous actions or missed observations, which complicates intervention. So we generalize these results to a set of benchmark domains from \cite{ramirez2009plan}, where greater experimental control allows us to evaluate the impact of extraneous actions (EA) and partial observability (PO). Thus, we expect some degradation in performance as the noise increases and observability decreases; the question is by how much? 
 
 \begin{table}[tpb]
 \caption{Independent variables for evaluating impact of algorithm parameters and sensitivity to noisy data}
@@ -295,7 +301,7 @@ We begin with results from a user study on cyber-security that motivated our wor
 \begin{tabular}{|l|l|}
 \hline
 Variable                   & Settings                                           \\ \hline
-\begin{tabular}[c]{@{}l@{}}Objective Weights (OW)\\ (C,T,D)\end{tabular} &
+\begin{tabular}[c]{@{}l@{}}Metric Weights (MW)\\ (C,T,D)\end{tabular} &
   \begin{tabular}[c]{@{}l@{}}(1,0,0), (0,1,0), (0,0,1), (0.33,0.33,0.33), (0.5,0.5,0), \\ (0.5,0,0.5), (0,0.5,0.5)\end{tabular} \\ \hline
 Planning Domains (PD)       & PAG, blocks-words, navigator, ipc-grid+, logistics \\ \hline
 Partial observability (PO) & 25\%, 50\%, 75\%, 100\%                            \\ \hline
@@ -350,7 +356,7 @@ The subjects were only provided with instructions to perform normal computer tas
 
 
 Mean Flagged UP accuracy was 59.53\% (SD=30.79) across all metric weight assignment classes, but the weights exerted a significant influence on accuracy (\textit{F}=40866, \textit{p}$\ll$0). 
-The highest accuracy (mean=95.59\%,SD=2.13) occurred for two configurations of metric weight assignments: one that equally weighted Certainty, Desirability and Timeliness metrics as well as the one that equally weighted Certainty and Timeliness, ignoring the Desirability metric. 
+The highest accuracy (mean=95.59\%,SD=2.13) occurred for two configurations of metric weight assignments: one that equally weighted the Certainty, Desirability and Timeliness metrics as well as the one that equally weighted Certainty and Timeliness, ignoring the Desirability metric. 
 We find that, in the cyber-security domain, the Undesirable Consequence Recognition algorithm relies on the Certainty and Timeliness metrics the most.
 Mean CPU time per cycle of the algorithm was 1.7 seconds (SD=0.45), suggesting that this algorithm could easily be integrated into an agent that mitigates cyber-security issues.
 
@@ -387,7 +393,7 @@ Algorithm \ref{alg:extraneous} describes the process to compute the extraneous a
     \label{alg:extraneous}
     \begin{algorithmic}[1]
         \Procedure{extraneouspool}{$domain$,$undesirableState,init$}
-        	\State $current\gets UP, EX_{goal}\gets \emptyset, state \gets \emptyset$
+        	\State $current\gets UP, EX_{g}\gets \emptyset, state \gets \emptyset$
         	\State $UP\gets Planner(domain,undesirableState,init)$
         	\State $state \gets init$
         	\ForAll{$a \in current$}
@@ -406,11 +412,11 @@ Algorithm \ref{alg:extraneous} describes the process to compute the extraneous a
         \EndProcedure
     \end{algorithmic}
 \end{algorithm}
-We begin by computing the ground-truth undesirable plan $UP$ using a planner. 
+We begin by computing the ground-truth undesirable plan $UP$ using a planner (line 3). 
 Then for the actions in $UP$ we modify the initial state by incorporating the effects of each action. 
-The end of this loop translates the $state$ to the goal state for the problem. 
-Then we generate the Relaxed Planning Graph for the planning problem with the goal equal to the undesirable state.
-We select actions from the Relaxed Planning Graph such that the actions that are not already in $UP$ and the selected action is applicable in the goal state and post-conditions of the selected action do not remove any goal predicates. 
+The end of this loop translates the $state$ to the goal state for the problem (lines 5--8).
+Then we generate the Relaxed Planning Graph for the planning problem with the goal equal to the undesirable state (line 9).
+We select actions from the Relaxed Planning Graph such that the actions that are not already in $UP$ and the selected action is applicable in the goal state and post-conditions of the selected action do not remove any goal predicates (lines 10--12). 
 These actions form the extraneous action pool $EX_{g}$.
 The set $EX_{g}$ needs to be extended because we evaluate the Undesirable Consequence Recognition algorithm by varying the percentage of extraneous actions in the observation trace.
 This is done by modifying $S_{g}$ with effects of a selected action from $EX_{g}$, and repeating steps 4 through 5. 
@@ -425,29 +431,32 @@ This metric is used as a proxy for signal-to-noise ratio $[$0\%, 50\%, 75\%, 100
 Algorithm \ref{alg:noisytrace} describes our trace generation process. 
 Starting from the initial state, actions in the undesirable plan are added to the observation trace sequentially, including extraneous actions as appropriate. 
 This produces a final plan. 
-Partial observability (PO) is computed by randomly removing actions from the final plan such that, PO\% (number of original actions in trace after removal / number of original actions in trace before removal) is one of $[$25\%, 50\%, 75\%, 100\%$]$. 
+Partial observability is computed by randomly removing actions from the final plan.
+The percent partial observability (PO) of the resulting trace is computed as follows:
+\begin{equation}
+\textup{percent partial observability (PO)} = \frac{\textup{number of actions in trace after removal}} {\textup{number of actions in trace before removal}}
+\end{equation} 
+We create observation traces with $[$25\%, 50\%, 75\%, 100\%$]$ percent partial observability. 
 
 \begin{algorithm}
-    \caption{Noisy Observation Trace Generation Algorithm}
+    \caption{Observation Trace Generation for Undesirable Consequence Recognition}
     \label{alg:noisytrace}
     \begin{algorithmic}[1] % The number tells where the line numbering should start
-        \Procedure{noisytrace}{$domain$,$problem,init$}
-        	\State $current\gets UP, ea\gets 0, trace\gets \emptyset, state \gets init$
-        	\State $UP\gets Planner(domain,problem,state)$
-        	\ForAll{$a \in current$}
-        		\If{$Pre(a)\in state $} 
-        		\State $trace \gets trace \cup a$
-        		\State $state\gets state\setminus Del(a)\cup Add(a)$
-        		\EndIf
-        		\State $UP\gets Planner(domain,problem,state)$
-        		\State $current\gets UP$
-        		\If {$ea<required EA\%$}
-        		\State randomly select $action$ from $EX_{goal}$ if Pre($action$) $\in state$
-        		\State $trace \gets trace \cup action$
-        		\State update $ea, state, current$
-        		\EndIf
-        	\EndFor
-        	\State Fix PO\% in $trace$ by removing actions
+        \Procedure{noisytrace}{$domain$,$undesirableState,init$}
+        	\State $ea\gets 0, trace \gets \emptyset, state \gets init$
+			\State $EX_g\gets$ \textsc{EXTRANEOUSPOOL}$(domain,undesirableState,init)$
+			\State $plan \gets Planner(domain, undesirableState, init)$
+
+			\While {$ea<required EA\%$}
+				\State randomly select action $a \in \lbrace plan \cup EX_g\rbrace$
+				\If{$Pre(a)\subseteq state $} 
+					\State $trace \gets trace \cup a$
+					\State $state \gets state\setminus Del(a)\cup Add(a)$
+					\State $plan \gets Planner(domain,undesirableState,state)$
+					\State update $ea$
+				\EndIf
+			\EndWhile
+			\State Fix PO\% in $trace$ by removing actions
             \State \textbf{return} $trace$
         \EndProcedure
     \end{algorithmic}
@@ -455,18 +464,45 @@ Partial observability (PO) is computed by randomly removing actions from the fin
 
 
 
+\subsubsection{Benchmark Results}
+We review the overall accuracy of our algorithm in benchmark domains by evaluating how well it ignores extraneous actions and flags undesirable actions in the ground truth plan.
+
+\textbf{Ignoring Extraneous Actions}\\
+When encountered with extraneous actions in the trace, the algorithm must be able to avoid flagging it as a critical trigger action. 
+We define mean Ignored EA\% percentage for a benchmark domain as: 
+\begin{equation}
+\textup{mean Ignored EA\%} = \frac{\textup{sum of  EA\% ignored per trial}}{\textup{number of trials with EA\%$>$0}}
+\end{equation}
+Table \ref{tab:ignoredeaforlevels} shows how mean Ignored EA\% varies with the noise level of the observation trace and the metric weight assignments.
+
+Results show that our algorithm consistently ignores extraneous actions for all benchmark domains. 
+This high accuracy rate can be attributed to our process of selecting critical trigger actions. 
+Since candidate trigger actions are extracted from a set of alternative plans leading to the same undesirable state, the likelihood of true extraneous actions to appear in the set of alternative plans is low. 
+This reduces the likelihood of false-positives in the trace.
 
 
-   \begin{table}[tpb]
+The metric weight combinations significantly influence Ignored EA\%  ($p<0.05$ for the \texttt{blo}, \texttt{ipc} and \texttt{log} domains).
+ Post-hoc analysis using TukeyHSD at $\alpha=0.05$ shows that across domains, the metric weight combinations that do not consider the Timeliness metric better perform at ignoring extraneous actions than combinations that include the Timeliness. 
+ This is because the Timeliness metric is not sensitive to extraneous actions in the trace. 
+ As a result, the Undesirable Consequence Recognition function can not sufficiently differentiate between extraneous actions and actions in ground truth plan, leading to false positives. 
+ The Timeliness metric captures progress yet to be made from current state to  the undesirable state in terms of remaining steps.
+ Extraneous actions do not contribute to the progress toward the undesirable state.
+ Therefore, when extraneous actions are encountered in the trace, the Timeliness metric does not sufficiently demote the extraneous action in the candidate trigger actions set. 
+ This leads to false positives.
+ In contrast, the Certainty and Desirability metrics look for occurrences of an action in undesirable plans. 
+ As extraneous actions do not occur in undesirable plans, both metrics are capable of filtering extraneous actions from the candidate trigger action set by minimizing the metric function value and preventing them from being selected as the critical trigger.
+
+ \begin{table}[tpb]
      \centering
    \begin{small}
-   	\caption{Mean Ignored EA\%  (and standard deviation) for benchmark domains for levels of EA\% in observation trace and objective weight assignment classes. The left three columns combine mean Ignored EA\% for OW assignments across all values of $\alpha$ and breaks mean Ignored EA\% down by EA\% in trace. The right OW columns breaks down mean Ignored EA\% by specific $\alpha$ value for all levels of EA\% in observation trace.}
+   	\caption{Mean Ignored EA\%  (and standard deviation) for benchmark domains for levels of EA\% in observation trace and metric weight assignment classes. The left three columns combine mean Ignored EA\% for MW assignments across all values of $\alpha$ and breaks mean Ignored EA\% down by EA\% in trace. 
+   	The right MW columns breaks down mean Ignored EA\% by specific $\alpha$ value for all levels of EA\% in observation trace.}
 	\label{tab:ignoredeaforlevels}
    \resizebox{\columnwidth}{!}{
 	\begin{tabular}{|c|ccc|ccccccc|}
 		\hline
 	    & \multicolumn{10}{c|}{Mean Ignored EA\%} \\ \cline{2-11}
-		\multirow{3}{*}{Domain}  & \multicolumn{3}{c|}{EA\% in trace} & \multicolumn{7}{c|}{OW Assignments  (C,T,D)} \\ \cline{2-11} 
+		\multirow{3}{*}{Domain}  & \multicolumn{3}{c|}{EA\% in trace} & \multicolumn{7}{c|}{MW Assignments  (C,T,D)} \\ \cline{2-11} 
 		& 50\% & 75\% & 100\%
 %		& (0,0,1) & (0,.5,.5) & (0,1,0) & (.3,.3,.3) & (.5,0,.5) & (.5,.5,0) & (1,0,0) \\ \hline
 		& (0,0,1) & (0,0.5,0.5) & (0,1,0) & (0.3,0.3,0.3) & (0.5,0,0.5) & (0.5,0.5,0) & (1,0,0) \\ \hline
@@ -480,16 +516,63 @@ Partial observability (PO) is computed by randomly removing actions from the fin
 \end{table}
 
 
+\textbf{Flagging Undesirable Actions}\\
+Flagged UP\% captures how well the algorithm flags an action in the observation trace as critical triggers given that the action appears in an undesirable plan treated as the ground truth.
+We define mean Flagged UP\% percentage for a benchmark domain as: 
+\begin{equation}
+\textup{mean Flagged UP\%} = \frac{\textup{sum of  Flagged UP\% per trial}}{\textup{number of trials}}
+\end{equation}
+ We first look at Flagged UP\% in traces with 0\% noise and full observability (i.e., best-case scenario) to establish an upper bound to the metric.
+
+Table \ref{tab:flagupupperbound} shows a very large range (Max-Min) for Flagged UP\%. 
+This indicates that although the only variable for this sample is the metric weight category, Flagged UP\% is also sensitive to other external factors that have not been accounted for in our proposed Undesirable Consequence Recognition function. 
+The challenge lies in identifying these external factors and determining their relationship so that the Undesirable Consequence Recognition function can be tuned to improve accuracy. 
+This will be the main focus of our future work. 
+
+\begin{table}[tpb]
+	\centering
+\caption{Flagged UP\% for traces with 0\% EA and 100\% PO for \texttt{Block-words} (\texttt{bw}), \texttt{IPC-grid+} (\texttt{ipc}), \texttt{Logistics} (\texttt{log}), and \texttt{Grid-Navigation}   (\texttt{nav}) domains. For each domain, this shows the upper bound for the mean Flagged UP \% the algorithm can obtain.}
+		\label{tab:flagupupperbound}
+    \begin{small}
+	\begin{tabular}{|l|c|c|c|c|}
+		\hline
+		\multirow{2}{*}{Domain} & \multicolumn{4}{c|}{Flagged UP\%} \\ \cline{2-5} 
+		& Mean   & SD     & Min    & Max    \\ \hline
+		\texttt{blo}  & 37.12  & 24.83  & 6.12   & 77.78  \\ 
+		\texttt{ipc}  & 43.27  & 30.55  & 0.00   & 90.00  \\ 
+		\texttt{log}  & 31.77  & 17.27  & 12.82  & 66.67  \\ 
+		\texttt{nav}  & 61.68  & 40.31  & 14.10  & 100.00 \\ \hline
+	\end{tabular}
+\end{small}
+\end{table}  
+
+Table \ref{tab:flaggedupforlevels} shows that Flagged UP\% also increases when observability increases in the trace. 
+Factor analysis using one-way ANOVA for MW shows that this positive effect is significant ($p<0.05, df=6$) for all four benchmark domains. 
+High Flagged UP\% was reported for MW combinations that consider Timeliness: specifically for the following configurations,
+\begin{itemize}
+\item Certainty, Timeliness and Desirability weighted equally
+\item Certainty and Timeliness weighted equally
+\item Desirability and Timeliness weighted equally
+\end{itemize}
+Post-hoc analysis using TukeyHSD at $\alpha=0.05$ shows that this difference is significant. 
+Thus, we conclude that the Timeliness metric can improve the true-positive rate, yielding higher precision for the algorithm. 
+The Timeliness metric is responds well in identifying critical trigger actions when the observation trace contains partial observability because it captures the number of remaining steps until the undesirable state is reached, sampled from a set likely plans.
+Even when some actions executed by the user are missed,  the observer can accurately select the critical trigger actions using the remaining actions in the sampled plans.
+Accuracy of the Undesirable Consequences Recognition function when using the Certainty and the Desirability metrics decreases as partial observability increases because these two metrics consider occurrences of an action. 
+When observations are missed, the observer's perception of the current state of the world is different from the user's.
+When the observer uses the \textit{faulty} current state to sample plans, they may contain actions that are otherwise not needed in reference to the ground truth undesirable plan.
+This results in candidate trigger action set containing \textit{unwanted} actions, and the two metrics that check for occurrences of an action (Desirability and Certainty) fail to adequately promote actions that must be ranked higher.
+
 \begin{table}[tpb]
 	\centering
 \begin{small}
-\caption{Mean Flagged UP\%  (and standard deviation) for benchmark domains for levels of PO\% in observation trace and objective weight assignment classes. The left four columns combine mean Flagged UP\% for OW assignments across all values of $\alpha$ and breaks mean Flagged UP\% down by PO\% in trace. The right OW columns breaks down mean Flagged UP\% by specific $\alpha$ value for all levels of PO\% in observation trace.}
+\caption{Mean Flagged UP\%  (and standard deviation) for benchmark domains for levels of PO\% in observation trace and the metric weight assignment classes. The left four columns combine mean Flagged UP\% for MW assignments across all values of $\alpha$ and breaks mean Flagged UP\% down by PO\% in trace. The right MW columns breaks down mean Flagged UP\% by specific $\alpha$ value for all levels of PO\% in observation trace.}
 	\label{tab:flaggedupforlevels}
 \resizebox{\columnwidth}{!}{
 	\begin{tabular}{|c|c c c c|c c c c c c c|}
 		\hline
 		& \multicolumn{11}{c|}{Mean Flagged UP\%} \\ \cline{2-12} 
-		\multirow{3}{*}{Domain} & \multicolumn{4}{c|}{PO\% in trace} & \multicolumn{7}{c|}{OW Assignments (C,T,D)} \\ \cline{2-12} 
+		\multirow{3}{*}{Domain} & \multicolumn{4}{c|}{PO\% in trace} & \multicolumn{7}{c|}{MW Assignments (C,T,D)} \\ \cline{2-12} 
 %		& 25\% & 50\% & 75\% & 100\% & (0,0,1) & (0,.5,.5) & (0,1,0) & (.3,.3,.3) & (.5,0,.5) & (.5,.5,0) & (1,0,0) \\ \cline{1-12} 
 		& 25\% & 50\% & 75\% & 100\% & (0,0,1) & (0,0.5,0.5) & (0,1,0) & (0.3,0.3,0.3) & (0.5,0,0.5) & (0.5,0.5,0) & (1,0,0) \\ \cline{1-12} 
 		
@@ -503,32 +586,8 @@ Partial observability (PO) is computed by randomly removing actions from the fin
 \end{table}
 
 
-
-\subsubsection{Benchmark Results}
-We review the overall accuracy of our algorithm in benchmark domains by evaluating how well it ignores extraneous actions and flags undesirable actions in the ground truth plan.
-
-\textbf{Ignoring Extraneous Actions}\\
-When encountered with extraneous actions in the trace, the algorithm must be able to avoid flagging it as critical. We define mean Ignored EA\% percentage for a domain as: (sum of Ignored EA\% per trial / number of trials with EA\%$>$0). Table \ref{tab:ignoredeaforlevels} shows how mean Ignored EA\% varies with the noise level of the observation trace and objective weight assignments.
-
-Results show that our algorithm consistently ignores extraneous actions for all benchmark domains. This high accuracy rate can be attributed to our process of selecting critical trigger actions. Since candidate trigger actions are extracted from a set of alternative plans leading to the same undesirable state, the likelihood of true extraneous actions to appear in the set of alternative plans is low. This reduces the likelihood of false-positives in the trace.
-
-
-The OW combinations significantly influence Ignored EA\%  ($p<0.05$ for the \texttt{blo}, \texttt{ipc} and \texttt{log} domains). Post-hoc analysis using TukeyHSD at $\alpha=0.05$ shows that across domains, OW combinations that do not consider the timeliness metric better perform at ignoring extraneous actions than combinations that include timeliness. This is because timeliness metric is not sensitive to extraneous actions in the trace. As a result, the objective function can not sufficiently differentiate between extraneous actions and actions in ground truth plan, leading to false positives.Because timeliness metric captures progress yet to be made from current state to triggering the undesirable state in terms of remaining steps, in the presence of extraneous actions, which do not contribute to progress toward the undesirable state, the metric does not sufficiently demote the extraneous action in the candidate action set, leading to false-positives. 
-In contrast, certainty and desirability metrics look for occurrences of an action in undesirable plans. As extraneous actions do not occur in undesirable plans, both metrics are capable of filtering extraneous actions from the candidate action pool by minimizing objective function value and preventing them from being selected as the critical trigger.
-
-
-\textbf{Flagging Undesirable Actions}\\
-Flagged UP\% captures how well the algorithm flags observations as critical triggers given that the observation appears in an undesirable plan treated as ground truth. We first look at Flagged UP\% in traces with 0\% noise and full observability (i.e., best-case scenario) to establish an upper bound to the metric.
-
-Table \ref{tab:flagupupperbound} shows a very large range (Max-Min) for Flagged UP\%. This indicates that although the only variable for this sample is OW, Flagged UP\% is also sensitive to other external factors that have not been accounted for in our proposed objective function. The challenge lies in identifying these external factors and determining their relationship so that the objective function can be tuned to improve accuracy. This will be the main focus of our future work. 
-
-Table \ref{tab:flaggedupforlevels} shows that Flagged UP\% also increases when observability increases in the trace. Factor analysis using one-way ANOVA for OW shows that this positive effect is significant ($p<0.05, df=6$) for all four benchmark domains. Interestingly, high Flagged UP\% was reported for OW combinations that consider timeliness: specifically for configurations, certainty-timeliness-desirability with equal weighting, certainty-timeliness with equal weighting and desirability-timeliness with equal weighting. Post-hoc analysis using TukeyHSD at $\alpha=0.05$ shows that this difference is significant. Thus, we conclude that the timeliness metric can improve the true-positive rate, yielding higher precision for the algorithm. The timeliness metric is sensitive to partial observability because it sufficiently captures distance to triggering an undesirable state, which is a consistent indicator of the progress is being made. Even with partial observability, the remaining steps of a plan change in such a way that it can be tracked and correctly reflected in the objective function. Accuracy of the certainty and desirability metrics lowers as partial observability increases because they consider occurrences of an action. 
-
-
 \textbf{Computational Overhead}\\
 For each benchmark domain, we calculated the average CPU time per cycle for problem factors (EA and PO). As shown in Table \ref{tab:cpu2}, we found differences due to observation trace factors; two-way ANOVA on EA and PO showed significant main effects and interaction effects ($p<$0.05) for \texttt{ipc}, \texttt{log} and \texttt{nav} domains.
-
-
 \begin{table}[tpb]
   \centering
     \caption{Mean CPU time in seconds for problem factors for each domain. $\Delta$ is the difference between the max and min times for each domain.}
@@ -549,25 +608,21 @@ For each benchmark domain, we calculated the average CPU time per cycle for prob
   	}%resize box
 \end{table}
 
-\begin{table}[tpb]
-	\centering
-\caption{Flagged UP\% for traces with 0\% EA and 100\% PO for \texttt{Block-words} (\texttt{bw}), \texttt{IPC-grid+} (\texttt{ipc}), \texttt{Logistics} (\texttt{log}), and \texttt{Grid-Navigation}   (\texttt{nav}) domains}
-		\label{tab:flagupupperbound}
-    \begin{small}
-	\begin{tabular}{|l|c|c|c|c|}
-		\hline
-		\multirow{2}{*}{Domain} & \multicolumn{4}{c|}{Flagged UP\%} \\ \cline{2-5} 
-		& Mean   & SD     & Min    & Max    \\ \hline
-		\texttt{blo}                     & 37.12  & 24.83  & 6.12   & 77.78  \\ 
-		\texttt{ipc}                     & 43.27  & 30.55  & 0.00   & 90.00  \\ 
-		\texttt{log}                     & 31.77  & 17.27  & 12.82  & 66.67  \\ 
-		\texttt{nav}                     & 61.68  & 40.31  & 14.10  & 100.00 \\ \hline
-	\end{tabular}
-\end{small}
 
-\end{table}
 
 \section{Concluding Remarks}
-We have described a variant of plan recognition that can help identify intervention points to help a user avoid undesirable states while interacting with a computer. Our approach views the decision of when to intervene as a multi-objective optimization problem that optimizes three domain-independent  metrics: certainty, timeliness and desirability. We tested our algorithm on both benchmark domains and human subject data from a cyber-security experiment. Results show that, across all benchmark domains, certainty and desirability metrics perform well in ignoring extraneous actions, while the timeliness metric and it's combinations with certainty and desirability perform well in identifying true positives. We identified two metrics that are sensitive to noise in action based observation traces and a metric that is sensitive to partial observability of actions.
+We have described a variant of plan recognition that can help identify actions that warrant intervention to help a user avoid undesirable states while interacting with a computer. 
+We introduced the Undesirable Consequences Recognition function that combine three domain-indent metrics: Certainty, Timeliness and Desirability.
+Actions that maximize the Undesirable Consequences Recognition function are selected as actions that warrant intervention.
+We tested our algorithm on both benchmark planning domains and human subject data from a cyber-security experiment. 
+Results from the benchmark domains show that the Certainty and the Desirability metrics perform well in ignoring extraneous actions, while the Timeliness metric and it's combinations with the Certainty and the Desirability perform well in identifying true positives. 
+We found that the Certainty and the Desirability metrics perform well in recognizing undesirable consequences when the observations contain extraneous actions.
+We also found that the Timeliness metric respond well in recognizing undesirable consequences when the observation traces contain missing actions.
+However,  for the benchmark domains, the low percentage of true-positives in the case where there is full observability and no extraneous actions indicate that the three metrics are not good enough to recognize intervention for actions in a ground-truth undesirable plan.
+Therefore, metrics must be developed to evaluate the contribution of less frequent actions appearing in the set of sampled plans.
+For the cyber-security domain, the Undesirable Consequence Recognition Function relies on the Certainty and Timeliness metrics to flag the true-positives compared to the ground truth undesirable plan.
 
-However, the low percentage of true-positives in the best case scenario indicate that the metrics are not good enough in their raw form in dealing with partial observability. Therefore, metrics must be developed to evaluate the contribution of less frequent actions appearing in alternative plans. Evaluation of the effects of objective weight metrics, shows that desirability metric does not adequately downgrade the effect of certainty and timeliness. This indicates that objective weight assignments require an in depth look into multi-objective optimization techniques to find the optimal combination of weights over metrics.
+In this work, we studied how the Undesirable Consequence Recognition Function ignores noise in the trace and flags the true positives considering that the metrics weighted with seven weight classes.
+The results show that the metric weight class significantly influences the accuracy (i.e., ability to ignore noise and flag the true positives) for the benchmark domains.
+Therefore, it will be useful to study approaches such as Pareto optimization can be used for identifying the metric weight classes that maximizes the Ignored EA and Flagged UP evaluation metrics.
+

@@ -51,11 +51,11 @@ We show that the Intervention Problem carries subtleties that the state-of-the-a
 We propose two complementary solutions for Plan Intervention: (1) Unsafe Suffix Intervention and (2) Human-aware Intervention. 
 We show that these two complementary solutions dominate state-of-the-art plan recognition algorithms in correctly recognizing when intervention is required.
 
-For intervention, giving goal priors, as required for goal/plan recognition, is difficult because certain facts about the domain are hidden to the user and unintended goals may be enabled during execution regardless the priors. 
-Furthermore, human actors may not construct plans the same way as an automated planner because humans may identify the optimal choice of actions every time. 
+For intervention, giving goal priors as required for goal/plan recognition is difficult because certain facts about the domain are hidden to the user and unintended goals may be enabled during execution. 
+Furthermore, human actors may not construct plans the same way as an automated planner because humans may identify the optimal choice of actions at each time step. 
 They may  make mistakes early on during tasks having a steep learning curve. 
 Partial knowledge about the domain may preclude the human user from knowing the full effects of his actions or he may not be thinking about the effects at all. 
-Therefore, the observer may not may not always be able to accurately estimate what the users are trying to do.
+Therefore, the observer may not always be able to accurately estimate what the users are trying to do.
 
 We study two kinds of Intervention Problems. 
 In \emph{Unsafe Suffix Intervention}, the observer uses automated planners to project the remaining suffixes and extract features that can differentiate between safe and unsafe plans. 
@@ -84,7 +84,7 @@ In this chapter, we first define a general form of the Intervention Problems and
 %%%===========================================================================================================
 \section{The Intervention Environment}
 \label{sec:distinguishing}
-We model {\bf intervention} in environments where a \textit{user} is trying to achieve desirable goal(s), denoted \desired, while avoiding undesirable outcomes, denoted \undesired.
+We model {\bf intervention} in environments where a \textit{user} is trying to achieve a desirable goal(s), denoted \desired, while avoiding undesirable outcomes, denoted \undesired.
 Note that in contrast to the Intervention Problem discussed in Chapter~\ref{chap:ch4}, the observer has knowledge about \desired and \undesired and must take into account both these goal states in order to make the intervention decision.
 Some environments include a \textit{competitor} who may also take actions in the world, but we assume the user is not aware of the competitor's actions, as might happen in cyber-security applications.
 
@@ -99,7 +99,7 @@ We call such a projection a \textit{suffix}.
 We denote a single  \textit{suffix} projection as \Suffix and the set of projections as \Suffixes because there will usually be many projections.
 
   
-The intervention models discussed in Chapters~\ref{chap:ch4} and \ref{chap:ch5} emphasize on analyzing the remaining suffixes to decide when to intervene.
+The intervention models discussed in Chapters~\ref{chap:ch4} and \ref{chap:ch5} emphasize analyzing the remaining suffixes to decide when to intervene.
 In Plan Recognition, the observer uses an observation trace $O$ to derive the user's likely plan. $O$ can be either an ordered sequence of actions  \cite{ramirez2009plan,ramirez2010probabilistic} or an ordered sequence of states \cite{sohrabi2016plan}.
 In the first form of intervention we present in this chapter, the observer considers the remaining plans (i.e., suffixes) in safe and unsafe partitions to learn to recognize unsafe suffixes in order to help the user avoid \undesired. 
 In this case, the observer can help the user by only accepting actions into \historyDef that will safely advance the user toward \desired.
@@ -151,7 +151,7 @@ Most likely goal & No decision & No decision & No decision & Fail \\ \hline
 \end{figure}
 
 Now let us consider a situation where there may be some additional agent taking actions in the world.
-For example, in a cyber-security application, a second agent may insert malicious code in a file to gain access to a privileged information.
+For example, in a cyber-security application, a second agent may insert malicious code in a file to gain access to privileged information.
 More generally, we call this additional agent a competitor, since it is not always the case that they are ``attacking'' a user.
 The Blocks Word domain example from Ramirez et al. \citeyear{ramirez2009plan} is used to illustrate intervention with the user, the competitor and the observer. 
 In the Intervention Problem illustrated in Figure~\ref{fig:bw2} (A), the competitor's goal $\mathrm{u}=$ $\lbrace$(\texttt{CLEAR C})(\texttt{ON C U})(\texttt{ON U T})$\rbrace$(i.e., CUT) and the user's goal $\mathrm{d}=\lbrace$(\texttt{CLEAR C})(\texttt{ON C U})(\texttt{ON U P})$\rbrace$(i.e., CUP). The user can not recognize the block T (shown in red). The competitor only modify the state of block T and executes actions with the block T. As shown in the first column, initially, all four blocks are on the table. 
@@ -167,7 +167,7 @@ Note that in the Blocks Words example, \desired and \undesired are distinct enou
 Table~\ref{tab:prpbw} shows how an observer modeled as an offline Plan Recognition agent will recognize the goals for the Blocks Words problem in Figure~\ref{fig:bw2} (A). Similar to the Grid Navigation example, the Plan Recognition agent implements the Plan Recognition as Planning algorithm introduced by Ramirez et al. \citeyear{ramirez2010probabilistic} to disambiguate between \undesired and \desired. All other assumptions in the Grid Navigation Plan Recognition task also hold in this problem.
 It can be seen that in the Blocks Words example the observer disambiguate  \undesired and \desired somewhat better than the Grid Navigation example, because the goals are different enough.
 The most likely goal identified by the observer aligns with the Yes/No decisions in Figure~\ref{fig:bw2} (A). 
-However, there are still observation reveals where the observer can not make a clear decision.
+However, there are still ``observation reveals'' where the observer can not make a clear decision.
 In the last reveal, the observer correctly identifies \undesired as the goal. However, the observer can not help the user avoid \undesired in the final reveal because $O$ satisfies \undesired by definition of $O$ in Plan Recognition as Planning. 
 With the proposed intervention algorithms, which learn the distinctions between unsafe and safe plans, we hope to improve the intervention recognition accuracy for the observer, while allowing the user some freedom to satisfy \desired avoiding \undesired.
 Furthermore, by accepting actions that only help the user advance toward \desired safely into the observation history \historyDef, our intervention algorithm ensures that the user avoids \undesired.
@@ -213,7 +213,7 @@ The observer has full observability, knows about states \desired and \undesired.
 The user can not recognize the effects of a competitor's actions. 
 \textbf{Plans:} 
 The user follows a satisficing plan to reach \desired, but may reach \undesired unwittingly. 
-There is a satisficing plan to reach \dandu and we assume that it has a common prefix with a plan to reach \desired. We assume that the user continues to present the observer with actions from his original plan even after the first positive flag and does not replan. 
+There is a satisficing plan to reach \dandu and we assume that it has a common prefix with a plan to reach \desired. We assume that the user continues to present the observer with actions from his original plan despite intervention and does not replan. 
 \textbf{Competitor:}
 When present, the competitor only perform actions using objects hidden to the user; this restriction follows from many security domains where an attacker is a remote entity that sets traps and expects the user to become an unwitting accomplice.
 The user and the competitor are (bounded) rational agents.
@@ -230,7 +230,7 @@ A STRIPS planning problem  is a tuple $ P = \langle D, G \rangle$, where $D$ is 
 A solution for $P$ is a plan $\pi = \{a_1, \dots ,a_k\}$ of length $k$ that modifies \initialState into $G$ by execution of actions $a_1, \dots, a_k$. The effect of executing a plan is defined by calling $\gamma$ recursively: $\gamma(\ldots\gamma(\gamma(\initialState,a_1),a_2)\ldots , a_k) = G$.
 
 The Intervention Problem requires domain models that are distinct for the user, observer, and competitor.
-Let us define the user's domain model as $\domainUser = (\factsUser, \actionsUser, \initialState)$.
+Let us define the user's domain model as $\domainUser = (\factsUser, \actionsUser, \initialState)$, where \factsUser is the predicates, \actionsUser is the set of actions the user can execute and \initialState is the initial state for the user's planning problem.
 The competitor can see the effects of the user but cannot take user actions.  
 Instead, the competitor can take its own actions and the domain model for the competitor as $\domainOther = (\factsOther, \actionsOther, \initialState)$.
 Although the observer does not inject actions into the history, it can see the actions of the user and competitor.
@@ -295,6 +295,7 @@ We next formally define the Unsafe Intervention Suffix \SuffixUnsafe.
 An Intervention Suffix \Suffix of length $k$ is unsafe if there is at least one action $x_i \in \Suffix (1\leq i\leq |\Suffix|)$ such that $x_i$ is a directly contributing action or $x_i$ is in a indirectly contributing sequence.
 \end{definition}
 
+\sloppy
 In the example in Figure~\ref{fig:bw2} (B), $\SuffixUnsafe=($\texttt{PICKUP USER A}, \texttt{STACK USER A D}, \texttt{PICKUP COMPETITOR B}, \texttt{PICK USER UP T}, \texttt{STACK COMPETITOR B A}, \undesired$)$ because of the directly contributing action \texttt{STACK COMPETITOR B A}. In the example in Figure~\ref{fig:bw2} (A), $\SuffixUnsafe=($\texttt{PICKUP USER U}, \texttt{PICKUP COMPETITOR T}, \texttt{STACK COMPETITOR T P}, \texttt{STACK COMPETITOR T P}, \texttt{STACK USER U T}, \texttt{PICKUP USER C}, \texttt{STACK USER C U}, \dandu) because it contains the actions from an indirectly contributing sequence.
 
 \subsection{The Family of Intervention Problems}
@@ -302,6 +303,7 @@ In the example in Figure~\ref{fig:bw2} (B), $\SuffixUnsafe=($\texttt{PICKUP USER
 We now define a general form of the Intervention Problem.
 Let $plan(o_i, g)$ be some general method to generate suffixes for \planDesired and \planUndesired; in Section~\ref{sec:features} we will show how we can use classical planning.
 
+\sloppy
 \begin{definition}[Intervention Problem]
   \label{def:standard}
   Let $\mathcal{I} = (D, \desired, \undesired, \historyDef, \presentedAction, \mathcal{X}_\Diamond)$ be a tuple where
@@ -491,7 +493,7 @@ We count  $s$, the number of the edges (actions) before \undesired is reached fo
 In this formula, $-1$ indicates that the undesirable state is not reachable from the current state. For the example problem illustrated in Figure \ref{fig:feature}, $\delta_\undesired=\frac{3}{1}=3$.
 
 \subsubsection{Distance to $\boldsymbol{\desired}$ ($\delta_\desired$)} 
-This feature measures the distance to \desired from current state. The path set \SuffixesSafe contains action sequences that reach \desired without reaching \undesired.
+This feature measures the distance to \desired from the current state. The path set \SuffixesSafe contains action sequences that reach \desired without reaching \undesired.
 We count  $t$, the number of the edges where \desired is achieved safely for a path in \SuffixesSafe. 
 Then, $\delta_\desired$ is defined as the average of these distances given by the formula:
 \begin{equation*} 
@@ -505,6 +507,7 @@ In this formula, $-1$ indicates that \desired can not be reached safely from the
 
 \subsubsection{Active attack landmark percentage ($\mathcal{L}_{ac}$)} 
 This feature captures the criticality of the current state toward contributing to \undesired. 
+As defined in Chapter~\ref{chap:ch2}, Section~\ref{sec:prpdomain}, landmarks are facts that must be true in every valid plan for a planning problem.
 We used the algorithm proposed by Hoffmann et al. \citeyear{hoffman2004lm} to extract fact landmarks for the planning problem $P = \langle \domainTemplate{other}, \mathrm{u}\rangle$ or $P = \langle \domainTemplate{user}, \mathrm{u}\rangle$. 
 These landmarks are referred to as \textit{attack landmarks} ($\mathcal{L}_{u}$) because they establish predicates that must be true to reach \undesired.  
 Landmarks have been successfully used in deriving heuristics in Plan Recognition \cite{vered2018goalrec} and generating alternative plans \cite{bryce2014diverse}. 
@@ -571,7 +574,7 @@ This produces the Sampled Feature vector for the presented action. Algorithm~\re
 \label{sec:learning-to-intervene}
 We train a classifier to categorize the presented observation $o_i$ into two classes: (Yes) indicating intervention is required and (No), indicating otherwise. 
 We chose Naive Bayes, K-nearest neighbors, decision tree and logistic regression classifiers from Weka~\footnote{\url{http://www.cs.waikato.ac.nz/ml/weka/}}. 
-Given a observations labeled as Yes/No and corresponding feature vectors as training examples, we train the classifiers with 10-fold cross validation. 
+Given observations labeled as Yes/No and corresponding feature vectors as training examples, we train the classifiers with 10-fold cross validation. 
 The trained model is used to predict intervention for previously unseen Intervention Problems. 
 Attribute selected classifiers filter the feature vector to only select critical features. 
 This step reduces complexity of the model, makes the outcome of the model easier to interpret, and reduces over-fitting. 
@@ -1002,7 +1005,7 @@ Logistic Regression & \textbf{0.91} & \textbf{0.95} & \textbf{0.93} & \textbf{0.
 Naive Bayes & 0.73 & 0.90 & 0.81 & 0.74 & 0.86 & 0.83 & 0.68 & 0.90 & 0.78 \\ \hline
 \end{tabular}
 }%
-\caption{Precision, Recall and F-scores for the prediction accuracy of the Human-aware Intervention learned models. Best values are in bold.}
+\caption{Precision, Recall and F-scores for the prediction accuracy of the Human-aware Intervention learned models. Best values are in bold. $k$ = number of moves remaining until the forbidden vehicle is moved}
 \label{tab:rupsraccuracy}
 \end{table}
 
@@ -1130,7 +1133,7 @@ In various stages of the puzzle solving task, the user may opt to use these sugg
 The second sub problem is explaining intervention and the follow-up to intervention. 
 We can explore how effective different explanation models (e.g., contrastive, selective) are in explaining intervention and intervention Recovery to human users.
 
-There are several other extensions to our current intervention framework, that we would like to explore as future work. 
+There are several other extensions to our current intervention framework we would like to explore as future work. 
 In the planning domains we used to model intervention tasks, we assumed that the user's actions are deterministic and there is only one undesirable state that needs to be avoided. 
 It is possible to relax these two assumptions and explore intervention in non-deterministic environments where the user needs to avoid multiple undesirable goals. 
 However, in order for intervention to be meaningful, the intervention planning domains need to be descriptive enough to model complex tasks. 
