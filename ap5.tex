@@ -65,17 +65,3 @@ P10 & 50.3 & 11 & 66    & 14 & 127.3 & 46 \\ \hline
 \caption{Plans produced by human users grouped by the mean number of moves and the number of forbidden moves}
 \label{tab:solvergroups}
 \end{table}
-
-\section{Solution Length Distribution}
-\label{ap:distribution}
-\begin{figure}[tpb]
-  \centering
-\includegraphics[width=\columnwidth]{img/figure7.jpg}
-  \caption{Number of moves in the users' solution compared to the optimal number of moves $\alpha$, 1.2$\alpha$, 1.4$\alpha$, 1.6$\alpha$, 1.8$\alpha$ for puzzles P1 through P10}
-  \label{fig:difficulty}
-\end{figure}
-
-Figure~\ref{fig:difficulty} illustrates how the number of moves in users' solutions compare to a set of threshold values derived from the optimal solution for each Rush Hour planning task. We define the threshold set $\theta$ as: given the optimal number of moves  $\alpha$ for a puzzle, $\theta=\lbrace \alpha, 1.2\alpha, 1.4\alpha, 1.6\alpha, 1.8\alpha\rbrace$. The letter in parenthesis indicates the puzzle group (see Figure~\ref{fig:ui}(B) for the three puzzle types) of each puzzle.
-
-It can be seen that human solvers' solutions to P8 were very close to the optimal solution in the number of moves. Human solvers' found it very difficult to find a solution closer to the optimal number of moves for P2.
-Users who attempted P3 and P5 found solutions shorter than the safe, optimal. Shorter solutions for these two puzzles all required the user to move the forbidden vehicles.

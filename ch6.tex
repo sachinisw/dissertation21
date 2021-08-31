@@ -60,6 +60,7 @@ Finally, we present the findings of our study to answer the following questions.
 \end{enumerate}
 
 \begin{table}[ptb]
+\caption{Dimensions of the Human-aware Intervention Problem}
 \begin{tabular}{|l|l|}
 \hline
 \textbf{Dimension} & \textbf{Domain Specific Properties} \\ \hline
@@ -69,7 +70,6 @@ Types of observations & The user's actions and states resulting from actions \\ 
 Noise in observations & None \\ \hline
 Intervention recovery & Offer helpful hint \\ \hline
 \end{tabular}
-\caption{Dimensions of the Human-aware Intervention Problem}
 \label{tab:dim4}
 \end{table}
 
@@ -159,10 +159,11 @@ The (partial) solution on the right is produced by a human user.
 The highlighted step in the human user's solution (18$^{th}$ move) show that the user is moving the forbidden vehicle C2. 
 In fact, the human user moved the forbidden vehicle twice before reaching the goal state.
 The human user's solution consisted of 43 moves.
-Furthermore, results from a human subject study discussed in Appendix~\ref{ap:distribution} show that human users typically find longer plans to Rush Hour planning task compared to the cost optimal solutions found by an automated planner.
+Furthermore, results from a human subject study discussed in Section~\ref{sec:distribution} show that human users typically find longer plans to Rush Hour planning task compared to the cost optimal solutions found by an automated planner.
 Thus we conclude that the cost optimal solution to the modified Rush Hour planning task provides a reference solution against which we can compare the user’s solution.
 
-\begin{table}[ptb]
+\begin{table}[tpb]
+\caption{Solutions for the Rush Hour planning task in Figure~\ref{fig:board}(A) produced by an automated planner (left) and a human user (right). The forbidden vehicle is C2}
 \begin{tabular}{|c|c|}
 \hline
 A safe, optimal solution (21 moves) & Unsafe solution (43 moves)\\
@@ -170,14 +171,13 @@ A safe, optimal solution (21 moves) & Unsafe solution (43 moves)\\
 \begin{tabular}[c]{@{}l@{}}\texttt{\textsc{move-car c0 l17 l16 l18 we}}\\ \texttt{\textsc{move-car c0 l16 l15 l17 we}}\\ \texttt{\textsc{move-truck t3 l23 l17 l29 l35 ns}}\\ \texttt{\textsc{move-car c7 l20 l21 l19 ew}}\\ \texttt{\textsc{move-car c6 l25 l19 l31 ns}}\\ \texttt{\textsc{move-truck t1 l32 l31 l33 l34 we}}\\ \texttt{\textsc{move-car c5 l28 l34 l22 sn}}\\ \texttt{\textsc{move-truck t3 l17 l11 l23 l29 ns}}\\ \texttt{\textsc{move-car c7 l21 l22 l20 ew}}\\ \texttt{\textsc{move-truck t2 l14 l20 l8 l2 sn}}\\ \texttt{\textsc{move-truck t2 l20 l26 l14 l8 sn}}\\ \texttt{\textsc{move-truck t0 l3 l2 l4 l5 we}}\\ \texttt{\textsc{move-truck t3 l11 l5 l17 l23 ns}}\\ \texttt{\textsc{move-car c7 l22 l23 l21 ew}} \\ \texttt{\textsc{move-car c7 l23 l24 l22 ew}}\\ \texttt{\textsc{move-car c5 l28 l22 l34 ns}}\\ \texttt{\textsc{move-truck t1 l33 l34 l32 l31 ew}}\\ \texttt{\textsc{move-truck t1 l34 l35 l33 l32 ew}}\\ \texttt{\textsc{move-truck t2 l26 l32 l20 l14 sn}}\\ \texttt{\textsc{move-car c0 l15 l14 l16 we}}\\ \texttt{\textsc{move-car c0 l14 l13 l15 we}}\end{tabular} &
   \begin{tabular}[c]{@{}l@{}}\texttt{\textsc{move-car c0 l17 l16 l18 we}}\\ \texttt{\textsc{move-car c0 l16 l15 l17 we}}\\ \texttt{\textsc{move-car c4 l30 l24 l36 ns}}\\ \texttt{\textsc{move-car c4 l24 l18 l30 ns}}\\ \texttt{\textsc{move-truck t3 l23 l17 l29 l35 ns}}\\ \texttt{\textsc{move-truck t3 l17 l11 l23 l29 ns}}\\ \texttt{\textsc{move-truck t1 l34 l35 l33 l32 ew}}\\ \texttt{\textsc{move-truck t1 l35 l36 l34 l33 ew}}\\ \texttt{\textsc{move-car c7 l20 l21 l19 ew}}\\ \texttt{\textsc{move-car c6 l25 l19 l31 ns}}\\ \texttt{\textsc{move-truck t1 l34 l33 l35 l36 we}}\\ \texttt{\textsc{move-truck t1 l33 l32 l34 l35 we}}\\ \texttt{\textsc{move-truck t1 l32 l31 l33 l34 we}}\\ \texttt{\textsc{move-car c5 l28 l34 l22 sn}}\\ \texttt{\textsc{move-car c7 l21 l22 l20 ew}}\\ \texttt{\textsc{move-truck t2 l14 l20 l8 l2 sn}}\\ \texttt{\textsc{move-truck t2 l20 l26 l14 l8 sn}}\\ \colorbox{LightSalmon}{\texttt{\textsc{move-car c2 l9 l8 l10 we}}}\\ \texttt{\textsc{move-truck t0 l3 l2 l4 l5 we}}\\ \texttt{\textsc{move-truck t3 l11 l5 l17 l23 ns}}\\ \texttt{\textsc{move-truck t3 l17 l23 l11 l5 sn}}\\ \texttt{\textsc{move-truck t3 l23 l29 l17 l11 sn}}\\ $\ldots$\end{tabular} \\ \hline
 \end{tabular}
-\caption{Solutions for the Rush Hour planning task in Figure~\ref{fig:board}(A) produced by an automated planner (left) and a human user (right). The forbidden vehicle is C2}
 \label{tab:plan}
 \end{table}
 
 
 \subsection{Hints: Formal Definitions}
 The observer solves the Human-aware Intervention problem ($\mathcal{I}$) for the Rush Hour planning task to recognize when the human user needs help and presents the hints.
-In Chapter~\ref{chap:ch5}, Section~\ref{sec:learningmethods}, we presented several learned models that solve $\mathcal{I}$ to automatically recognize when the user needs help.
+The model presented in Section~\ref{sec:human-aware} the observer automatically recognizes when a human user needs help during a cognitively engaging puzzle solving task.
 Hints are a special type of answer because they do not directly provide the complete solution to the question the user may ask the observer: ``\textit{why was I intervened?}'' nor do they engage the user in a dialogue. 
 Our design of helpful hints allows the user to carefully probe the search space of the Rush Hour planning task while avoiding the undesirable state. 
 Hints are specially useful in situations where the human user wishes to retain some autonomy over the system he is interacting with (e.g., intelligent tutoring systems).
@@ -262,7 +262,7 @@ Therefore, the puzzle solving task should pose a sufficient challenge for the us
 This is an alternative way to increase the difficulty of the puzzle without having to increase the number of vehicles on the board \cite{fernau2003} to make the puzzle more challenging.
 In order to further instill the importance of avoiding the forbidden vehicle in the user's mind, we also provide warning messages on the Web interface (Figure~\ref{fig:ui2}) to inform the user about the presence of a forbidden vehicle and what would happen if the forbidden car was moved. 
 
-Recall that in Chapter~\ref{chap:ch5}, Section~\ref{sec:experimentprotocol1}, we discussed three types of Rush Hour puzzles based on the position of the forbidden vehicle (\textbf{E}dge, \textbf{M}iddle, \textbf{C}orner).
+Recall that in Chapter~\ref{chap:ch5}, Section~\ref{sec:rushhourexperiment1}, we discussed three types of Rush Hour puzzles based on the position of the forbidden vehicle (\textbf{E}dge, \textbf{M}iddle, \textbf{C}orner).
 In the first round, where the human subjects solve the puzzle without Human-aware Intervention, we use 10 puzzles.
 The Human-aware Intervention learned models are developed using the data collected from the 10 puzzles.
 In the second round, where the human subjects solve the puzzle with Human-aware Intervention, we use 13 puzzles.
@@ -271,6 +271,7 @@ We added three extra puzzles to category M to resolve the distribution imbalance
 We expect that these three classes of  Rush Hour puzzles will pose unique challenges for the human user when trying to avoid the forbidden vehicle.
 \begin{center}
 \begin{table}
+\caption{Rush Hour puzzles used for the experiment without Human-aware Intervention (left) and with Human-aware Intervention (right)}\label{tab:puzzles}
 \begin{tabular}{ll}
 \begin{tabular}{|c|c|}
 \hline
@@ -296,7 +297,6 @@ M & P7, P11, P12, P13 \\
 \hline
 \end{tabular}
 \end{tabular}
-\caption{Rush Hour puzzles used for the experiment without Human-aware Intervention (left) and with Human-aware Intervention (right)}\label{tab:puzzles}
 \end{table}
 \end{center}
 \begin{figure}[tpb]
@@ -539,6 +539,7 @@ It can be seen that across all three puzzle types,  the hint ``\textbf{Show the 
 Considering the puzzle types C, E and M, we could not find unique subsets of hints the participants preferred the most.
 
 \begin{table}[tbp]
+\caption{Mean (standard deviation) of the subjective helpfulness rating the subjects assigned for the hints \textbf{H1}: Show the minimum remaining number of moves, \textbf{H2}: Show the next best move, \textbf{H3}: Show the vehicles that must be moved, \textbf{H4}: restart puzzle}
 \begin{tabular}{lll|l|l|l|l|}
 \cline{4-7}
  &  &  & \multicolumn{4}{l|}{\textbf{Mean (std. dev.) helpfulness rating}} \\ \hline
@@ -557,7 +558,6 @@ Considering the puzzle types C, E and M, we could not find unique subsets of hin
 \multicolumn{1}{|l|}{} & \multicolumn{1}{l|}{P12} & 1 & 1.0 & 5.0 & 5.0 & 1.0 \\
 \multicolumn{1}{|l|}{} & \multicolumn{1}{l|}{P13} & 11 & 1.2 (1.8) & 1.7 (1.8) & 0.9 (1.4) & 0.9 (1.6) \\ \hline
 \end{tabular}
-\caption{Mean (standard deviation) of the subjective helpfulness rating the subjects assigned for the hints \textbf{H1}: Show the minimum remaining number of moves, \textbf{H2}: Show the next best move, \textbf{H3}: Show the vehicles that must be moved, \textbf{H4}: restart puzzle}
 \label{tab:phase2ratings}
 \end{table}
 
@@ -569,6 +569,7 @@ From those who moved the forbidden vehicle, 54 users moved the vehicle more than
 Table \ref{tab:usersolutions} describes the summary statistics for the solutions that did not move the forbidden vehicle and the solutions that moved the forbidden vehicle produced by the human users in the control group.
 
 \begin{table}[tpb]
+\caption{Frequency, minimum, maximum, mean and std. deviation number of moves in users' solutions for the Rush Hour planning tasks P1 through P10 \textbf{solved without using the Interactive Human-aware Intervention}}
 \begin{tabular}{|l|l|l|l|l|l|l|l|l|l|l|}
 \hline
 \multicolumn{1}{|c|}{\multirow{2}{*}{PID}} &
@@ -596,7 +597,6 @@ P8  & 18 & 9  & 12  & 9.3   & 0.8   & -  & -  & -   & -    & -    \\
 P9  & 2  & 21 & 27  & 24    & 4.2   & 14 & 29 & 169 & 66.3 & 39.0 \\
 P10 & -  & -  & -   & -     & -     & 9  & 44 & 158 & 81.2 & 39.2 \\ \hline
 \end{tabular}
-\caption{Frequency, minimum, maximum, mean and std. deviation number of moves in users' solutions for the Rush Hour planning tasks P1 through P10 \textbf{solved without using the Interactive Human-aware Intervention}}
 \label{tab:usersolutions}
 \end{table}
 
@@ -624,6 +624,7 @@ Figure \ref{fig:phase1split} illustrates the percentage split between unsafe and
 Figure \ref{fig:phase2split} illustrates the percentage split for the condition group. 
 
 \begin{table}[tpb]
+\caption{Frequency, minimum, maximum, mean and std. deviation number of moves in users' solutions for the Rush Hour planning tasks P1 through P13 \textbf{solved using the Interactive Human-aware Intervention}}
 \begin{tabular}{|l|l|l|l|l|l|l|l|l|l|l|}
 \hline
 \multirow{2}{*}{PID} & \multicolumn{5}{c|}{Safe Solutions}  & \multicolumn{5}{c|}{Unsafe Solutions} \\ \cline{2-11} 
@@ -642,7 +643,6 @@ P11                  & 1     & 61  & 61  & 61   & -         & 2      & 50  & 95 
 P12                  & 1     & 41  & 41  & 41   & -         & -      & -   & -   & -     & -        \\
 P13                  & 6     & 24  & 40  & 29.5 & 6.3       & 6      & 30  & 55  & 41.2  & 9.6      \\ \hline
 \end{tabular}
-\caption{Frequency, minimum, maximum, mean and std. deviation number of moves in users' solutions for the Rush Hour planning tasks P1 through P13 \textbf{solved using the Interactive Human-aware Intervention}}
 \label{tab:usersolutionsphase2}
 \end{table}
 
@@ -667,6 +667,7 @@ We adopt the same principle to discuss the solutions the human users produced in
 In both cases we use an automated planner to find the cost optimal solutions to the Rush Hour planning tasks.
 
 \begin{table}[tpb]
+\caption{Optimal costs for the Rush Hour planning tasks $P_{observer}$ and $P_{user}$ optimized for number of moves and number of cars. $P_{observer}$ finds solutions without moving the forbidden vehicle. $P_{user}$ may find a shorter solution while moving the forbidden vehicle.}
 \begin{tabular}{|l|c|c|c|c|}
 \hline
 \multirow{2}{*}{PID} & \multicolumn{2}{l|}{Number of Moves} & \multicolumn{2}{l|}{Number of Cars} \\ \cline{2-5} 
@@ -685,7 +686,6 @@ P11 & 26   & 26     & 7	   & 7		\\
 P12 & 17   & 17     & 8    & 8		\\
 P13 & 21   & 21	    & 8	   & 8		\\	\hline
 \end{tabular}
-\caption{Optimal costs for the Rush Hour planning tasks $P_{observer}$ and $P_{user}$ optimized for number of moves and number of cars. $P_{observer}$ finds solutions without moving the forbidden vehicle. $P_{user}$ may find a shorter solution while moving the forbidden vehicle.}
 \label{tab:optimals}
 \end{table}
 
@@ -738,6 +738,7 @@ Table \ref{tab:solvergroupsphase1} summarizes the mean solution length in number
 There were 46 users in the fast group, 42 in the medium and 48 in the slow group. 
 
 \begin{table}[tpb]
+\caption{ The mean number of moves and the frequency of forbidden moves in fast, medium and slow solution groups, when the Rush Hour planning task is \textbf{solved without hints}}
 \begin{tabular}{|l|l|l|l|l|l|l|}
 \hline
 \multicolumn{1}{|c|}{\multirow{2}{*}{PID}} &
@@ -762,7 +763,6 @@ P8  & 9  (0)  & 0  & 9 (0)  & 0  & 10  (1.1) & 0  \\
 P9  & 27.8 (3.8) & 8  & 48.6 (10.0) & 12 & 99   (38.7) & 28 \\ 
 P10 & 50.3 (7.8) & 11 & 66  (6.9)  & 14 & 127.3 (32.7) & 46 \\ \hline
 \end{tabular}
-\caption{ The mean number of moves and the frequency of forbidden moves in fast, medium and slow solution groups, when the Rush Hour planning task is \textbf{solved without hints}}
 \label{tab:solvergroupsphase1}
 \end{table}
 
@@ -801,6 +801,7 @@ This observation is the same for solving the Rush Hour planning problem with and
 
 
 \begin{table}[tpb]
+\caption{ The mean number of moves and the frequency of forbidden moves in fast, medium and slow solution groups when the Rush Hour planning task is \textbf{solved with hints}. A hyphen (-) indicates that the users who solved that puzzle did not see any hints}
 \begin{tabular}{|l|l|l|l|l|l|l|}
 \hline
 \multicolumn{1}{|c|}{\multirow{2}{*}{PID}} &
@@ -828,7 +829,6 @@ P11 & -          & - & -           & - & 68.7 (23.5) & 5  \\ %\hline
 P12 & -          & - & -           & - & 41          & 0  \\ %\hline
 P13 & 25 (1.7)   & 0 & 31.7 (3.3)  & 2 & 44.4 (7.8)  & 17 \\ \hline
 \end{tabular}
-\caption{ The mean number of moves and the frequency of forbidden moves in fast, medium and slow solution groups when the Rush Hour planning task is \textbf{solved with hints}. A hyphen (-) indicates that the users who solved that puzzle did not see any hints}
 \label{tab:solvergroupsphase2}
 \end{table}
 
@@ -854,6 +854,7 @@ Figure~\ref{fig:speedrequest} illustrates the request frequency distribution wit
 
 
 \begin{table}[tpb]
+\caption{Number of times each hint was selected by users in the slow, medium and fast solution groups}
 \begin{tabular}{|l|cccccc|}
 \hline
 \multirow{2}{*}{Speed} & \multicolumn{6}{c|}{Hint} \\ \cline{2-7} 
@@ -862,7 +863,7 @@ Slow & 57 & 36 & 10 & 131 & 14 & 73 \\ \hline
 Medium & 23 & 9 & 17 & 120 & 5 & 42 \\ \hline
 Fast & 18 & 11 & 3 & 90 & 0 & 32 \\ \hline
 \end{tabular}
-\caption{Number of times each hint was selected by users in the slow, medium and fast solution groups}
+
 \label{tab:speedsandrequests}
 \end{table}
 
@@ -883,6 +884,7 @@ For type E, the least requested hint is ``Show the vehicles that must be moved''
 The ``Undo'' option was triggered for all three planning tasks.
 Figure~\ref{fig:groupandrequest} illustrates the request frequency distribution with the error bars.
 \begin{table}[tpb]
+\caption{Number of times each hint was selected by users in the Rush Hour planning task types E, M, C}
 \begin{tabular}{|l|cccccc|}
 \hline
 \multirow{2}{*}{Type} & \multicolumn{6}{c|}{Selected Hint} \\ \cline{2-7} 
@@ -891,7 +893,6 @@ E & 40 & 18 & 6 & 145 & 12 & 66 \\ \hline
 M & 31 & 13 & 6 & 100 & 2 & 38 \\ \hline
 C & 27 & 25 & 18 & 96 & 5 & 43 \\ \hline
 \end{tabular}
-\caption{Number of times each hint was selected by users in the Rush Hour planning task types E, M, C}
 \label{tab:groupsandrequests}
 \end{table}
 
@@ -903,6 +904,7 @@ C & 27 & 25 & 18 & 96 & 5 & 43 \\ \hline
 \end{figure}
 
 \begin{table}[tpb]
+\caption{The total number of hints requested from each type sorted by the request number - part 1}
 \resizebox{\columnwidth}{!}{% 
 \begin{tabular}{|l|llllllllllllllllllll|}
 \hline
@@ -917,12 +919,12 @@ Restart & 2 & 6 & 2 & 4 & 5 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 
 Total & 91 & 80 & 72 & 60 & 47 & 38 & 30 & 25 & 23 & 21 & 20 & 19 & 17 & 16 & 14 & 13 & 11 & 10 & 10 & 9 \\ \hline
 \end{tabular}%
 }
-\caption{The total number of hints requested from each type sorted by the request number - part 1}
 \label{tab:reqnumberbreakdown1}
 \end{table}
 
 
 \begin{table}[tpb]
+\caption{The total number of hints requested from each type sorted by the request number - part 2}
 \resizebox{\columnwidth}{!}{% 
 \begin{tabular}{|l|rrrrrrrrrrrrrrrrrr|}
 \hline
@@ -936,7 +938,6 @@ Restart & \multicolumn{1}{l}{0} & \multicolumn{1}{l}{0} & \multicolumn{1}{l}{0} 
 Total & 8 & 7 & 7 & 7 & 6 & 5 & 5 & 4 & 4 & 3 & 3 & 2 & 2 & 1 & 1 & 1 & 1 & 1 \\ \hline
 \end{tabular}%
 }
-\caption{The total number of hints requested from each type sorted by the request number - part 2}
 \label{tab:reqnumberbreakdown2}
 \end{table}
 
@@ -1047,14 +1048,18 @@ Then the user requested the ``Show the next best move'' hint 3 times and closer 
 In Section~\ref{sec:relationshipavoidingforbidden}, we conclude that in order help the user avoid the forbidden vehicle, the Interactive Human-aware Intervention agent must direct the user toward the cost optimal solution for the planning task.
 In this section, we evaluate how successful the interactive Human-aware Intervention model has been in moving the user's solution closer to the cost optimal solution using the hints.
 Recall that the hints are properties derived from the cost optimal solution and the fact landmarks of $P_{observer}$.
-We want to address the following questions:
+We want to address the following:
+
+\textbf{Evaluation Questions}
 \begin{enumerate}
 \item Does the Interactive Human-aware Intervention have an effect on the solution length?
 \item Does the Interactive Human-aware Intervention help move the user closer to the optimal solution?
 \item Does seeing a help video affect the solution length?
 \end{enumerate}
 
-We introduce the following evaluation metrics.
+We introduce the following metrics to resolve the evaluation questions.
+
+\textbf{Evaluation Metrics}
 \begin{enumerate}
 \item The number of moves in the human user's solution
 \item The difference from the cost optimal solution
@@ -1064,7 +1069,7 @@ We introduce the following evaluation metrics.
 The definitions for these metrics will be presented later.
 Question 1 is answered using the evaluation metric 1.
 Question 2 is answered using the evaluation metrics 2, 3 and 4.
-Question 3 is answered using the evaluation metrics 1.
+Question 3 is answered using the evaluation metric 1.
 
 For questions 1 and 2, we use the data from the control and condition groups for the planning tasks P1, P2, P4, P6, P7, P8, P9 and P10 for the evaluation.
 We remove the planning tasks P3 and P5 because for those two tasks, the cost optimal solution while moving the forbidden vehicle is shorter than the cost optimal solution without moving the forbidden vehicle.
@@ -1169,36 +1174,32 @@ Figure~\ref{fig:fullhisto} illustrates the frequency probability distribution of
 The data is highly skewed with a skewness factor +3.4.
 \begin{figure}[tpb]
   \centering
-\includegraphics[width=0.7\columnwidth]{img/histo_length.png}
-  \caption{Frequency probability distribution of the number of moves}
+\includegraphics[width=0.8\columnwidth]{img/histo_length.png}
+  \caption{Frequency probability densities for the number of moves distribution}
   \label{fig:fullhisto}
 \end{figure}
-
-We remove 15 data points from the sample (8\%) to reduce the skewness and approximate the distribution of the number of moves to a normal distribution.
-This adjustment resulted in 166 observations for the control and the condition groups.
-The skewness factor of the adjusted sample is +0.89.
-Given the skewness factor and also the sample size 166, greater than the recommended size by the Central Limit Theorem, we assume that this is a normal distribution.
-Figure~\ref{fig:b1} shows the box plot for the distribution of the number of moves before the reduction of observations.
-Figure~\ref{fig:b2} shows the box plot for the same after the reduction.
-We use the adjusted sample for the statistical analyses that follow.
-
-\begin{figure}[tpb]
-\centering
-	\begin{minipage}[b]{0.46\columnwidth}
-	\includegraphics[width=\columnwidth]{img/outliers.png}
-	\caption{Distribution of the number of moves before removing the outliers}			
-	\label{fig:b1}
-	\end{minipage}
-	\quad
-	\begin{minipage}[b]{0.50\columnwidth}
-	\includegraphics[width=\columnwidth]{img/outliers_fixed.png}
-	\caption{Distribution of the number of moves after removing the outliers}
-	\label{fig:b2}
-	\end{minipage}
-\end{figure}
+Because the sample size 181 ($113+68$) is greater than the recommended size by the Central Limit Theorem, we assume that this is a normal distribution.
+%Figure~\ref{fig:b1} shows the box plot for the distribution of the number of moves before the reduction of observations.
+%Figure~\ref{fig:b2} shows the box plot for the same after the reduction.
+%We use the adjusted sample for the statistical analyses that follow.
+%
+%\begin{figure}[tpb]
+%\centering
+%	\begin{minipage}[b]{0.46\columnwidth}
+%	\includegraphics[width=\columnwidth]{img/outliers.png}
+%	\caption{Distribution of the number of moves before removing the outliers}			
+%	\label{fig:b1}
+%	\end{minipage}
+%	\quad
+%	\begin{minipage}[b]{0.50\columnwidth}
+%	\includegraphics[width=\columnwidth]{img/outliers_fixed.png}
+%	\caption{Distribution of the number of moves after removing the outliers}
+%	\label{fig:b2}
+%	\end{minipage}
+%\end{figure}
 
 \subsubsection{Effect on the Number of Moves}
-We address the question ``\textit{Does using the Interactive Human-aware Intervention (i.e., the hints) have an effect on the number of moves''}?
+We address the question ``\textit{Does using the Interactive Human-aware Intervention (i.e., the hints) have an effect on the number of moves between the control and the condition groups''}?
 We propose the following study design.
 \begin{itemize}
 \item \textbf{Dependent variable}: Number of  moves
@@ -1211,25 +1212,26 @@ We propose the following study design.
 \end{itemize}
 
 \noindent In Figure~\ref{fig:lenbypid}, the blue box plots represent the human subjects who used the Interactive Human-aware Intervention, while the red box plots represent the human subjects who did not.
-We see that the median number of moves for planning tasks such as P1, P2, P4, and P6, the human subjects who used the Interactive Human-aware Intervention is higher.
-On the other hand, the median number of moves is lower for the human subjects who solved the planning tasks P10, P7, and P9 using Interactive Human-aware Intervention.
+We see that human subjects who used the Interactive Human-aware Intervention have a higher median number of moves for planning tasks such as P1, P4, and P6, compared to the human subjects who did not use Interactive Human-aware Intervention.
+On the other hand, the median number of moves is lower for the human subjects who solved the planning tasks P10, P2, P7, and P9 using Interactive Human-aware Intervention.
 For the planning task P8, the medians are almost the same between those who used the Interactive Human-aware Intervention and those who did not.
 \begin{figure}[tpb]
   \centering
-\includegraphics[width=0.9\columnwidth]{img/lenbypid.png}
-  \caption{Box plot for the number of moves in the condition and the control group for each planning task}
+\includegraphics[width=\columnwidth]{img/lenbypid.png}
+  \caption{Box plots for the number of moves in the condition (Y) and the control (N) group for each planning task}
   \label{fig:lenbypid}
 \end{figure}
 
 Figure~\ref{fig:lenbytype} shows the effect on the number of moves with the number of moves and planning task type (C, E, M) as factors.
 Here too, the blue box plots represent the human subjects who used the Interactive Human-aware Intervention, while the red box plots represent the human subjects who did not.
 Using the Interactive Human-aware Intervention, human subjects who solved type M planning tasks have been able to reduce the median number of moves.
-In contrast, when using the Interactive Human-aware Intervention on type E and C puzzles the median number of moves have increased.
+In contrast, when using the Interactive Human-aware Intervention on type C puzzles the median number of moves have increased.
+For type E planning tasks, the median number of moves is almost the same between those who used the Interactive Human-aware Intervention and those who did not.
 
 \begin{figure}[tpb]
   \centering
-\includegraphics[width=0.7\columnwidth]{img/lenbytype.png}
-  \caption{Box plot for the number of moves in the condition and the control group for each planning task type}
+\includegraphics[width=0.8\columnwidth]{img/lenbytype.png}
+  \caption{Box plots for the number of moves in the condition (Y) and the control group (N) for each planning task type}
   \label{fig:lenbytype}
 \end{figure}
 
@@ -1237,39 +1239,42 @@ We verify whether or not the observed differences in the number of moves between
 Let $\mu_N$ be the mean number of moves in a solution from the control group (did not the Interactive Human-aware Intervention) and $\mu_H$ be the mean number of moves in a solution from the condition group (used the Interactive Human-aware Intervention).
 Then, we define the null ($H_0$) and the alternative ($H_A$) hypotheses as follows.
 \begin{itemize}
-\item $H_0: \mu_N = \mu_H$, the means of the control and the condition group are the same.
-\item $H_A: \mu_N \neq \mu_H$, the means of the control and the condition group are different.
+\item $H_0: \mu_N = \mu_H$, the means of the control and the condition groups are the same.
+\item $H_A: \mu_N \neq \mu_H$, the means of the control and the condition groups are different.
 \end{itemize}
 Throughout, we use two-way ANOVA with the type \RomanNumeralCaps{3} correction to account for the unbalanced group design with $\alpha=0.05$.
 
-When considering the planning task id and the usage of the Interactive Human-aware Intervention as factors, ANOVA shows that the effect of the planning task id on the number of moves is significant ($F<<<0, df=7$).
-However, the effect of the usage of the Interactive Human-aware Intervention is not significant ($F=0.52, df=1$).
-The interaction effect of the usage of the Human-aware Intervention and the planning task id is also not significant ($F=0.31, df=7$).
-However, the Levene's Test to test the homogeneity of variance fails ($F=0.0007, df=15$) when considering the factors planning task id and the usage of the Human-aware Intervention on the number of moves.
+Considering the planning task id and the usage of the Interactive Human-aware Intervention as factors, ANOVA shows that the effect of the planning task id on the number of moves is significant ($p-value<<<0, F=14.0 ,df=7$).
+However, the effect of the usage of the Interactive Human-aware Intervention is not significant on the number of moves ($p-value=0.77, F=0.08 ,df=1$).
+The interaction effect of the usage of the Human-aware Intervention and the planning task id is also not significant ($p-value=0.96,F=0.28, df=7$).
+However, the Levene's Test to test the homogeneity of variance fails ($p-value<<<0, F=4.27, df=15$) when considering the factors planning task id and the usage of the Human-aware Intervention on the number of moves.
 The homogeneity of variance is a critical requirement for the ANOVA test.
 Furthermore the levels in the independent variable task id (P1, P2, $\ldots$) is associated with the levels of the independent variable type (C, E, M).
 For example, type C contains task ids P2, P4, P6, P8.
 Therefore, we can not report ANOVA considering task id as a factor.
-Because of these concerns, for the design that evaluates the effect on task id on on the number of moves, we ignore the results and do not draw any conclusions from the analysis.
+Because of these concerns, for the design that evaluates the effect on task id on the number of moves, we ignore the results and do not draw any conclusions from the analysis.
 
-In contrast, considering the planning task type and the usage of the Interactive Human-aware Intervention as factors, the Levene's Test to test the homogeneity of variance passes ($F=0.43, df=5)$.
+In contrast, considering the planning task type and the usage of the Interactive Human-aware Intervention as factors, the Levene's Test to test the homogeneity of variance passes ($p-value=0.41, F=1.0, df=5)$.
 Therefore, we report the conclusions from this design.
-The effect of the planning task type on the number of moves is significant ($F<<<0, df=2$).
-However, the effect of the usage of the Interactive Human-aware Intervention is not significant ($F=0.18, df=1$).
-The interaction effect of the usage of the Human-aware Intervention and the planning task type on the number of moves is also not significant ($F=0.07, df=2$) at $\alpha=0.05$.
-However, this interaction effect becomes significant at $\alpha=0.1$.
+The effect of the planning task type on the number of moves is not significant ($p-value=0.62, F=0.48, df=2$).
+The effect of the usage of the Interactive Human-aware Intervention on the number of moves is not significant ($p-value=0.61, F=0.25,  df=1$).
+The interaction effect of the usage of the Human-aware Intervention and the planning task type on the number of moves is also not significant ($p-value=0.74, F=0.30, df=2$) at $\alpha=0.05$.
 Therefore, at $\alpha=0.05$ we do not reject $H_0$ with respect to the usage of Interactive Human-aware Intervention and its effect on the number of moves.
 
 
 \subsubsection{Effect on the Difference from the Number of Moves in the Cost Optimal Solution}
-We address the question ``\textit{Does using the Interactive Human-aware Intervention (i.e., the hints) have an effect on the difference from the optimal''}?
-This metric indicates how close the human user's solution has got to the cost optimal solution for the planning task in terms of the number of moves.
+We address the question ``\textit{Does using the Interactive Human-aware Intervention have an effect on the difference from the number of moves in the optimal solution''}?
+This metric measures how close the human user's solution has got to the cost optimal solution for the planning task generated by an automated planner measured in the number of moves.
 We propose the following study design.
 \begin{itemize}
-\item \textbf{Dependent variable}: 
-\begin{multline}
-\textup{Difference from the optimal} = \textup{Number of  moves in the user's solution}\\ - \textup{Number of moves in the cost optimal solution}
-\end{multline}
+\item \textbf{Dependent variable}: \\
+Let\\
+ $D_i$ = \textup{Difference from the cost optimal solution}\\
+ $M_u$ = \textup{Number of moves in the human user's solution}\\
+ $M_c$ = \textup{Number of moves in the cost optimal solution generated by a planner}
+ \begin{align}
+	D_i = M_u - M_c
+ \end{align}
 \item \textbf{Independent variables:}
 \begin{itemize}
 \item Used the Interactive Human-aware Intervention (Yes / No)
@@ -1278,30 +1283,41 @@ We propose the following study design.
 \end{itemize}
 \end{itemize}
 
-In Figure~\ref{fig:lenoptbypid}, the blue box plots represent the human subjects who used the Interactive Human-aware Intervention, while the red box plots represent the human subjects who did not.
-Similar to the case where the number of moves was the dependent variable, the median is higher for the human subjects who used the Interactive Human-aware Intervention for the planning tasks P1, P2, P4, and P6.
-The human subjects who solved the planning tasks P10, P7, and P9 with the Interactive Human-aware Intervention resulted in a lower median.
-For the planning task P8, there seems to be no difference between the medians of two groups.
+Figure~\ref{fig:lenopthisto} illustrates the frequency probability distribution of the $D_i$ in the solutions produced by the human users in the control and the condition groups. 
+The data is highly skewed with a skewness factor +3.4.
 \begin{figure}[tpb]
   \centering
-\includegraphics[width=0.9\columnwidth]{img/lenoptbypid.png}
+\includegraphics[width=0.8\columnwidth]{img/histo_lenopt.png}
+  \caption{Frequency probability densities for the $D_i$ distribution}
+  \label{fig:lenopthisto}
+\end{figure}
+Because the sample size 181 is greater than the recommended size by the Central Limit Theorem, we assume that this is a normal distribution.
+
+In Figure~\ref{fig:lenoptbypid}, the blue box plots represent the human subjects who used the Interactive Human-aware Intervention, while the red box plots represent the human subjects who did not.
+Similar to the case where the number of moves was the dependent variable, the median $D_i$ is higher for the human subjects who used the Interactive Human-aware Intervention for the planning tasks P1, P4, and P6.
+The median $D_i$ is lower for human subjects who solved the planning tasks P10, P2, P7, and P9 using the Interactive Human-aware Intervention.
+For the planning task P8, there seems to be no difference between the $D_i$ medians of the two groups.
+\begin{figure}[tpb]
+  \centering
+\includegraphics[width=\columnwidth]{img/lenoptbypid.png}
   \caption{Box plot for the difference from the optimal in the condition and the control group for each planning task id}
   \label{fig:lenoptbypid}
 \end{figure}
 
-Figure~\ref{fig:lenoptbytype} shows the effect on the  dependent variable by planning task type (C, E, M).
-Using the Interactive Human-aware Intervention, human subjects who solved type M planning tasks have been able to reduce the median difference to the optimal.
-In contrast, when using the Interactive Human-aware Intervention on type E and C planning task, the median differences to the optimal have increased.
+Figure~\ref{fig:lenoptbytype} shows the effect on the  dependent variable $D_i$ by planning task type (C, E, M).
+Using the Interactive Human-aware Intervention, human subjects who solved type M planning tasks have been able to reduce the median $D_i$.
+In contrast, when using the Interactive Human-aware Intervention on type C planning task, the median $D_i$ has increased.
+There seems to be no difference between the $D_i$ medians of those two solved type E planning tasks using the Interactive Human-aware Intervention and those who did not use the Interactive Human-aware Intervention.
 
 \begin{figure}[tpb]
   \centering
-\includegraphics[width=0.7\columnwidth]{img/lenoptbytype.png}
+\includegraphics[width=0.9\columnwidth]{img/lenoptbytype.png}
   \caption{Box plot for the difference from the optimal in the condition and the control group for each planning task type}
   \label{fig:lenoptbytype}
 \end{figure}
 
 We verify whether or not the observations for dependent variable between the control and the condition group are statistically significant.
-Let $\mu_N$ be the mean difference to the optimal in a solution from the control group (did not the Interactive Human-aware Intervention) and $\mu_H$ be the mean difference to the optimal in a solution from the condition group (used the Interactive Human-aware Intervention).
+Let $\mu_N$ be the mean difference to the optimal (i.e., mean of $D_i$) in the solutions from the control group which did not the Interactive Human-aware Intervention) and $\mu_H$ be the mean difference to the optimal in a solution (i.e., mean of $D_i$) from the condition group which used the Interactive Human-aware Intervention.
 Then, we define the null ($H_0$) and the alternative ($H_A$) hypotheses as follows.
 \begin{itemize}
 \item $H_0: \mu_N = \mu_H$, the means of the control and the condition group are the same.
@@ -1309,16 +1325,15 @@ Then, we define the null ($H_0$) and the alternative ($H_A$) hypotheses as follo
 \end{itemize}
 Throughout, we use two-way ANOVA with the type \RomanNumeralCaps{3} correction to account for the unbalanced group design with $\alpha=0.05$.
 
-As in the case where the dependent variable is the number of moves, the Levene's Test to test the homogeneity of variance fails ($F=0.0007, df=15$) for the design where we consider the planning task id and the usage of the Interactive Human-aware Intervention as factors.
+As in the case where the dependent variable is the number of moves, the Levene's Test to test the homogeneity of variance fails ($p-value<<< 0, F=4.3, df=15$) for the design where we consider the planning task id and the usage of the Interactive Human-aware Intervention as factors.
 Therefore, we ignore the results and do not draw any conclusions from the ANOVA.
 
-In contrast, considering the planning task type and the usage of the Interactive Human-aware Intervention as factors, the Levene's Test to test the homogeneity of variance passes ($F=0.41, df=5)$.
+In contrast, considering the planning task type and the usage of the Interactive Human-aware Intervention as factors, the Levene's Test to test the homogeneity of variance passes ($p-value=0.69, F=0.62, df=5)$.
 Therefore, we report the conclusions from this design.
-The effect of the planning task type on the differences to the optimal is significant ($F=0.001, df=2$).
-However, the effect of the usage of the Interactive Human-aware Intervention on the differences to the optimal is not significant ($F=0.98, df=1$).
-The interaction effect of the usage of the Human-aware Intervention and the planning task type on the differences to the optimal is also not significant ($F=0.01, df=2$) at $\alpha=0.05$.
-However, this interaction effect becomes significant at $\alpha=0.1$.
-Therefore, at $\alpha=0.05$ we do not reject $H_0$ with respect to the usage of Interactive Human-aware Intervention and its effect on the differences to the optimal.
+The effect of the planning task type on $D_i$ is not significant ($p-value=0.68, F=0.17, df=2$).
+The effect of the usage of the Interactive Human-aware Intervention on the differences to the optimal is not significant ($p-value=0.63, F=0.46, df=1$).
+The interaction effect of the usage of the Human-aware Intervention and the planning task type on $D_i$ is also not significant ($p-value=0.76, F=0.27, df=2$) at $\alpha=0.05$.
+Therefore, at $\alpha=0.05$ we do not reject $H_0$ with respect to the usage of Interactive Human-aware Intervention and its effect on the solution length differences to the optimal solution produced by an automated planner.
 
 
 
@@ -1336,13 +1351,35 @@ Let us assume L1, L2 and L3 are the landmarks for the planning task.
   \caption{Plans produced by an automated planner (top), User X (middle) and User Y (bottom) achieving the same three landmarks.}
   \label{fig:latest}
 \end{figure}
+
+\begin{table}[tpb]
+\centering
+\caption{Latest Landmark Achievement Times}
+\resizebox{0.25\textwidth}{!}{%
+\begin{tabular}{|l|l|l|l|}
+\hline
+\multicolumn{1}{|c|}{\multirow{2}{*}{Plan}} & \multicolumn{3}{c|}{Landmark} \\ \cline{2-4} 
+\multicolumn{1}{|c|}{} & L1 & L2 & L3 \\ \hline
+Planner & 3 & 7 & 8 \\ \hline
+User X & 11 & 13 & 17 \\ \hline
+User Y & 10 & 16 & 22 \\ \hline
+\end{tabular}%
+}
+\label{tab:latest}
+\end{table}
+
 Table~\ref{tab:latest} shows the latest time in number of steps each landmark is achieved.
 Note that User Y has initially achieved the L1 at step 8 but has lost and regained it at step 10.
 Therefore the latest landmark achievement time for L1 for User Y is 10.
-We compute the landmark achievement metric as follows:
-\begin{equation}
-\textup{landmark achievement} = \frac{\sum_{Li \in Landmarks} \left | (Li \textup{ latest achivement for user} - Li  \textup{ latest achievement for planner}) \right |}{|Landmarks|} 
-\end{equation}
+We compute the landmark achievement metric $\mathcal{L}_A$ as follows:
+
+Let\\
+ $L_{i}^u$ = \textup{Latest time the user achieved the landmark $L_i$ in number of steps}\\
+ $L_{i}^p$ = \textup{Latest time the automated planner achieved the landmark $L_i$ in number of steps}
+ \begin{align}
+	\mathcal{L}_A = \frac{\sum_{L_i \in Landmarks} \left | (L_i^u - L_i^p) \right |}{|Landmarks|} 
+ \end{align}
+ 
 For the example in Figure~\ref{fig:latest}:
 \begin{itemize}
 \item landmark achievement for User X $= |(11-3)| + |(13-7)| + |(17-8)| = 23/3 \approx 8 steps$
@@ -1356,61 +1393,46 @@ The closer the user's solution is to the solution of the planner, the smaller th
 Thus, the metric indicates whether the user is getting closer to the optimal solution to the planning task or not.
 Therefore, we use the landmark achievement metric to evaluate whether the Interactive Human-aware Intervention is helpful in moving the human user closer to the optimal solution produced by a planner.
 
-\begin{table}[tpb]
-\centering
-\resizebox{0.25\textwidth}{!}{%
-\begin{tabular}{|l|l|l|l|}
-\hline
-\multicolumn{1}{|c|}{\multirow{2}{*}{Plan}} & \multicolumn{3}{c|}{Landmark} \\ \cline{2-4} 
-\multicolumn{1}{|c|}{} & L1 & L2 & L3 \\ \hline
-Planner & 3 & 7 & 8 \\ \hline
-User X & 11 & 13 & 17 \\ \hline
-User Y & 10 & 16 & 22 \\ \hline
-\end{tabular}%
-}
-\caption{Latest Landmark Achievement Times}
-\label{tab:latest}
-\end{table}
 
-The control group has 113 observations.
-The condition group has 68 observations.
-Figure~\ref{fig:histach} illustrates the frequency probability distribution of the landmark achievement in the solutions produced by the human users in the control and the condition groups. 
-The data is highly skewed with a skewness factor +4.2.
 \begin{figure}[tpb]
   \centering
-\includegraphics[width=0.7\columnwidth]{img/histo_ach.png}
+\includegraphics[width=\columnwidth]{img/histo_ach.png}
   \caption{Frequency probability distribution of the landmark achievement}
   \label{fig:histach}
 \end{figure}
+Figure~\ref{fig:histach} illustrates the frequency probability distribution of the landmark achievement in the solutions produced by the human users in the control and the condition groups. 
+The data is highly skewed with a skewness factor +4.2.
+Given the sample size 181 being greater than the recommended size by the Central Limit Theorem, we assume that this is a normal distribution.
 
-We remove 24 data points from the sample (13\%) to reduce the skewness and approximate the distribution of the landmark achievement to a normal distribution.
-This adjustment resulted in 159 observations for the control and the condition groups.
-The skewness factor of the adjusted sample is +0.95.
-Given the skewness factor and also the sample size 159, greater than the recommended size by the Central Limit Theorem, we assume that this is a normal distribution.
-Figure~\ref{fig:b3} shows the box plot for the distribution of the landmark achievement before the reduction of observations.
-Figure~\ref{fig:b4} shows the box plot for the same after the reduction.
-We use the adjusted sample for the statistical analyses that follow.
 
-\begin{figure}[tpb]
-\centering
-	\begin{minipage}[b]{0.46\columnwidth}
-	\includegraphics[width=\columnwidth]{img/outliers_ach1.png}
-	\caption{Distribution of the landmark achievement before removing the outliers}			
-	\label{fig:b3}
-	\end{minipage}
-	\quad
-	\begin{minipage}[b]{0.50\columnwidth}
-	\includegraphics[width=\columnwidth]{img/outliers_ach2.png}
-	\caption{Distribution of the landmark achievement after removing the outliers}
-	\label{fig:b4}
-	\end{minipage}
-\end{figure}
+%We remove 24 data points from the sample (13\%) to reduce the skewness and approximate the distribution of the landmark achievement to a normal distribution.
+%This adjustment resulted in 159 observations for the control and the condition groups.
+%The skewness factor of the adjusted sample is +0.95.
+%Given the skewness factor and also the sample size 159, greater than the recommended size by the Central Limit Theorem, we assume that this is a normal distribution.
+%Figure~\ref{fig:b3} shows the box plot for the distribution of the landmark achievement before the reduction of observations.
+%Figure~\ref{fig:b4} shows the box plot for the same after the reduction.
+%We use the adjusted sample for the statistical analyses that follow.
+%
+%\begin{figure}[tpb]
+%\centering
+%	\begin{minipage}[b]{0.46\columnwidth}
+%	\includegraphics[width=\columnwidth]{img/outliers_ach1.png}
+%	\caption{Distribution of the landmark achievement before removing the outliers}			
+%	\label{fig:b3}
+%	\end{minipage}
+%	\quad
+%	\begin{minipage}[b]{0.50\columnwidth}
+%	\includegraphics[width=\columnwidth]{img/outliers_ach2.png}
+%	\caption{Distribution of the landmark achievement after removing the outliers}
+%	\label{fig:b4}
+%	\end{minipage}
+%\end{figure}
 
 \subsubsection{Effect on the Latest Time the Landmarks Are Achieved}
 We address the question ``Does using the Interactive Human-aware Intervention have an effect on the landmark achievement?''
 We propose the following study design.
 \begin{itemize}
-\item \textbf{Dependent variable}: landmark achievement
+\item \textbf{Dependent variable}: landmark achievement ($\mathcal{L}_A$)
 \item \textbf{Independent variables:}
 \begin{itemize}
 \item Used the Interactive Human-aware Intervention (Yes / No)
@@ -1419,51 +1441,50 @@ We propose the following study design.
 \end{itemize}
 \end{itemize}
 
-In Figure~\ref{fig:achbypid}, the blue box plots represent the human subjects using the Interactive Human-aware Intervention, while the red box plots represent the human subjects who do not.
-The median landmark achievement for the human subjects using the Interactive Human-aware Intervention for the planning tasks P1, P2, P4, and P6 is higher.
-The median landmark achievement for P10 when using Interactive Human-aware Intervention is slightly higher.
-The human subjects who solved the planning tasks P7, and P9 with the Interactive Human-aware Intervention reported lower median landmark achievement.
-For the planning task P8, there is a slight reduction in the median landmark achievement when using Interactive Human-aware Intervention.
 \begin{figure}[tpb]
   \centering
-\includegraphics[width=0.9\columnwidth]{img/achbypid.png}
+\includegraphics[width=\columnwidth]{img/achbypid.png}
   \caption{Box plot for the landmark achievement in the condition and the control group for each planning task id}
   \label{fig:achbypid}
 \end{figure}
+In Figure~\ref{fig:achbypid}, the blue box plots represent the human subjects using the Interactive Human-aware Intervention, while the red box plots represent the human subjects who do not.
+The median $\mathcal{L}_A$ for the human subjects using the Interactive Human-aware Intervention for the planning tasks P1, P4, and P6 are higher.
+The human subjects who solved the planning tasks P2, P7, P9, P10 with the Interactive Human-aware Intervention reported lower median landmark achievement.
+For the planning task P8, there seems to be no difference in the median $\mathcal{L}_A$ when using Interactive Human-aware Intervention compared to not using Interactive Human-aware Intervention.
+
 
 Figure~\ref{fig:achbytype} shows the effect on the dependent variable by planning task type (C, E, M).
-Using the Interactive Human-aware Intervention, human subjects who solved type M planning tasks have been able to reduce the median landmark achievement.
-In contrast, when using the Interactive Human-aware Intervention on type E and C planning task, the median landmark achievement have increased.
+Using the Interactive Human-aware Intervention, human subjects who solved type M planning tasks have been able to reduce the median $\mathcal{L}_A$.
+In contrast, when using the Interactive Human-aware Intervention on type E and C planning task, the median $\mathcal{L}_A$ have increased.
 \begin{figure}[tpb]
   \centering
-\includegraphics[width=0.7\columnwidth]{img/achbytype.png}
+\includegraphics[width=0.9\columnwidth]{img/achbytype.png}
   \caption{Box plot for the landmark achievement in the condition and the control group for each planning task type}
   \label{fig:achbytype}
 \end{figure}
 
 We verify whether or not the observations for dependent variable between the control and the condition group are statistically significant.
-Let $\mu_N$ be the mean landmark achievement in a solution from the control group (did not the Interactive Human-aware Intervention) and $\mu_H$ be the mean landmark achievement in a solution from the condition group (used the Interactive Human-aware Intervention).
+Let $\mu_N$ be the mean $\mathcal{L}_A$ in a solution from the control group (did not the Interactive Human-aware Intervention) and $\mu_H$ be the mean $\mathcal{L}_A$ in a solution from the condition group (used the Interactive Human-aware Intervention).
 Then, we define the null ($H_0$) and the alternative ($H_A$) hypotheses as follows.
 \begin{itemize}
-\item $H_0: \mu_N = \mu_H$, the means of the control and the condition group are the same.
-\item $H_A: \mu_N \neq \mu_H$, the means of the control and the condition group are different.
+\item $H_0: \mu_N = \mu_H$, the mean $\mathcal{L}_A$ values of the control and the condition group are the same.
+\item $H_A: \mu_N \neq \mu_H$, the mean $\mathcal{L}_A$ values of the control and the condition group are different.
 \end{itemize}
 Throughout, we use two-way ANOVA with the type \RomanNumeralCaps{3} correction to account for the unbalanced group design with $\alpha=0.05$.
 
-When using Interactive Human-aware Intervention and the planning task id as factors to the dependent variable landmark achievement, the Levene's Test to test the homogeneity of variance fails ($F=0.0001, df=15$) for the design.
+
+When using Interactive Human-aware Intervention and the planning task id as factors of the dependent variable $\mathcal{L}_A$, the Levene's Test to test the homogeneity of variance fails ($p-value<<<0, F=5.08, df=15$) for the design.
 Furthermore the levels in the independent variable task id (P1, P2, $\ldots$) is associated with the levels of the independent variable type (C, E, M).
 For example, type C contains task ids P2, P4, P6, P8.
 Therefore, we can not report ANOVA considering task id as a factor.
 Because of these reasons, we ignore the results and do not draw any conclusions from the ANOVA.
 
-In contrast, considering the planning task type and the usage of the Interactive Human-aware Intervention as factors, the Levene's Test to test the homogeneity of variance passes ($F=0.14, df=5)$.
+In contrast, considering the planning task type and the usage of the Interactive Human-aware Intervention as factors, the Levene's Test to test the homogeneity of variance passes ($p-value=0.65, F=0.67, df=5)$.
 Therefore, we report the conclusions from this design.
-The effect of the planning task type on the landmark achievement is significant ($F=0.003, df=2$).
-The effect of the usage of the Interactive Human-aware Intervention on the landmark achievement is also significant ($F=0.04, df=1$) at $\alpha=0.05$.
-The interaction effect of the usage of the Human-aware Intervention and the planning task type on the landmark achievement is not significant ($F=0.64, df=2$).
-Therefore, at $\alpha=0.05$ we reject $H_0$ with respect to landmark achievement considering the usage of Interactive Human-aware Intervention and the planning task type.
-We conduct TukeyHSD post-hoc analysis to identify whether the landmark achievement difference changes significantly based on whether the subject use Interactive Human-aware Intervention or not (i.e. the combinations, Y:C-N:C, Y:M-N:M and Y:E-N:E). 
-The result show that the differences in the mean landmark achievement is not significant for any of the three categories.
+The effect of the planning task type on the $\mathcal{L}_A$ is not significant ($p-value=0.86, F=0.15, df=2$).
+The effect of the usage of the Interactive Human-aware Intervention on the $\mathcal{L}_A$ is also not significant ($p-value=0.83, F=0.05, df=1$) at $\alpha=0.05$.
+The interaction effect of the usage of the Human-aware Intervention and the planning task type on the landmark achievement is not significant ($p-value=0.91, F=0.09, df=2$).
+Therefore, at $\alpha=0.05$ we do not reject $H_0$ with respect to $\mathcal{L}_A$ for the design that considers the factors usage of Interactive Human-aware Intervention and the planning task type.
 
 
 \subsubsection{Computing the Evaluation Metric and the Data Preparation for Evaluation Question 2}
@@ -1473,19 +1494,19 @@ User X has also achieved each landmark only once.
 User Y has achieved the landmark L1 twice: initially achieved the at step 8 but has lost and regained it at step 10.
 Therefore, Y has regained the landmark once.
 Additionally Y has achieved the landmarks L2 and L3 only once.
-We compute the landmark regain metric as follows:
+We compute the landmark regain metric ($\mathcal{L}_R$) as follows:
 \begin{equation}
-\textup{landmark regain} = \sum_{Li \in Landmarks} \left | (\textup{number of times } Li \textup{ appears in the solution} - 1) \right |
+\mathcal{L}_R = \sum_{Li \in Landmarks} \left | (\textup{number of times } Li \textup{ appears in the solution} - 1) \right |
 \end{equation}
 For the example in Figure~\ref{fig:latest}:
 \begin{itemize}
-\item landmark regain for User X $= |(1-1)| + |(1-1)| + |(1-1)| = 0$
-\item landmark regain for user Y $=|(2-1)| + |(1-1)| + |(1-1)| = 1$
+\item $\mathcal{L}_R$ for User X $= |(1-1)| + |(1-1)| + |(1-1)| = 0$
+\item $\mathcal{L}_R$ for user Y $=|(2-1)| + |(1-1)| + |(1-1)| = 1$
 \end{itemize}
 In Section~\ref{sec:usingthelandmarks} we saw that the human users who achieve the landmarks for a planning task similar to the automated planner, find the solution to the planning task faster compared to human users who do not.
 The landmark achievement metric captures this intuition.
 Furthermore, for the Rush Hour planning tasks the cost optimal solutions achieve each landmark only once in most cases.
-When the user gains a landmark and loses it by executing another action, it indicates that the user is getting away from the solution.
+When the user gains a landmark and loses it by executing another action, it indicates that the user is moving away from the solution.
 The closer the user's solution is to the solution of the planner, the smaller the landmark regain value will be.
 Thus, the metric indicates whether the user is getting closer to the optimal solution to the planning task or not.
 Therefore, we use the landmark regain metric to evaluate whether the Interactive Human-aware Intervention is helpful in moving the human user closer to the optimal solution.
@@ -1502,36 +1523,33 @@ The data is highly skewed with a skewness factor +3.5.
   \label{fig:histreg}
 \end{figure}
 
-We remove 18 data points from the sample (10\%) to reduce the skewness and approximate the distribution of the landmark achievement to a normal distribution.
-This adjustment resulted in 163 observations for the control and the condition groups.
-The skewness factor of the adjusted sample is +1.3
-There are many zeros in the data set, indicating that many subjects achieved the landmarks only once.
-Given the sample size 163 being greater than the recommended size by the Central Limit Theorem, we assume that this is a normal distribution.
-Figure~\ref{fig:b5} shows the box plot for the distribution of the landmark achievement before the reduction of observations.
-Figure~\ref{fig:b6} shows the box plot for the same after the reduction.
-We use the adjusted sample for the statistical analyses that follow.
-
-\begin{figure}[tpb]
-\centering
-	\begin{minipage}[b]{0.46\columnwidth}
-	\includegraphics[width=\columnwidth]{img/outliers_regain.png}
-	\caption{Distribution of the landmark regain before removing the outliers}			
-	\label{fig:b5}
-	\end{minipage}
-	\quad
-	\begin{minipage}[b]{0.50\columnwidth}
-	\includegraphics[width=\columnwidth]{img/outliers_regain_fixed.png}
-	\caption{Distribution of the landmark regain after removing the outliers}
-	\label{fig:b6}
-	\end{minipage}
-\end{figure}
+There are many zeros in the data set, indicating that many subjects achieved the landmarks for their planning problem only once.
+Given the sample size 181 being greater than the recommended size by the Central Limit Theorem, we assume that this is a normal distribution.
+%Figure~\ref{fig:b5} shows the box plot for the distribution of the landmark achievement before the reduction of observations.
+%Figure~\ref{fig:b6} shows the box plot for the same after the reduction.
+%We use the adjusted sample for the statistical analyses that follow.
+%
+%\begin{figure}[tpb]
+%\centering
+%	\begin{minipage}[b]{0.46\columnwidth}
+%	\includegraphics[width=\columnwidth]{img/outliers_regain.png}
+%	\caption{Distribution of the landmark regain before removing the outliers}			
+%	\label{fig:b5}
+%	\end{minipage}
+%	\quad
+%	\begin{minipage}[b]{0.50\columnwidth}
+%	\includegraphics[width=\columnwidth]{img/outliers_regain_fixed.png}
+%	\caption{Distribution of the landmark regain after removing the outliers}
+%	\label{fig:b6}
+%	\end{minipage}
+%\end{figure}
 
 
 \subsubsection{Effect on Regaining Landmarks}
 We address the question ``Does using the Interactive Human-aware Intervention have an effect on the landmark regain?''
 We propose the following study design.
 \begin{itemize}
-\item \textbf{Dependent variable}: landmark regain
+\item \textbf{Dependent variable}: landmark regain ($\mathcal{L}_R$)
 \item \textbf{Independent variables:}
 \begin{itemize}
 \item Used the Interactive Human-aware Intervention (Yes / No)
@@ -1541,29 +1559,28 @@ We propose the following study design.
 \end{itemize}
 
 In Figure~\ref{fig:regainbypid}, the blue box plots represent the human subjects using the Interactive Human-aware Intervention, while the red box plots represent the human subjects who do not.
-The median landmark regain for the human subjects using the Interactive Human-aware Intervention for the planning tasks P1, P4, and P6 is higher.
-The median landmark regain for the human subjects using the Human-aware Intervention for the planning tasks P2, P7 and P9 is lower.
-The medians for P8 and P10 are almost the same.
+The median $\mathcal{L}_R$ for the human subjects using the Interactive Human-aware Intervention for the planning tasks P1, P4, P6 and P7 is higher.
+The median $\mathcal{L}_R$ for the human subjects using the Human-aware Intervention for the planning tasks P2 and P9 is lower.
+The medians $\mathcal{L}_R$ for P8 and P10 are almost the same.
 
 \begin{figure}[tpb]
   \centering
-\includegraphics[width=0.9\columnwidth]{img/regainbypid.png}
+\includegraphics[width=\columnwidth]{img/regainbypid.png}
   \caption{Box plot for the landmark regain in the condition and the control group for each planning task id}
   \label{fig:regainbypid}
 \end{figure}
 
 Figure~\ref{fig:regainbytype} shows the effect on the dependent variable by planning task type (C, E, M).
-Using the Interactive Human-aware Intervention, human subjects who solved type M planning tasks have been able to reduce the median landmark regain.
-In contrast, when using the Interactive Human-aware Intervention on type E and C planning task, the median landmark regain have increased.
+When using the Interactive Human-aware Intervention on type E, M and C planning task, the median $\mathcal{L}_R$ values have increased.
 \begin{figure}[tpb]
   \centering
-\includegraphics[width=0.7\columnwidth]{img/regainbytype.png}
+\includegraphics[width=0.9\columnwidth]{img/regainbytype.png}
   \caption{Box plot for the landmark regain in the condition and the control group for each planning task type}
   \label{fig:regainbytype}
 \end{figure}
 
-We verify whether or not the observations for dependent variable between the control and the condition group are statistically significant.
-Let $\mu_N$ be the mean landmark regain in a solution from the control group (did not the Interactive Human-aware Intervention) and $\mu_H$ be the mean landmark regain in a solution from the condition group (used the Interactive Human-aware Intervention).
+We verify whether or not the observations for the dependent variable $\mathcal{L}_R$ differences between the control and the condition group are statistically significant.
+Let $\mu_N$ be the mean $\mathcal{L}_R$ in a solution from the control group (did not the Interactive Human-aware Intervention) and $\mu_H$ be the mean $\mathcal{L}_R$ in a solution from the condition group (used the Interactive Human-aware Intervention).
 Then, we define the null ($H_0$) and the alternative ($H_A$) hypotheses as follows.
 \begin{itemize}
 \item $H_0: \mu_N = \mu_H$, the means of the control and the condition group are the same.
@@ -1571,9 +1588,14 @@ Then, we define the null ($H_0$) and the alternative ($H_A$) hypotheses as follo
 \end{itemize}
 Throughout, we use two-way ANOVA with the type \RomanNumeralCaps{3} correction to account for the unbalanced group design with $\alpha=0.05$.
 
-When using Interactive Human-aware Intervention and the planning task id as factors to the dependent variable landmark achievement, the Levene's Test to test the homogeneity of variance fails ($F<<<0, df=15$) for the design.
-The  Levene's test also fails for the design that considers the Interactive Human-aware Intervention and the planning task type ($F=0.04, df=5$).
-Therefore, we ignore the results and do not draw any conclusions from the ANOVA.
+When using Interactive Human-aware Intervention and the planning task id as factors to the dependent variable landmark achievement, the Levene's Test to test the homogeneity of variance fails ($p-value<<<0, F=4.3 ,df=15$) for the design.
+The  Levene's test passes for the design that considers the usage of Interactive Human-aware Intervention and the planning task type ($p-value=0.62, F=0.71, df=5$).
+Therefore, we only report the ANOVA results from the design that considers that considers the usage of Interactive Human-aware Intervention and the planning task type.
+
+The effect of the planning task type on the $\mathcal{L}_R$ is not significant ($p-value=0.18, F=1.7, df=2$).
+The effect on the usage of Interactive Human-aware Intervention on the $\mathcal{L}_R$ is not significant ($p-value=0.8, F=0.06, df=1$).
+The interaction effect of the usafe of Interactive Human-aware Intervention and the planning task type on $\mathcal{L}_R$ is also not significant ($p-value=0.96, F=0.03, df=2$).
+Therefore, at $\alpha=0.05$ we do not reject $H_0$ with respect to $\mathcal{L}_R$ for the design that considers the factors, the usage of Interactive Human-aware Intervention and the planning task type.
 
 \subsubsection{Effect of Help Video}
 We address the question ``Does seeing a help video move the user closer to the optimal solution?''.
@@ -1592,119 +1614,222 @@ We propose the following study design.
 \item Planning Task Type (C, E, M)
 \end{itemize}
 \end{itemize}
-We join the two variables: using the Interactive Human-aware Intervention and watching the help video to form one independent variable with 4 levels.
-Level 1, Yes-Yes indicates that the participant used both kinds of help.
-Level 2, Yes-No indicates that the participant used the Interactive Human-aware Intervention but did not watch the video.
-Level 3, No-Yes indicates that the participant did not use the Interactive Human-aware Intervention but watched the help video.
-Level 4, No-No indicates that the participant did not use either kind of help.
-We use this combined variable for our analysis.
-There are 55 users in level 1, 16 in level 2, 52 in level 3 and 12 in level 4.
+We join the two variables: \textbf{using the Interactive Human-aware Intervention} and \textbf{watching the help video} to form one independent variable with 4 levels.
+Level 1, Yes-Yes (YY) indicates that the participant watched the video and used the Interactive Human-aware Intervention.
+Level 2, Yes-No (YN) indicates that the participant watched the help video but did not use the Interactive Human-aware Intervention.
+Level 3, No-Yes (NY) indicates that the participant did not watch the help video but used the Interactive Human-aware Intervention.
+Level 4, No-No (NN) indicates that the participant did not watch the video or used the Interactive Human-aware Intervention.
+We use this combined variable called \textbf{Help Type} for the analysis that follow.
+There are 46 users in level 1, 26 in level 2, 37 in level 3 and 26 in level 4.
+Thus, our modified design is as follows:
+\begin{itemize}
+\item \textbf{Dependent variable}: Number of moves
+\item \textbf{Independent variables:}
+\begin{itemize}
+\item Help Type (YY/NY/YN/NN)
+\item Planning Task Id (P1 through P13)
+\item Planning Task Type (C, E, M)
+\end{itemize}
+\end{itemize}
 
 Figure~\ref{fig:histvid} illustrates the frequency probability distribution of the number of moves for the solutions produced by the human users in the sample. 
 The data is highly skewed with a skewness factor +4.6.
 \begin{figure}[tpb]
   \centering
-\includegraphics[width=0.7\columnwidth]{img/histo_video.png}
+\includegraphics[width=0.8\columnwidth]{img/histo_video.png}
   \caption{Frequency probability distribution of the number of moves}
   \label{fig:histvid}
 \end{figure}
-We remove 8 data points from the sample (5\%) to reduce the skewness and approximate the distribution of the number of moves to a normal distribution.
-This adjustment resulted in 127 observations for the sample.
-The skewness factor of the adjusted sample is +0.67.
-Given the skewness factor and also the sample size 127, greater than the recommended size by the Central Limit Theorem, we assume that this is a normal distribution.
-Figure~\ref{fig:b7} shows the box plot for the distribution of the number of moves before the reduction of observations.
-Figure~\ref{fig:b8} shows the box plot for the same after the reduction.
-We use the adjusted sample for the statistical analyses that follow.
-
-\begin{figure}[tpb]
-\centering
-	\begin{minipage}[b]{0.46\columnwidth}
-	\includegraphics[width=\columnwidth]{img/outliers_vid.png}
-	\caption{Distribution of the number of moves before removing the outliers}			
-	\label{fig:b7}
-	\end{minipage}
-	\quad
-	\begin{minipage}[b]{0.50\columnwidth}
-	\includegraphics[width=\columnwidth]{img/outliers_fixed_vid.png}
-	\caption{Distribution of the number of moves after removing the outliers}
-	\label{fig:b8}
-	\end{minipage}
-\end{figure}
-
-In Figure~\ref{fig:helpsbypid}, the box plots represent the human subjects using the four levels of help for the 13 planning tasks.
+%We remove 8 data points from the sample (5\%) to reduce the skewness and approximate the distribution of the number of moves to a normal distribution.
+%This adjustment resulted in 127 observations for the sample.
+%The skewness factor of the adjusted sample is +0.67.
+%Given the skewness factor and also the sample size 127, greater than the recommended size by the Central Limit Theorem, we assume that this is a normal distribution.
+%Figure~\ref{fig:b7} shows the box plot for the distribution of the number of moves before the reduction of observations.
+%Figure~\ref{fig:b8} shows the box plot for the same after the reduction.
+%We use the adjusted sample for the statistical analyses that follow.
+%
+%\begin{figure}[tpb]
+%\centering
+%	\begin{minipage}[b]{0.46\columnwidth}
+%	\includegraphics[width=\columnwidth]{img/outliers_vid.png}
+%	\caption{Distribution of the number of moves before removing the outliers}			
+%	\label{fig:b7}
+%	\end{minipage}
+%	\quad
+%	\begin{minipage}[b]{0.50\columnwidth}
+%	\includegraphics[width=\columnwidth]{img/outliers_fixed_vid.png}
+%	\caption{Distribution of the number of moves after removing the outliers}
+%	\label{fig:b8}
+%	\end{minipage}
+%\end{figure}
 The frequency distribution in the sample for the planning tasks and each category of help type is shown in Table~\ref{tab:help}.
 \begin{table}[tpb]
 \centering
+\caption{Frequency distribution in the sample for the planning task id and the types of help}
 \resizebox{0.3\textwidth}{!}{%
 \begin{tabular}{|l|c|c|c|c|}
 \hline
-\multicolumn{1}{|c|}{\multirow{2}{*}{\begin{tabular}[c]{@{}c@{}}Planning\\ Task\end{tabular}}} & \multicolumn{4}{l|}{Help Category} \\ \cline{2-5} 
+\multicolumn{1}{|c|}{\multirow{2}{*}{\begin{tabular}[c]{@{}c@{}}Planning\\ Task\end{tabular}}} & \multicolumn{4}{c|}{Help Type} \\ \cline{2-5} 
 \multicolumn{1}{|c|}{} & \multicolumn{1}{l|}{YY} & \multicolumn{1}{l|}{YN} & \multicolumn{1}{l|}{NY} & \multicolumn{1}{l|}{NN} \\ \hline
-P1 & 1 & - & 5 & - \\ \hline
-P2 & 4 & - & 4 & - \\ \hline
-P3 & - & 8 & - & 5 \\ \hline
-P4 & 8 & - & 6 & - \\ \hline
-P5 & - & 8 & - & 7 \\ \hline
-P6 & 5 & - & 5 & - \\ \hline
-P7 & 6 & - & 1 & - \\ \hline
-P8 & 6 & - & 3 & - \\ \hline
-P9 & 4 & - & 5 & - \\ \hline
+P1 & - & 1 & 3 & 2 \\ \hline
+P2 & 3 & 1 & 4 & - \\ \hline
+P3 & 8 & - & 5 & - \\ \hline
+P4 & 6 & 2 & 3 & 3 \\ \hline
+P5 & 8 & - & 6 & 1 \\ \hline
+P6 & 1 & 3 & 2 & 3 \\ \hline
+P7 & 6 & - & - & 1 \\ \hline
+P8 & - & 6 & 1 & 2 \\ \hline
+P9 & 2 & 3 & 1 & 3 \\ \hline
 P10 & 3 & - & 5 & - \\ \hline
-P11 & 6 & - & 7 & - \\ \hline
-P12 & 5 & - & 5 & - \\ \hline
-P13 & 8 & - & 6 & - \\ \hline
+P11 & 2 & 4 & 2 & 5 \\ \hline
+P12 &  & 5 & - & 5 \\ \hline
+P13 & 7 & 1 & 5 & 1 \\ \hline
 \end{tabular}%
 }
-\caption{Frequency distribution in the sample for the planning task id and the types of help}
 \label{tab:help}
 \end{table}
 
 \begin{figure}[tpb]
   \centering
 \includegraphics[width=\columnwidth]{img/helpsbypid.png}
-  \caption{Box plot for the number of moves in the sample for the planning task id and the types of help they received}
+  \caption{Box plot for the number of moves in the sample for the planning task id and the help types}
   \label{fig:helpsbypid}
 \end{figure}
+In Figure~\ref{fig:helpsbypid}, the box plots represent the human subjects using the four help types for the 13 planning tasks.
+Table~\ref{tab:medianvideo} summarizes the median number of moves for the thirteen planning tasks grouped by the type of help received by the human subjects attempting each task. 
+Within parenthesis are the mean number of moves.
+Recall that as per Table~\ref{tab:help}, there was only one participant assigned to some help configuration. 
+We have marked such occurrences with an asterisk (*) in Table~\ref{tab:medianvideo} and they are omitted from the discussion that follows.
+For the planning task P1, the median number of moves for the subjects who used the Interactive Human-aware Intervention (NY) is higher than the subjects who did not use any kind of help.
+For the planning task P2, the median number of moves for the subjects receiving both kinds of help is higher than those who only watched the help video.
+For the planning task P3, the median number of moves for the subjects receiving both kinds of help solved the planning task faster than the subjects who only used the Interactive Human-aware Intervention.
+For the planning task P4, the median number of moves is lowest for subjects who did not use either kind of help.
+Furthermore, the subjects who received both kinds of help reported the highest median number of moves.
+When comparing subjects who used only one type of help, those who only watched the help video reported a lower median number of moves compared to those who used the Interactive Human-aware Intervention.
+For the planning task P5, the median number of moves for the subjects who only used the Interactive Human-aware Intervention is lower than the subjects who used both kinds of help.
+For the planning task P6, the subjects who only watched the help video reported the lowest median number of moves compared to those who only used the Interactive Human-aware Intervention and those who did not use any kind of help.
+For the planning task P7, there is one subject who used no help, while all others who solved P7 used both types of help.
+For the planning task P8, the median number of moves between the subjects who only watched the help video and the subjects who did not use any kind of help are the same.
+For the planning task P9, the subjects receiving both kinds of help reported the highest median number of moves compared to the subjects who only watched the help video or subjects who did not use any kind of help.
+However, the median number of moves for subjects who used the Interactive Human-aware Intervention is lower compared to subjects who did not use any kind of help.
+For the planning task P10, the subjects receiving both kinds of help reported a slightly higher median number of moves compared to the subjects who only used the Interactive Human-aware Intervention.
+However, the mean number of moves between the two groups are the same.
+For the planning task P11,  the subjects receiving both kinds of help reported the highest median number of moves compared to all other help types.
+The lowest median number of moves was reported for subjects who did not use any kind of help.
+When comparing subjects who used only one type of help, those who only watched the help video reported a lower median number of moves compared to those who only used the Interactive Human-aware Intervention.
+For the planning task P12, the subjects who watched the help video reported a lower median number of moves compared to the subjects who did not use any kind of help.
+However, the mean number of moves for the subjected who watched the help video was higher compared to the subjects who did not use any kind of help.
+For the planning task P13, the subjects receiving both kinds of help reported a higher median number of moves compared to the subjects who only used the Interactive Human-aware Intervention.
+
+In summary, we see that considering the median number of moves, for many planning tasks used in this study, using both Interactive Human-aware Intervention and the Help video has resulted in increasing the median number of moves in the solutions produced by the human users (e.g., P2, P4, P5, P7, P9, P11, P13).
+For the planning tasks P3, using both help types reduced the median number of moves.
+For the planning task P10, using both help types only slightly increased the median number of moves, but the mean remained the same.
+Interestingly, for several planning tasks (e.g., P1, P4, P9, P11) human users found shorter solutions when they did not use any kind of help.
+
+
+\begin{table}[tpb]
+\caption{The median and the mean (in parenthesis) number of moves for the planning tasks P1 through P13 for the different types of help received by the human subjects.}
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+\multirow{2}{*}{Planning Task} & \multicolumn{4}{c|}{\begin{tabular}[c]{@{}c@{}}Number of Moves\\ median (mean)\end{tabular}} \\ \cline{2-5} 
+ & \multicolumn{1}{c|}{YY} & \multicolumn{1}{c|}{YN} & \multicolumn{1}{c|}{NY} & \multicolumn{1}{c|}{NN} \\ \hline
+P1 &  & 24 (24)$^*$ & 56 (62) & 45 (45) \\ \cline{1-1}
+P2 & 172 (226) & 111 (111)$^*$ & 105 (117) &  \\ \cline{1-1}
+P3 & 60 (68)  &  & 74 (71) &  \\ \cline{1-1}
+P4 & 69 (63) & 44 (44) & 49 (48) & 27 (27) \\ \cline{1-1}
+P5 & 43 (55) &  & 40 (40) & 27 (27)$^*$ \\ \cline{1-1}
+P6 & 62 (62)$^*$ & 24 (25) & 39 (39) & 35 (33) \\ \cline{1-1}
+P7 & 50 (69)  &  &  & 22 (22)$^*$  \\ \cline{1-1}
+P8 &  & 9 (9) & 14 (14)$^*$ & 9 (9) \\ \cline{1-1}
+P9 & 66 (66) & 36 (36) & 28 (28)$^*$ & 31 (31) \\ \cline{1-1}
+P10 & 60 (58) &  & 59 (58) &  \\ \cline{1-1}
+P11 & 78 (78) & 34 (34) & 41 (41) & 32 (31) \\ \cline{1-1}
+P12 &  & 22 (33) &  & 26 (27) \\ \cline{1-1}
+P13 & 35 (36) & 23 (23)$^*$ & 30 (34) & 21 (21)$^*$ \\ \hline
+\end{tabular}
+\label{tab:medianvideo}
+\end{table}
 
 \begin{figure}[tpb]
   \centering
-\includegraphics[width=0.7\columnwidth]{img/helpsbytype.png}
+\includegraphics[width=\columnwidth]{img/helpsbytype.png}
   \caption{Box plot for the number of moves in the sample for each planning task type and the type of help they received}
   \label{fig:helpsbytype}
 \end{figure}
-Figure~\ref{fig:helpsbytype} shows the effect on the dependent variable by planning task type (C, E, M).
-We verify whether or not the observations for dependent variable between the control and the condition group are statistically significant.
+Figure~\ref{fig:helpsbytype} shows the effect on the number of moves by planning task type (C, E, M) and the type of help received by the participants.
+We summarize the median number of moves for each planning task type in Table~\ref{tab:mediantypevideo}.
+Within parenthesis are the mean number of moves.
+For type C planning tasks we see that the median number of moves for those receiving both kinds of help is the highest compared to the other three help types.
+Furthermore, the second highest median is reported for subjects who only used the Interactive Human-aware Intervention.
+The lowest median number of moves is reported for subjects who did not use any kind of help.
+The mean number of moves for type C planning tasks follow the same pattern for the highest and the lowest means in the category.
+For type E planning tasks, the lowest median and the mean is reported for subjects who only watched the help video.
+The highest mean and the median number of moves are reported for subjects who received both kinds of help.
+For type E planning tasks, among those who used Interactive Human-aware Intervention, lower median number of moves is reported for those who only used the Interactive Human-aware Intervention.
+For type M planning tasks, the lowest median and the mean number of moves are reported for subjects who did not use any type of help.
+The highest median and the mean number of moves are reported for those who used both kinds of help.
+Similar to type E planning tasks, among those who used Interactive Human-aware Intervention, lower median and mean is reported for those who did not watch the help video.
+
+\begin{table}[tpb]
+\caption{The median and the mean (in parenthesis) number of moves for the planning tasks types C, E, M for the different types of help received by the human subjects.}
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+\multicolumn{1}{|c|}{\multirow{2}{*}{\begin{tabular}[c]{@{}c@{}}Planning Task\\ Type\end{tabular}}} & \multicolumn{4}{c|}{\begin{tabular}[c]{@{}c@{}}Number of Moves\\ median (mean)\end{tabular}} \\ \cline{2-5} 
+\multicolumn{1}{|c|}{} & \multicolumn{1}{c|}{YY} & \multicolumn{1}{c|}{YN} & \multicolumn{1}{c|}{NY} & \multicolumn{1}{c|}{NN} \\ \hline
+C & 78 (112) & 15 (27) & 54 (70) & 26 (25) \\ \cline{1-1}
+E & 57 (62) & 33 (35) & 50 (56) & 34 (38) \\ \cline{1-1}
+M & 41 (55) & 29 (32) & 32 (36) & 26 (28) \\ \hline
+\end{tabular}
+\label{tab:mediantypevideo}
+\end{table}
+
+We verify whether or not the differences in the number of moves between the help types and the planning task types are statistically significant.
 We define the null ($H_0$) and the alternative ($H_A$) hypotheses as follows:
 \begin{itemize}
-\item $H_0$: there is no difference in the mean number of moves for any help type.
-\item $H_A:$, there is a difference in the mean number of moves for help types.
+\item $H_0$: there is no difference in the mean number of moves between the help types.
+\item $H_A:$, there is a difference in the mean number of moves between the help types.
 \end{itemize}
 We use two-way ANOVA with $\alpha=0.05$.
+We do not consider the planning task id as a factor because there were no subjects for certain help categories, while for several other help categories we only had only one or two subjects.
+Therefore, our analysis on the effect of using the four help types for the three planning task types uses the following study design.
+\begin{itemize}
+\item \textbf{Dependent variable}: Number of moves
+\item \textbf{Independent variables:}
+\begin{itemize}
+\item Help Type (YY/NY/YN/NN)
+\item Planning Task Type (C, E, M)
+\end{itemize}
+\end{itemize}
+We conducted the Levene's Test to test the homogeneity of variance for this design.
+The test passes for this design ($p-value=0.09, F=1.65, df=11$) indicating that we can use the two-way ANOVA to draw conclusions from the design.
+The results show that the effect on the mean number of moves considering the help type factor is significant ($p-value<<<0, F=8.2, df=3$).
+The effect on the mean number of moves considering the planning task type factor is not significant ($p-value=0.07, F=2.8, df=2$)
+The effect on the mean number of moves considering the interaction effect of the planning task type and the help type is not significant ($p-value=0.09, F=1.8, df=6$)
 
-When using the help type and the planning task type as factors to the dependent variable number of moves, the Levene's Test to test the homogeneity of variance fails ($F=0.02, df=7$) for the design.
-Therefore, we ignore the results and do not draw any conclusions from the ANOVA.
-The  Levene's test passes for the design that considers the help type and the planning task id ($F=0.29, df=25$).
-We report the ANOVA results for this design, which shows that the there is a significant difference in the mean number of moves when considering the four levels of help types ($F=0.001, df=3$).
-Thus we reject $H_0$.
-The mean number of moves is also significant when considering each planning task ($F<<<0, df=11$).
-However, the mean number of moves difference considering the help type and the planning task interaction is not significant ($F=0.49, df=2$).
 
-Since the planning task type significantly affects the number of moves in a solution, we want to find out for individual planning tasks whether or not using the help type has an effect on the number of moves.
-For example, is the difference in mean number of moves for YY and NY for planning task P1 significant?, is the difference in mean for YY and NY for planning task P2 significant? and so on.
-We conduct the TukeyHSD posthoc analysis to compare the pair-wise means.
-For the planning tasks P1 the mean number of steps used by YY category is lower than the NY category. However, this difference is not statistically significant.
-For the planning task P2, the mean number of steps used by YY category is higher than the NY category. However, this difference is not statistically significant.
-For the planning task P3, the mean number of steps used by YN category is higher than the NN category. However, this difference is not statistically significant.
-For the planning task P4, the mean number of steps used by YY category is higher than the NY category. However, this difference is not statistically significant.
-For the planning task P5, the mean number of steps used by YN category is higher than the NN category. However, this difference is not statistically significant.
-For the planning task P6, the mean number of steps used by YY category is lower than the NY category. However, this difference is not statistically significant.
-For the planning task P7, the mean number of steps used by YY category is higher than the NY category. However, this difference is not statistically significant.
-For the planning task P8, the mean number of steps used by YY category is lower than the NY category. However, this difference is not statistically significant.
-For the planning task P9, the mean number of steps used by YY category is higher than the NY category. However, this difference is not statistically significant.
-For the planning task P10, the mean number of steps used by YY category is slightly lower than the NY category. However, this difference is not statistically significant.
-For the planning task P11, the mean number of steps used by YY category is higher than the NY category. However, this difference is not statistically significant.
-For the planning task P12, the mean number of steps used by YY category is higher than the NY category. However, this difference is not statistically significant.
-For the planning task P13, the mean number of steps used by YY category is higher than the NY category. However, this difference is not statistically significant.
+Since help type significantly affects the number of moves in a solution, we want to find out for which specific individual planning task types using the help type reduces/increases the number of moves.
+For example, is the difference in mean number of moves for YY and NY for planning task type C significant?
+Is the difference in mean for YY and NY for planning task M significant? and so on.
+We address this question by conducting the TukeyHSD posthoc analysis to compare the pair-wise means.
+For simplicity, we only discuss the pairs that returned statistically significant differences of means.
+For type C planning tasks the differences of means between YY and NN help types is statistically significant ($p-value=0.001$).
+This means that for type C planning tasks when human users use both kinds of help, the number of moves increases compared to instances where they do not use any kind of help, and that this increase is statistically significant.
+For type C planning tasks the differences of means between YY and YN is also statistically significant ($p-value=0.0003$).
+This means that for type C planning tasks when human users have already watched the help video, using the Interactive Human-aware Intervention increases the solution length compared to instances where they do not use the Interactive Human-aware Intervention.
+Considering type E and C planning tasks, the mean number of moves between type C planning task when both types of help is used is higher compared to type E planning task when using no help.
+Posthoc analysis showed that this difference is statistically significant ($p-value=0.03$).
+The mean number of moves between type C planning task when both types of help is used is significantly higher compared to type E planning task when only using Interactive Human-aware Intervention as the help type ($p-value=0.03$).
+Comparing type M and type C planning tasks, the mean number of moves between type C planning task when both types of help is used is significantly higher compared to type M planning task when using no help ($p-value=0.0003$).
+The mean number of moves between type C planning task when both types of help is used is significantly higher compared to type M planning task when only using Interactive Human-aware Intervention as the help type ($p-value=0.01$).
+The mean number of moves between type C planning task when both types of help is used is significantly higher compared to type M planning task when only using the help video as the help type ($p-value=0.001$).
+The mean number of moves between type C planning task when both types of help is used is significantly higher compared to type M planning task when using both kinds of help types ($p-value=0.04$).
+
+We also use the TukeyHSD postoc analysis to discuss the differences in means of each help type.
+Here too, we only report the combinations that resulted in statistically significant differences.
+The differences in means between YY and NN is statistically significant ($p-value=0.0005$).
+This indicates that using both the help video and the Interactive Human-aware Intervention  for the planning tasks results in longer solutions compared to instances where no help is used.
+Furthermore, we find that the differences in means for YY and YN is also statistically significant ($p-value=0.0007$).
+This indicates that given the human users watch the help video, using the Interactive Human-aware Intervention significantly increases the solution length, compared to instances where they do not use the Interactive Human-aware Intervention.
 
 
 \section{Discussion}
@@ -1720,9 +1845,9 @@ Our experiments show that the human users do not respond well to heuristic relat
 We introduce four metrics to evaluate whether or not the Interactive Human-aware Intervention has been successful in helping the user find the solution to the planning task, while avoiding the forbidden vehicle as follows:
 \begin{itemize}
 \item The number of moves in the human user's solution
-\item The difference from the cost optimal solution
-\item The landmark achievement
-\item The landmark regain
+\item The difference from the cost optimal solution ($D_i$)
+\item The landmark achievement ($\mathcal{L}_A$)
+\item The landmark regain ($\mathcal{L}_R$)
 \end{itemize}
 Although the 13 planning tasks we selected for this study produce optimal solutions having approximately the same number of moves (except for P8), the experiments show that the human users have difficulty getting closer to the optimal solution even with the use of hints.
 The longer the human users spend exploring the search space of the planning task, the higher the likelihood that he/she will also move the forbidden vehicle.
@@ -1738,6 +1863,27 @@ Let us now revisit the questions we intended to answer through our evaluation.
 \item Does the Interactive Human-aware Intervention help move the user closer to the optimal solution?
 \item Does seeing a help video affect the solution length?
 \end{enumerate}
+
+\begin{table}[tpb]
+\caption{Summary of findings solving Rush Hour planning tasks with the use of Interactive Human-aware Intervention (condition) and without (control).}
+\label{tab:summarycontrolcondition}
+\resizebox{\columnwidth}{!}{% 
+\begin{tabular}{|l|l|l|}
+\hline
+\multicolumn{1}{|c|}{Dependent Variable} & \multicolumn{1}{c|}{Factors}                                                                                                                        & \multicolumn{1}{c|}{Result Between the Control and the Condition Groups} \\ \hline
+Number of Moves                          & \begin{tabular}[c]{@{}l@{}}Used the Interactive Human-aware Intervention (Yes/No)\\ Planning task type (C, E, M)\end{tabular}                       & Group means not statistically significant                                \\ \hline
+Number of Moves                          & \begin{tabular}[c]{@{}l@{}}Used the Interactive Human-aware Intervention (Yes/No)\\ Planning task ID (P1, P2, P4, P6, P7, P8, P9, P10)\end{tabular} & Violates homogeneity of variance                                         \\ \hline
+$D_i$                                    & \begin{tabular}[c]{@{}l@{}}Used the Interactive Human-aware Intervention (Yes/No)\\ Planning task type (C, E, M)\end{tabular}                       & Group means not statistically significant                                \\ \hline
+$D_i$                                    & \begin{tabular}[c]{@{}l@{}}Used the Interactive Human-aware Intervention (Yes/No)\\ Planning task ID (P1, P2, P4, P6, P7, P8, P9, P10)\end{tabular} & Violates homogeneity of variance                                         \\ \hline
+$\mathcal{L}_A$                          & \begin{tabular}[c]{@{}l@{}}Used the Interactive Human-aware Intervention (Yes/No)\\ Planning task type (C, E, M)\end{tabular}                       & Group means not statistically significant                                \\ \hline
+$\mathcal{L}_A$                          & \begin{tabular}[c]{@{}l@{}}Used the Interactive Human-aware Intervention (Yes/No)\\ Planning task ID (P1, P2, P4, P6, P7, P8, P9, P10)\end{tabular} & Violates homogeneity of variance                                         \\ \hline
+$\mathcal{L}_R$                          & \begin{tabular}[c]{@{}l@{}}Used the Interactive Human-aware Intervention (Yes/No)\\ Planning task type (C, E, M)\end{tabular}                       & Group means not statistically significant                                \\ \hline
+$\mathcal{L}_R$                          & \begin{tabular}[c]{@{}l@{}}Used the Interactive Human-aware Intervention (Yes/No)\\ Planning task ID (P1, P2, P4, P6, P7, P8, P9, P10)\end{tabular} & Violates homogeneity of variance                                         \\ \hline
+\end{tabular}%
+}
+\end{table}
+
+Table~\ref{tab:summarycontrolcondition} summarizes the analysis of the use of Interactive Human-aware Intervention during a Rush Hour planning task using the four evaluation metrics.
 When we resolve question 1 using the number of moves as the evaluation metric, we find that for some planning tasks the Interactive Human-aware Intervention pushes the user closer to the optimal solution. However, the effect is not statistically significant considering the $\alpha=0.05$ for the study sample.
 When we resolve question 2 using the difference from the cost optimal solution, the landmark achievement and the landmark regain as evaluation metrics, we find that the differences from the cost optimal solution and the landmark achievement between those who used Interactive Human-aware Intervention and those who did not are not statistically significant.
 The distribution of landmark regain for the sample violated the homogeneity  of variances assumption for ANOVA. 
@@ -1747,7 +1893,7 @@ The change is also statistically significant.
 When we resolve question 3 using the number of moves as the evaluation metric, we find that there is a statistically significant difference between the types of help used (video and hints) between the 13 planning tasks.
 However, because each planning task is different from one another (even within the same category C, E, M) we want to find out if the number of moves differ significantly for the subjects attempting the same planning task, while using different help types.
 Posthoc analysis did not reveal a significant difference in the number of moves for the pair-wise comparisons for this question.
-I think reducing the number of planning tasks to one each from the categories C, E, M will help us yeild more conclusive results on the effects of the Interactive Human-aware Intervention.
+I think reducing the number of planning tasks to one each from the categories C, E, M will help us yield more conclusive results on the effects of the Interactive Human-aware Intervention.
 
 
 For the experiment, we categorized the Rush Hour planning tasks into three types by the position of the forbidden vehicle.

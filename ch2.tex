@@ -401,8 +401,127 @@ In goal recognition, the recognizer reasons about how likely a given set of poss
 
 This solution assumes that a plan library is provided to the recognizer in advance. Their implementation of the plan library uses trees to represent the possible plans for goal hypotheses. The planning domain used in this study describes how to perform chemistry lab experiments  using an educational software that simulated a virtual lab. The plans in the planning library were traces were taken from real students' traces when interacting with the virtual chemistry lab.
 
+\subsection{Goal/Plan Recognition with an Active Observer}
+In real-life situations, helpful intervention requires more observer engagement, i.e., an active observer to help the actor recover from intervention.
+Therefore, we discuss existing work on designing active observers having both the recognition and interaction capabilities.
+Next, we discuss related work on dealing with misconceptions held by the actor about the planning domain and AI safety in general.
+Because we specially focus on developing intervention models for human users, we discuss related work on using machine learning algorithm to classify human user behavior and how intervention is leveraged to provide intelligent help to human users.
 
-\section{Behavior Classification}
+
+While the goal/plan recognition works discussed in the previous section assume a passive observer, a growing body of work has also looked into recognition problems with active observers.
+Only recognizing when intervention is needed (as a passive observer) solves only a part of the problem.
+In cases where intervention is used for an artificial agent, active observers can force the agent to alter its current plan.
+When intervention happens during a cognitively engaging task, as in the Rush Hour puzzle, a human user would naturally like to know what to do next.
+An active observer who can take action or give instructions to the human user, not only will be able to assist the user complete the task safely but also will improve the human user's interaction with the AI system.
+
+\citeyear{bisson2011} propose a plan library based plan recognition technique to provoke the observed agent so that it becomes easier to disambiguate between pending goal hypotheses.
+The observer modifies the fluents associated with a \textit{provokable} action, which forces the observed agent to react on the modification.
+The provokable event is selected heuristically such that it reduces the uncertainty among the observed agent's likely goals.
+In another approach that aims to expedite the goal recognition, \citeyear{shvo2020active} use landmarks to eliminate hypothesized goals.
+They define the Active Goal Recognition problem for an observer agent who can execute sensing and world-altering actions.
+The observer executes a \textit{contingent plan} containing the sensing and world-altering actions to confirm/refute the landmarks of the planning problems for each goal hypothesis.
+Goals hypotheses whose landmarks (for the corresponding planning problem) are refuted by the execution of the contingent plan are removed from the set of likely goals.
+Although the initial problem definition assumes that the observer's contingent plan is non-intervening and is primarily used to reduce the goal hypotheses, \citeyear{shvo2020active} also propose an extension where the observer can actively impede or aid the actor.
+For example, the authors suggest adopting the Counter-planning Algorithm proposed by \citeyear{pozanco2018counterplanning} to generate a plan for the observer to impede the actor, after the actor's goals are identified through Active Goal Recognition.
+Pozanco's Counter-planning Algorithm is designed for a domain where two adversarial agents (seeking and preventing) pursue different goals.
+In the context of the Active Goal Recognition problem, the seeking agent is the actor while the preventing agent is the observer.
+Counter-planning requires that the observer quickly identify the seeking agent’s goal.
+They use the Ramirez and Geffener’s probabilistic goal recognition algorithm to perform goal recognition.
+Then the preventing agent actively intervenes the seeking agent by identifying the earliest landmark for the seeking agent’s planning problem (for the recognized goal) that needs to be blocked (i.e., counter-planning landmark). 
+The recognizer uses automated planning to generate a plan to achieve the counter-planning landmark (e.g., negating the landmark), thus  blocking the seeking agent’s goal achievement.
+The aforementioned works in Active Goal Recognition assume full observability over the actor.
+\citeyear{amato2019} relax this constraint and propose Active Goal Recognition with partial observability over the actor and model the planning problem as a partially observable Markov decision process (POMDP) \cite{kael1998}.
+Similar to the previously discussed Active Goal Recognition problems, the observer agent is trying to reach it’s own goal as well as correctly predict the chosen goal of the actor.
+Therefore, they define the Active Goal Recognition problem for the observer by augmenting the observer's action space with the actor's actions, the observer's own actions and the decision actions on the actor's goals.
+The state space is defined as the Cartesian product of the observer's states, actor's states and actor's goals.
+The goals for the recognition problem are augmented with the observer's own goals. and the prediction of the actor's goals.
+A solution to this planning problem starts at the
+the initial states of the observer and the actor and chooses actions to the augmented goal while minimizing the cost (or maximizing a reward).
+A POMDP is defined to solve the augmented planning problem (i.e., Active Goal Recognition problem).
+
+The goal recognition algorithms discussed above mainly focus on pruning the pending goal hypotheses to allow the observer quickly disambiguate between goals.
+To accomplish this objective, Shvo et al. use sensing and world-altering actions to confirm/refute the landmarks.
+Counter-planning also uses landmarks.
+Bisson et al. use heuristics.
+Other solutions for goal recognition take a decision theoretic approach where the observer attempts to find plans to achieve own goals while predicting the user's goal optimizing over some reward function.
+Our intervention models differ from these solutions in the intervention recognition task because we do not prune the goal hypotheses.
+Instead, we emphasize on accurately recognizing whether an actor's revealed plan is unhelpful (and must be interrupted) where the plans leading to the goal hypotheses share common prefixes, making the disambiguation difficult.
+We use  machine learning to learn the differences between the helpful and unhelpful plan suffixes and use that information to decide when to intervene.
+We rely on the same plan properties as existing recognition algorithms to learn the differences between plan suffixes: plan cost and landmarks.
+In addition, we have shown that the plan distance metrics can also be used to differentiate between helpful and unhelpful plan suffixes.
+
+The next step in our work is to extend the Human-aware Intervention model so that the observer can actively help the human user modify his plan following the recognition phase.
+The works we discussed in this section have already addressed this requirement in agent environments, where the observer also executes actions to support the goal recognition process.
+Pozanco et al. take a step further to show that following recognition, the observer can impede the actor using planning.
+\citeyear{freedman2017} discuss a method that allows the observer to interact with the actor while the actor's plan is in progress with fewer observations available.
+Our experiments validate their argument that plan/goal recognition by itself is more useful as a post-processing step when the final actions are observed, which will be too late for the Intervention problems we discuss in this work.
+Our solution addresses this limitation, allowing the observer to recognize ``before it's too late'' that the undesirable state is developing.
+We use machine learning to perform the recognition task.
+In contrast, \citeyear{freedman2017} propose a domain modification technique (similar to Ramirez and Geffner's) to formulate a planning problem that determines a relevant interactive response from the current state.
+Plans that agree (and do not agree) with the observations can now be found using an off-the-shelf planner on the modified domain.
+The actor's goal is recognized by comparing the costs of these plan sets.
+Following the recognition phase, they also define assistive and adversarial responsive actions the observer can execute during the interaction phase.
+Assistive responsive action generation is more related to our Intervention problem because our observer's goal is to help the actor avoid the undesirable state.
+The authors define an assistive interaction planning problem to generate a plan from the current state for the observer.
+This \textit{assistive} plan  uses the combined fluents of the actor and the observer, the Cartesian product of the actor's and the observer's actions (including no-op actions) and a modified goal condition for the observer.
+The assistive action generation through planning  proposed by \citeyear{freedman2017} is a complementary approach for the interactive Human-aware Intervention model we hope to implement in the next phase of this work.
+However, we will specially focus on using automated planning to inform the decision making process of the human actors following intervention.
+In addition, our work in Unsafe Suffix Recognition can be further extended by relaxing the assumptions we have made in the current implementation about the agents and the environment, specifically deterministic actions and full observability for the observer.
+This may require adopting planning techniques like the one proposed by Amato et al., but with different reward functions.
+For example, for intervention problems the reward function may take into account the freedom of the actor to reach his goal while ensuring safety.
+
+
+
+
+~\subsubsection{Dealing with Misconceptions Held by the Actor}
+In our intervention model the undesirable state is hidden to the user.
+This is similar to the user having a misconception or a false belief about the domain as the user ``believes'' the undesirable state is actually safe.
+Although for our Intervention problem, we assume that the user's belief model is explicitly available to the observer, in other situations this assumption may not hold (e.g., the observer may have limited sensing capabilities).
+In this case, another agent in the environment (like the observer in our Intervention problem), needs to be able to acquire the beliefs the user has.
+\citeyear{talamadupula2014} discuss a belief acquisition process for a search and rescue domain.
+The belief acquirer maps the beliefs into a planning problem, allowing him to predict the plan of the agent who is missing the beliefs.
+The predicted plan and the belief acquirer's own plans are then used to achieve coordination among human-robot teams.
+
+\citeyear{shvo2020epistemic}, in Epistemic Multi-agent Planning, use a multi-agent modal logic to model an observer (and other actors) having different beliefs about the world and other actors.
+This is in contrast to  \citeyear{talamadupula2014}, who use First-order logic.
+Given an Epistemic Plan Recognition problem (for an Epistemic Planning observer and an actor), the authors define an \textit{ill-formed} plan with respect to some goal if and only if the plan achieves the goal with respect to the actor but does not achieve the goal from the observer's perspective.
+The authors highlight a limitation of Epistemic Plan Recognition (also applicable in normal Plan Recognition). 
+The observer's recognition efficacy is dependent on the completeness and the veracity of the observer's beliefs about the environment and the actor.
+In addition it is also limited by how distinguishable the goals and the plans are that need to be recognized.
+Our intervention solution attempts to address the problem of improving recognition accuracy when plans are indistinguishable.
+\citeyear{shvo2020epistemic} introduce \textit{adequacy} for the recognition process when the actor's actual beliefs are different from the observer's beliefs about the actor.
+If the observer’s beliefs about the actor’s beliefs are \textit{adequate},
+then the observer can generate precisely all plans that the actor can also generates for some goal that also satisfies the observations.
+
+~\subsection{AI Safety}
+Using our Intervention models an observer can recognize, with few false alarms/misses, that an undesirable state is developing.
+The recognition enables the observer to take some action to help the user avoid the undesirable state and complete the task safely.
+Therefore, our work is also a precursor to incorporating safety into AI systems.
+
+\citeyear{zhang2018} use factored Markov Decision Process to model a domain where an agent, while executing plans to achieve the goals that are desirable to a human user, also wants to avoid the negative side effects that the human user would find undesirable/surprising.
+The agent has complete knowledge about the MDP, but does not know about the domain features that the user has given permission to change.
+In order to find the safety optimal policies, the agent partitions the domain features as \textit{free}, \textit{locked} and \textit{unknown} (treated as locked).
+Then the MDP is solved using linear programming with constraints that prevent the policy from visiting states with changed values for the locked, unknown features.
+The feature partitioning is similar to our analysis of safe and unsafe plan suffixes using features of plans, where we explore the plan space to recognize what plans enable/satisfy the undesirable state and what do not.
+In contrast to their model, we model the agents' environment as a deterministic domain using STRIPS.
+\citeyear{zhang2018} policy generation process interacts with the user (through querying) to find the safe-optimal policies that the user really cares about.
+\citeyear{sandya2020} propose a multi-objective approach to mitigating the negative side-effects.
+Given an task modeled as a MDP, the agent must optimize over the reward for the assigned task (akin to the desirable goal in our Intervention problem), minimize the negative side effects (the undesirable state) within a maximum expected loss of the reward for the assigned task  (\textit{slack}) in order to minimize the negative side effect.
+Being able to handle the negative side effects, caused by imperfect information in the environment is also pertinent to Human-aware Intervention that we propose.
+Although in this work we are more focused on intervention recognition than intervention response, it's also important to consider how the user's feedback/preferences can be factored into intervention recovery for more robust human-agent interaction.
+
+\citeyear{menell2016} introduce \textit{cooperative inverse reinforcement learning} (CIRL) to ensure that the autonomous system poses no risks to the human user and align it's values to that of the human in the environment.
+The key idea is that the observer (a robot) is  interactively attempting to maximize the human's reward while observing the actions executed by the human. 
+The cooperative game environment is modeled as a Partially Observable Markov Decision Process and the reward function incentivizes the human to teach and the robot to learn, leading to a cooperative learning behavior. 
+The problem of finding the optimal policy pair for the robot and the human is found by reducing the problem to solving a partially observable Markov decision process.
+Intervention is a continuous process where the user and the agent will interact with each other repeatedly until the task is complete
+Especially in helpful intervention (like the idea we propose in this work, repeated interaction allows the human user and the agent to learn more about the task and hopefully complete it safe-optimally.
+CIRL formalizes a solution to address this problem.
+
+
+
+
+\section{Human User Behavior Classification}
 The design of assistive agents for human users require that the recognizer be able to identify human behavior and how well the  behavior aligns with the goals of the system they interacts with. Human users are not always rational and may have hidden goals. It maybe an unfair comparison to model them as rational agents in real life scenarios.
  
 Behavior classification is different from typical plan/goal recognition. 
@@ -412,3 +531,62 @@ Given two plans $p$ and $p^\prime$, the Jaccard similarity for the actions in th
 $\frac{\left | A(p)\cap A(p^\prime) \right |}{\left | A(p)\cup A(p^\prime) \right |}$, where $A(p)$ and  $A(p^\prime)$ refer to the sets of actions in the plans $p$ and $p^\prime$ respectively.
 We use a similar features to recognize the actor's plan prefixes that lead to undesirable states.
 
+
+~\section{Providing Intelligent Help to Human Users Through Intervention}
+\citeyear{virvou2002ifm, virvou2002} discuss the design of a system that provides intelligent help for novice human users while using a file manipulating software application.
+The Intelligent File Manipulator (IFM) is an online help system where it automatically recognizes that an action may not have the desired goal for the user and offers help by generating alternative actions that would achieve the user's goals.
+IFM uses a user modeling component to reason over the observed actions.
+The user modeling component combines a limited goal recognition mechanism and a simulator for users' reasoning based on Human Plausible Reasoning theory to generate hypotheses about possible errors the user might make.
+
+There are some similarities between IFM and our proposed intervention framework. 
+Both models use observations of actions as input for deciding intervention.
+Both models assume that the user's goals are known.
+We now discuss some differences between the IFM intervention model and our proposed model: Intervention by Suffix Analysis.
+The IFM domain is modeled as a task hierarchy, while our domain models (benchmark and Rush Hour) are sequential.
+To map the user's observed sequence of actions to the plans leading to  the desirable and undesirable states, our intervention model uses automated planning to explore the plan space. 
+Then, we analyze the remaining plan suffixes using machine learning to decide intervention.
+IFM does not use automated planning. 
+Instead it uses a limited goal recognition mechanism called ``instability'' to identify when users need help.
+They identify a set of states of the file system as undesirable such as empty directories, multiple copies of a certain file etc.
+If the file system state contains any of the preset undesirable states, then the system contains instabilities.
+The user's action will either add an instability or remove an existing one from the system's state.
+The system tracks the progress of the user's plan(s) by monitoring how the instabilities are added and removed from the system.
+IFM categorizes the user's observed actions into four categories ``expected'', ``neutral'', ``suspect'' and ``erroneous'' depending on how compatible the observed actions are with the user's hypothesized intentions.
+Intervention in IFM takes place when the user executes ``suspect'' or ``erroneous'' actions because they signal that there are still unfinished plans.
+To help the user recover from intervention, the IFM flags ``suspect'' or ``erroneous'' actions, and suggests alternative actions that are compatible with the user's intentions.
+Finding the alternative actions similar to the ones the user has already executed is done based on the user models derived from the Human Plausible Reasoning theory.
+We hope to address the issue of intervention recovery for our proposed Human-aware Intervention Problem in future developments of our application.
+
+\citeyear{yadev2016} present HEALER, a software agent that sequentially select persons for intervention camps from a dynamic, uncertain network of participants such that the spread of HIV/AIDS awareness is maximized.
+Real-life information about the nodes of the network (human users) are captured and modeled as a POMDP.
+The Intervention problem discussed in this work is slightly different from our model.
+Solving the POMDP gives the solution for how to select the most influential individuals from the network to maximize awareness among the population.
+In contrast, our intervention model is defined for a discrete and sequential environment.
+A similarity between the models is that they codify properties of actual human users into the POMDP so that the model can be adopted in real-life application.
+Our Human-aware Intervention model too is designed from actual human user data.
+
+A body of literature on managing task interruption focuses on using cognitive modeling to predict human behavior, which can be used to identify intervention points.  
+Hiatt et al.~(\citeyear{hiattEtAl2011.ijcai.accommodatingHumanVariability}) apply theory of mind to accommodate variability in human behavior during task completion.  They show that a theory of mind approach can help explain possible reasons behind a human's unexpected action, that then allows the robot to respond appropriately.  Ratwani~et~al.~(\citeyear{ratwaniEtAl08.chi.predictingPostCompletionErrors}) demonstrate that a cognitive model can accurately predict situations where a human missed a step in a sequence of tasks.  More recently, Altmann \& Trafton (\citeyear{altmannTrafton20.cogsci.memoryForGoals}) show how to extend a cognitive model to explain a cognitively plausible mechanism for tracking multiple, interacting goals.
+
+~\subsection{Intervention in Cyber-security for Home Users}
+Cyber-security domain offers a lot of promise to study behavior both as normal users and as adversaries in automated planning. 
+Behavioral Adversary Modeling System (BAMS) \cite{boddy2005course} uses automated planning to help computer network administrators in analyzing vulnerabilities in their system against various kinds of attacks. 
+BAMS takes into account the properties of an adversary and produces plans that lead to system exploits that also coincides with the adversary model. While this work does not directly apply to plan recognition at its core, it illustrates a use case where classical planning can be used to design assistive systems targeted towards human end users.
+
+In this work, we take a step toward designing assistive systems to help human end users, who are non-experts (e.g., home users). 
+Home users are specially vulnerable to undesirable consequences because they lack the know-how to recognize risky situations in advance.
+A previous study \cite{byrne2016} showed that home users pay more attention to the benefits of the activities than the risk; they have goals that they want/need to achieve and are willing to take the risk to achieve them. Many triggering actions may be normal
+activities (e.g., reading email, clicking on links) with the user more focused on the goal than on the risk. 
+Thus, the undesirable consequence recognition problem needs to take into account the user’s intention as well as the undesirable consequence.
+
+\citeyear{howe2012psychology} observed that most studies that look into computer security practices of users relying on self reported surveys suffered from issues such as respondent bias, socially desirable responding and peer perception.
+The authors posited that experiments based on simulation, which place the participant in the actual situation that is monitored can help reduce such issues and also be leveraged to assess the emotional reactions of users to interventions and warnings.
+
+The Intervention Problem can be directly applied in the cyber-security domain.
+An attacker attempting to trick the user into compromising his security/privacy during day-to-day computing tasks (e.g., reading email, installing software) fits the intervention model with the user, competitor and the observer we discussed in this work.
+Given a cyber-security planning domain model with sufficient complexity (e.g., BAMS domain model), where the undesirable state (i.e., security breach) may develop over time, the Unsafe Suffix Analysis Intervention model can be applied to recognize the threat in advance.
+A key requirement in helping users in cyber-security domain is to minimize the false positives and negatives during intervention recognition.
+As evidenced by the experiment results on benchmark domains and the Rush Hour domain confirm, our proposed learning based algorithm addresses this requirement well.
+While our approach uses Automated Planning, a complementary approach proposed by \citeyear{Roschke2011} use Attack Graphs to model vulnerabilities in an intrusion detection system to detect attack scenarios while decreasing false positives.
+However, the intervention recognition must also be paired with intervention recovery in cyber-security domains to ensure the safety of the agent or the human user, particularly when the user has partial visibility or limited capability for understanding the severity of threats.
+Intervention recovery is also important in  help the agent or the human user safely complete the task.
