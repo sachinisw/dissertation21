@@ -1883,27 +1883,50 @@ $\mathcal{L}_R$                          & \begin{tabular}[c]{@{}l@{}}Used the I
 }
 \end{table}
 
-Table~\ref{tab:summarycontrolcondition} summarizes the analysis of the use of Interactive Human-aware Intervention during a Rush Hour planning task using the four evaluation metrics.
-When we resolve question 1 using the number of moves as the evaluation metric, we find that for some planning tasks the Interactive Human-aware Intervention pushes the user closer to the optimal solution. However, the effect is not statistically significant considering the $\alpha=0.05$ for the study sample.
-When we resolve question 2 using the difference from the cost optimal solution, the landmark achievement and the landmark regain as evaluation metrics, we find that the differences from the cost optimal solution and the landmark achievement between those who used Interactive Human-aware Intervention and those who did not are not statistically significant.
-The distribution of landmark regain for the sample violated the homogeneity  of variances assumption for ANOVA. 
-Therefore, we do not report the results for that metric to answer question 2.
-We also find that metrics number of moves, difference to the optimal and landmark achievement change significantly considering planning task ids.
-The change is also statistically significant.
-When we resolve question 3 using the number of moves as the evaluation metric, we find that there is a statistically significant difference between the types of help used (video and hints) between the 13 planning tasks.
-However, because each planning task is different from one another (even within the same category C, E, M) we want to find out if the number of moves differ significantly for the subjects attempting the same planning task, while using different help types.
-Posthoc analysis did not reveal a significant difference in the number of moves for the pair-wise comparisons for this question.
-I think reducing the number of planning tasks to one each from the categories C, E, M will help us yield more conclusive results on the effects of the Interactive Human-aware Intervention.
+Table~\ref{tab:summarycontrolcondition} summarizes the analysis of the use of Interactive Human-aware Intervention during a Rush Hour planning task based on the four evaluation metrics.
+Our ideal expectation is that the Interactive Human-aware Intervention model reduces the number of moves, reduces $D-i$, reduces $\mathcal{L}_A$ and reduces $\mathcal{L}_R$.
+If the reductions between the control (did not use intervention) and the condition (used intervention) groups for our evaluation metrics are statistically significant, then it would have been possible to conclude that using the Interactive Human-aware Intervention helps move the user closer to the solution produced by an automated planner.
+Conversely, if we had observed significantly higher values for the evaluation metrics for the condition group compared to the control, then we would conclude that the Interactive Human-aware Intervention does not help move the user closer to the solution produced by a planner.
+In our analysis we we not able to find any statistical significance between the control and the condition groups for any of the evaluation metrics.
+Thus we conclude that considering the four evaluation metrics, the Interactive Human-aware Intervention neither improved or worsened the planning tasks.
 
+When we resolve question 1 using the number of moves as the evaluation metric, we find that for some planning tasks types the Interactive Human-aware Intervention pushes the user closer to the optimal solution. However, the effect is not statistically significant considering the $\alpha=0.05$ for the sample.
+When we resolve question 2 using the difference from the cost optimal solution, the landmark achievement and the landmark regain as evaluation metrics, we find that the differences from the cost optimal solution and the landmark achievement between those who used Interactive Human-aware Intervention and those who did not are not statistically significant between the three planning task types.
+We do not discuss the effect of the evaluation metrics for each of the eight planning tasks (P1, P2, P4, P6, P7, P8, P9, P10) in the control and the condition groups because the distributions violate the homogeneity of variances assumption for ANOVA.
 
-For the experiment, we categorized the Rush Hour planning tasks into three types by the position of the forbidden vehicle.
-However, when examining the solutions produced by the human users there are large variances in the number of moves within the planning tasks that fall into one category.
-For example, consider the planning task P2 and P8 in the same category where the forbidden car is placed in the corner of the board.
+When we resolve question 3 using the number of moves as the evaluation metric, we find that there is a statistically significant difference between the types of help (YY, NY, YN and NN) between the three planning task types: C, E and M.
+We use the data from the study where the subjects solved 13 planning tasks.
+Recall that the participants watch the video before they start the planning task and the Interactive Human-aware Intervention is used during the planning task.
+When we say that a subject \textit{did not use the Interactive Human-aware Intervention} we mean that the subject did not see any hints being prompted by the Intervention agent during the planning task.
+We count all instances where the subject selected one of the hints prompted by the Intervention agent (including the Ignore hint option) as the subject using the Interactive Human-aware Intervention.
+The analysis shows that the different help types the users receive before and during the planning tasks significantly affects the number of moves in the solution.
+The posthoc analysis shows that for Type C planning tasks where the forbidden vehicle is positioned in the corner of the board, watching the video and also using the Interactive Human-aware Intervention results in a higher number of moves compared to instances where the human user do not use any type of help.
+Furthermore, using both kinds of help significantly increases the number of moves when compared to only using the video as help.
+This can be attributed to the fact that the hints force the user to think more deeply about the solution to the planning problem.
+Furthermore, the hint ``Next Best Move'' (most requested hint for type C planning tasks) moves the human user toward the cost optimal solution by only one step.
+This still leaves a lot of burden on  the user to think more carefully about what the step after executing the hint should be, which they may not do willingly.
+The information given to the users through the ``Next Best Move'' hint may not be descriptive enough to move the user closer toward the cost optimal solution generated by an automated planner.
+Thus, it will be useful to explore the effect of revealing longer partial solutions to the remaining planning task to the user in order to help the user find the cost optimal plan faster.
+Of course, revealing the longest possible partial plan at once takes the cognitive load away from the user entirely.
+This is equivalent to the agent solving the planning task on the user's behalf (similar to a tutor revealing the answer to a math problem at once).
+In application domains where the human users wish to retain some autonomy while interacting with the AI system, this type of ``giving away the solution'' may not be preferable.
+On the other hand, revealing too little information, as we have encountered in this experiment, results in the user spending a long time searching for the solution.
+Therefore, when an automated planning agent interacts with the human user to assist the user complete a complex task, careful balance must be struck between the quality of the information revealed and the remaining planning task to determine: ``\textit{How much help is too much help}?''.
+An important step toward addressing this question is to design metrics to evaluate the quality of information pertaining to the remaining planning task revealed to the user.
+In this research we have taken initial steps toward addressing this problem with the evaluation metrics derived from automated planning.
+ 
+Posthoc analysis also revealed that there are significant differences in the solution lengths produced the three planning task types C, E and M.
+We find that solving type C planning tasks using both kinds of help (YY) take a significantly longer time compared to solving type E and M planning tasks using no help (NN).
+Although we can draw the conclusion that solving type C planning tasks with help takes longer compared to solving type E and M, when further examining the solutions produced by the human users, there are large variances in the number of moves within the planning tasks that fall into one category.
+For example, consider the planning task P2 and P8 in the same planning task type C, where the forbidden car is placed in the corner of the board.
 The minimum number of moves in a plan produced by a human user for task P2 is 67 and the maximum number of moves is 419.
 For task P8 the minimum number of moves is 9 and the maximum number of moves is 14.
-This allows us to draw the conclusion that there are yet undiscovered factors  about the Rush Hour planning task, besides the position of the forbidden vehicle, which contribute to the difficulty the human users experience in finding the solution.
+This observation allows us to further conclude that there are yet undiscovered factors  about the Rush Hour planning tasks, besides the position of the forbidden vehicle, which contribute to the difficulty the human users experience in finding the solution.
 Some example factors that may determine the difficulty may be how blocked the forbidden vehicle is on the board, the number of vehicles blocking the path of the goal car.
 It is also likely that the difficulty may be determined by a combination of these factors.
+
+We also individually compare the solution lengths of the thirteen planning tasks when the human users adopt different combinations of help types: YY, NY, YN and NN.
+However, due to the small number of participants in the groups, we do not report any statistical analysis results between the groups for the planning tasks.
 
 We set a threshold for the number of steps for the Human-aware Intervention to start making predictions. 
 The threshold is required to generate enough data for the classifier to predict intervention and minimize the false alarms early on in the planning task, which may cause the user to turn off the alerts.
