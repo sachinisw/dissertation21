@@ -1,6 +1,6 @@
 \chapter{Interactive Human-aware Intervention}
 \label{chap:ch6}
-Using the Rush Hour domain, we study how an intervention model can be extended to recover from intervention and help users complete cognitively engaging tasks by providing helpful hints. 
+Using the Rush Hour domain, we study how an intervention model can be extended to allow intervention and help users complete cognitively engaging tasks by providing helpful hints. 
 In the context of the Rush Hour puzzle solving task, a hint is a piece of information about the Rush Hour planning problem. 
 We design helpful hints to allow the user to carefully probe the search space of the Rush Hour STRIPS planning task described in Section~\ref{sec:rushhourstrips} in
 Chapter~\ref{chap:ch5} while avoiding the undesirable state.
@@ -39,9 +39,9 @@ We evaluate the effectiveness of the proposed intervention recovery approach wit
 \section{Motivation}
 When a human user is learning to use a new software application, it can be helpful to have a passive observer that can intervene to help the user reach his intended goal. 
 This is particularly important when using the software imposes a significant cognitive load on the user and as a result the user's plan to accomplish the intended goal can become vulnerable to unintended actions or events.
-For this study, we simulate the human user learning to use a new software application with the Rush Hour puzzle solving task, 
+For this study, we simulate the human user learning to use a new software application with the Rush Hour puzzle solving task.
 In addition to the cognitive load, there may be information in the domain (e.g., Rush Hour puzzle, new software application) hidden to the user that may increase the likelihood that the user's intended goal will have unintended consequences. 
-For example, at the start of the Rush Hour puzzle solving task, the user does not know what the forbidden vehicle is.
+For example, at the start of the Rush Hour puzzle solving task, the user does not know where the forbidden vehicle is.
 Since the Rush Hour puzzles can be solved without moving the forbidden vehicle, moves that enable the forbidden vehicle to be moved later are \textit{unhelpful moves} and signal to the observer that the human user needs help. 
 Intuitively, any action that moves the forbidden vehicle triggers the undesirable state.
 The observer's decision making problem is to recognize when the user is making unhelpful moves before the undesirable state is triggered with varying sensitivity levels.
@@ -80,12 +80,14 @@ The human subject study described in Chapter~\ref{chap:ch5} addressed this requi
 When the observer generates an intervention for the Rush Hour planning task (as an alert message displayed on the screen), it signals that an undesirable state is developing, which the user can not recognize on his own at the time.
 Although the intervention alert message may convey to the user that their action might cause undesirable consequences, given the cognitive load imposed by the task he/she may need help in framing the decision about what action to execute next. 
 Studies have shown that users want some positive outcome from their action and are willing to accept that negative outcomes are a possibility \cite{good2005stopping, govani2005, debatin2009facebook, byrne2016}. 
-Therefore, a solution cannot simply block the user from taking the action, but instead needs to assist them deciding what to do and recover from the unhelpful state. 
+Therefore, a solution cannot simply block the user from taking the action, but instead needs to assist them to decide what to do to recover from the unhelpful state. 
 In this chapter, our objective is to study the impact of giving information about the Rush Hour planning problem on intervention recovery.
 
 \subsection{Improving Interactivity with Explanations}
-When a human user and an agent collaborate in an environment, having their own knowledge of the world, knowledge about goals and plans to achieve them, the agent may take actions that the human user does not expect. 
-For example, in the Rush Hour domain, when the observer intervenes the human user, it comes as  surprise because the user can not recognize the developing undesirable state.
+A human user and an agent collaborating in the same environment may have different knowledge (beliefs) about the environment.
+They may or may not know each other's own goals but will be expected to collaborate to achieve a common goal.
+Given a sufficiently complex task, these conditions may result in the agent executing some action that the human user does not expect, or vice versa.
+For example, in the Rush Hour domain, when the observer intervenes the human user, it may as a surprise because the user can not recognize the developing undesirable state.
 Recent research in Explainable Artificial Intelligence (XAI) addresses different challenges related to making AI systems transparent and interactive in human-agent collaborations. Specifically in the area of explaining the behavior of \textit{rebellious agents} \cite{coman2015case}, where an agent with goal reasoning capabilities may rebel by rejecting or revising the goals and plans a human teammate may expect it to follow, the explanation helps to build trust and understanding between the human and the agent. 
 Rebellion has many positive motivations; for example in situations where the current plan execution will pose a threat to safety of the agent or the human, goals becoming unachievable due to resource constrains and ethical conflicts, differences in information access between the agent and the human.
 Similar to an agent who intervenes, a rebellious agent increases unpredictability when other agents or human users interact in the environment.
@@ -94,17 +96,19 @@ In 2016, legal measures were adopted in the European Union that grant the indivi
 
 Most efforts on improving interpretability of AI systems have focused on providing transparency to decision making using machine learning \cite{ribeiro2016, lundberg2017, slack2020}. 
 Research on improving interpretability and interactivity of AI systems that use automated planning for decision making has become popular in the recent years. Sohrabi et al. \citeyear{sohrabi2011} describe a technique to help humans understand a plan produced by an automated planner. Chakraborti et al. \citeyear{chakraborti2019} describe a method to generate explanations by reconciling the domain models of the agents and describing the differences between the models. 
-Several other work focus on explaining why a planner chose a particular action rather than a different one
+Several other works focus on explaining why a planner chose a particular action rather than a different one
 \cite{langley2017explainable, fox2017xai}.
 
-Prior efforts in explaining rebel behavior in agents consider explaining actions with harmful effects when the rebellious agent rejects to execute them \cite{briggs2015,greggsmith2015}.
+Prior efforts in explaining rebel behavior in agents consider explaining actions with harmful effects when the rebellious agent refuses to execute them \cite{briggs2015,greggsmith2015}.
 Dannenhauer et al. \citeyear{dannenhauer2018explaining} proposes a method for a rebellious agent with goal reasoning capabilities to explain it's planning and goal reasoning decisions. 
-When a goal reasoning rebellious agent rejects a goal, it needs to show that it can not find a plan to achieve that goal without violating the conditions (e.g., safety, ethical etc.).
+When a goal reasoning rebellious agent rejects a goal, it needs to show that it can not find a plan to achieve that goal without violating certain conditions (e.g., safety, ethical etc.).
 The authors propose a question/answer dialog model where (1) the rebellious agent questions the current plans that violate the conditions and tries to find alternative plans or (2) the human questions the rebellious agent about the initial plan to find possible (safe) ways to achieve the goal.
 The question/answering dialog model uses the explainable planning framework proposed by Fox et al. \cite{fox2017xai}.
-In that framework, the authors argue that questions in explainable planning must be designed to help the questioner \textit{uncover a piece of knowledge that the questioner does not have but believes to be available in the system} while avoid the obvious statements.  
-For an example, suppose we our observer has the capability to explain intervention. When the user asks ``why did you intervene?'', the answer should not be ``\textit{because it will trigger the undesirable state}'' because that is obvious.
-They present six questions: (1) ``Why did you do action A'', (2) ``And why didn’t you do something else(that I would have done)?'', (3) Why   is   what   you   propose   to   do   more   efficient/safe/cheap than something else (that I would have done)?, (4) ``Why can’t you do that?'', (5)``Why do I need to replan at this point?'', (6) Why do I not need to replan at this point?''
+In that framework, the authors argue that questions in explainable planning must be designed to help the questioner \textit{uncover a piece of important knowledge that the questioner does not have but believes to be available in the system} while avoiding the obvious statements.  
+For an example, suppose our observer has the capability to explain intervention. 
+When the user asks ``why did you intervene?'', the answer should not be ``\textit{because it will trigger the undesirable state in k number of steps}.''
+This is because the response does not reveal any new information about the state of the world that caused intervention, or help the user learn how to avoid it.
+They present six questions: (1) ``Why did you do action A'', (2) ``And why didn’t you do something else (that I would have done)?'', (3) Why   is   what   you   propose   to   do   more   efficient/safe/cheap than something else (that I would have done)?, (4) ``Why can’t you do that?'', (5)``Why do I need to replan at this point?'', (6) Why do I not need to replan at this point?''
 They also discuss what constitutes a response to these six questions from an automated planning perspective.
 
 
@@ -114,7 +118,7 @@ In human-aware intervention, the human user acts as the planner but the complexi
 The observer's role is to guide the user upon recognizing that the user is executing a plan that may result in the undesirable state.
 Following the definition of an explanation advanced by Fox et al. \citeyear{fox2017xai}, we designed the hints to help the user uncover pieces of information about the Rush Hour planning problem so that using the hints will help the user move toward the goal safely.
 Instead of engaging the human user in a question and answer dialog model, every time the observer intervenes, the hints are presented as options for the human user to choose.
-We consider the Rush Hour STRIPS planning task to generate the hints.
+We designed the Rush Hour STRIPS planning task to generate the hints.
 
 \subsection{Cost Optimal Solutions in the (Modified) Rush Hour Planning Task}
 \label{sec:costoptimal}
@@ -139,9 +143,8 @@ We recognize two optimizing criteria for a solution of the Rush Hour STRIPS plan
 \item the number of moves
 \item the number of vehicles moved
 \end{itemize}
-In this study, we consider the number of moves as the optimizing criteria where we assume all moves are uniform cost equal to 1.
-For the puzzle shown in Figure~\ref{fig:board}(A), the cost optimal solution, if the number of moves is considered as
-the optimizing criteria, consists of 21 moves. 
+In this study, we consider the number of moves as the optimizing criteria where we assume all moves are of uniform cost equal to 1.
+For the puzzle shown in Figure~\ref{fig:board}(A), the cost optimal solution, minimizing the number of moves, consists of 21 moves. 
 If optimized for the number of vehicles moved,
 the puzzle can be solved optimally by moving only 8 vehicles.
 
@@ -152,7 +155,7 @@ The human user does not know what the specific forbidden moves are, but he knows
 The planning task can be solved without moving the forbidden vehicle.
 Therefore, if the human user moves the forbidden car while solving the Rush Hour planning task, it indicates that he is moving away from a cost optimal solution and needs help.
 Because moving the forbidden vehicle is unnecessary, an automated planner can be used to find cost optimal solutions to the Rush Hour planning task.
-In contrast, a human user not having the heurisitic search capabilities as a planner, may make mistakes and commit to plans that are longer and may even reach the undesirable state.
+In contrast, a human user not having the heurisitic search capabilities of the planner, may make mistakes and commit to plans that are longer and may even reach the undesirable state.
 For example, Table~\ref{tab:plan} shows two solutions to the same Rush Hour planning task illustrated in Figure~\ref{fig:board}.
 The cost optimal solution on the left is produced by an automated planner. 
 The (partial) solution on the right is produced by a human user. 
@@ -212,7 +215,7 @@ Although the forbidden vehicle is \textit{removed} from the board, we block the 
 This step instructs the planner not to move the other vehicles to the \textit{forgotten} forbidden vehicle's positions because those locations are not free.
 These two steps force the automated planner to find solutions that do not move the forbidden vehicle and ensures that the found plans do not violate rules of the game.
 The solution to $P_{observer}$ is a plan $\pi_{observer}$ from the $[s_H]$ until \desired is satisfied.
-We denote the cost optimal plan as $\pi^{*}_{observer}$
+We denote the cost optimal plan as $\pi^{*}_{observer}$.
 
 \begin{definition}
 \label{def:hint}
@@ -232,7 +235,7 @@ When the fluents are grounded, the set of vehicle objects associated with the fa
 Modifies $[s_H]$ to $s_0$ so that the user solves $P_{user}$ again from the beginning.
 \item \textbf{Ignore hint} \\This option is not associated with properties of $P_{observer}$.
 It allows the user to disregard the hints and continue solving $P_{user}$. 
-Two successive choices of \textit{Ignore hint} disables the hints and stops the human-aware Intervention process.
+Two successive choices of \textit{Ignore hint} disables the hints and stops the Human-aware Intervention process.
 If the user moves the forbidden vehicle, an alert is displayed to inform the user about the forbidden action and the move is automatically undone. Figure~\ref{fig:badcar} shows the alert message.
 The automatic undo blocks the user from further searching down the undesirable path and forces the user to explore a different part of the search space for $P_{user}$.
 \end{itemize}
@@ -255,12 +258,14 @@ In this chapter we discuss the software framework we implemented for this purpos
 \end{figure}
 
 \section{Rush Hour Puzzle Design Decisions}
-When choosing Rush Hour puzzle configurations for the study, we want to carefully balance the puzzle's difficulty considering a human user. 
-Especially, given the PSPACE-completeness of the (generalized) puzzle, we need the puzzles to be solvable by human users in a reasonable time. 
-Further, we use the Rush Hour puzzle as a supplementary task comparable to human users learning to use a new software or a web application. 
-Therefore, the puzzle solving task should pose a sufficient challenge for the user during the search for a solution in order to make the intervention step more meaningful. We introduce a forbidden vehicle to restrict the moves the user is allowed to make. 
-This is an alternative way to increase the difficulty of the puzzle without having to increase the number of vehicles on the board \cite{fernau2003} to make the puzzle more challenging.
+We use the Rush Hour puzzle as a supplementary task comparable to human users learning to use a new software or a web application. 
+Therefore, the puzzle solving task should pose a sufficient challenge for the user during the search for a solution in order to make the intervention step more meaningful. 
+Adding stationery vehicles (e.g., like the forbidden vehicle) is an alternative way to increase the difficulty of the puzzle without having to increase the number of vehicles on the board \cite{fernau2003} to make the puzzle more challenging.
 In order to further instill the importance of avoiding the forbidden vehicle in the user's mind, we also provide warning messages on the Web interface (Figure~\ref{fig:ui2}) to inform the user about the presence of a forbidden vehicle and what would happen if the forbidden car was moved. 
+The message also conveyed a \textit{penalty} for moving the forbidden vehicles.
+When the user moves the forbidden vehicle, the move is automatically undone by the game engine.
+This penalty forces the user to think carefully about the next move to execute and prevents the user from searching further along the unhelpful parts of the search space.
+The penalty for moving the forbidden vehicle is a new addition compared to the conditions in the Rush Hour experiment described in Chapter~\ref{chap:ch5}
 
 Recall that in Chapter~\ref{chap:ch5}, Section~\ref{sec:rushhourexperiment1}, we discussed three types of Rush Hour puzzles based on the position of the forbidden vehicle (\textbf{E}dge, \textbf{M}iddle, \textbf{C}orner).
 In the first round, where the human subjects solve the puzzle without Human-aware Intervention, we use 10 puzzles.
@@ -333,7 +338,6 @@ All illegal moves are blocked and the user is alerted if the he attempts to make
 \end{figure}
 
 \subsection{System Design Decisions}
-We design the Rush Hour software framework to conduct human subject studies in an environment that allows the user to be engaged in a cognitively taxing task. 
 Our first design choice was in establishing the physical setup of the system. 
 Because the experiments are targeted toward all kinds of computer software users (experts/non-experts), we wanted the subjects' attention to be mainly on the puzzle solving task and not be distracted by a complex user-interface. 
 To allow for more users to participate, while minimizing the time commitment and the effort, we wanted the system to be accessible from anywhere (e.g, home, university). 
@@ -398,8 +402,8 @@ The video component is only available if the Rush Hour Simulator is operating wi
 On the other hand, the solver is a dynamic and an interactive component. 
 The solver component allows the user to start a puzzle solving task by clicking a button, which fetches a random Rush Hour puzzle from the server. 
 Figure~\ref{fig:ui3} shows how the puzzle is displayed to the human user.
-The participant can move the vehicles on the grid by first clicking once on the vehicle to select it and then clicking once on an adjacent empty cell to move it to the selected cell. To comply with the classical planning model of discrete actions, the application forces the user to move the vehicles one step at a time. 
-This rule invalidates moves that jump over multiple cells on the puzzle boards. 
+The participant can move the vehicles on the grid by first clicking once on the vehicle to select it and then clicking once on an adjacent empty cell to move it to the selected cell. 
+We enforced the discrete actions in the environment by invalidating the moves that jump over multiple cells on the puzzle boards. 
 The other illegal move is user attempting to move a vehicle in the opposite orientation. When the user makes one of these illegal moves, error messages are displayed and the move is blocked. 
 All legal moves the user make are temporarily kept in in-memory data structures on the client side. 
 Once the user finishes the puzzle solving task, an API call is invoked to initiate the data transmission between the client and the server in a secure manner via HTTPS. 
@@ -475,9 +479,15 @@ The system is deployed on a secure Linux Web server with a public IP address, wh
 
 
 \section{Experiment Design}
-In the first round, the human users solved Rush Hour planning tasks without Human-aware Intervention (see Appendix~\ref{ap:phase1design} for details).
+In the first round of data collection, the human users solved Rush Hour planning tasks without Human-aware Intervention (see Appendix~\ref{ap:phase1design} for details).
 In the second phase, the application intervenes the user and provides helpful hints.
-We recruited 142 participants from a university student population.
+We refer to the first group as the \textbf{control group}.
+We discussed the findings of this study in Chapter~\ref{chap:ch5}.
+In this chapter, we discuss the findings of the second experimental condition where the human users solved the Rush Hour planning tasks with hints.
+We refer to the second group as the \textbf{condition group}.
+Therefore, we have a between group experimental design to evaluate the effect of using the Interactive Human-aware Intervention between the control and the condition group.
+
+For the condition group, we recruited 142 participants from a university student population.
 The participants were not compensated for their time.
 Upon agreeing to participate in the study each subject is assigned one puzzle randomly out of 13 puzzles. 
 In addition, the participants are randomly selected to watch a 44 second video of a sample game play.
@@ -505,14 +515,13 @@ For each participant, we record the solution, requested hints, the demographic i
 \section{Results and Evaluation}
 We first present the findings of the post-study survey, discuss the properties of our study sample and outline how human users subjectively rated the helpfulness of the hints.
 Next, we turn our attention to the solutions produced by human users under two experimental conditions.
-As the first experimental condition, the human users solved Rush Hour planning tasks without hints.
-We refer to the first group as the \textbf{control group}.
-We discussed the findings of this study in Chapter~\ref{chap:ch5}.
-In this chapter, we discuss the findings of the second experimental condition where the human users solved the Rush Hour planning tasks with hints.
-We refer to the second group as the \textbf{condition group}.
-Therefore, we have a between group experimental design to evaluate the effect of using the Interactive Human-aware Intervention between the control and the condition group.
 We present the summary statistics for the number of moves in the solutions in the control and the condition groups and compare the solutions that moved the forbidden vehicle and the solutions that did not.
-Next we compare the
+We use this analysis to statistically verify if there is any relationship between avoiding the forbidden vehicle and the number of moves for both the condition and the control groups.
+Next, we discuss the usage of hints starting with subjective ratings for the helpfulness of hints given by human users.
+Next, we extend the discussion to study which hints were requested the most for different planning tasks.
+We also analyze the hint usage frequency during different stages of the planning task to identify if there are any patterns for the type of hint requested at early stages of the planning task compared to the late stages.
+Next, we evaluate the effectiveness of the Interactive Human-aware Intervention using four evaluation metrics.
+
 
 \subsection{Findings of the Post-study Survey}
 From the 131 participants who completed the demographics survey, the majority (52) were between the age of 20 - 25. 
@@ -544,7 +553,7 @@ Considering the puzzle types C, E and M, we could not find unique subsets of hin
 \cline{4-7}
  &  &  & \multicolumn{4}{l|}{\textbf{Mean (std. dev.) helpfulness rating}} \\ \hline
 \multicolumn{1}{|l|}{\textbf{Type}} & \multicolumn{1}{l|}{\textbf{Puzzle ID}} & \textbf{Count} & \multicolumn{1}{c|}{H1} & \multicolumn{1}{c|}{H2} & \multicolumn{1}{c|}{H3} & \multicolumn{1}{c|}{H4} \\ \hline
-\multicolumn{1}{|c|}{\multirow{4}{*}{\textbf{C}}} & \multicolumn{1}{l|}{P2} & 6 & 1.5 (2.5) & 4.3 (2.6) & 3.8 (2.3) & 2.0 (2.3) \\
+\multicolumn{1}{|l|}{\multirow{4}{*}{\textbf{C}}} & \multicolumn{1}{l|}{P2} & 6 & 1.5 (2.5) & 4.3 (2.6) & 3.8 (2.3) & 2.0 (2.3) \\
 \multicolumn{1}{|c|}{} & \multicolumn{1}{l|}{P4} & 11 & 1.3 (2.1) & 2.3 (2.1) & 1.5 (2.2) & 0.8 (1.7) \\
 \multicolumn{1}{|c|}{} & \multicolumn{1}{l|}{P6} & 3 & 2.0 (1.2) & 3.3 (2.6) & 1.7 (2.9) & 0 \\
 \multicolumn{1}{|c|}{} & \multicolumn{1}{l|}{P8} & 1 & 0 & 3.0 & 3.0 & 1.0 \\ \hline
@@ -668,23 +677,23 @@ In both cases we use an automated planner to find the cost optimal solutions to 
 
 \begin{table}[tpb]
 \caption{Optimal costs for the Rush Hour planning tasks $P_{observer}$ and $P_{user}$ optimized for number of moves and number of cars. $P_{observer}$ finds solutions without moving the forbidden vehicle. $P_{user}$ may find a shorter solution while moving the forbidden vehicle.}
-\begin{tabular}{|l|c|c|c|c|}
+\begin{tabular}{|l|l|c|c|c|c|}
 \hline
-\multirow{2}{*}{PID} & \multicolumn{2}{l|}{Number of Moves} & \multicolumn{2}{l|}{Number of Cars} \\ \cline{2-5} 
-    & $P_{observer}$ & $P_{user}$ & $P_{observer}$ & $P_{user}$ \\ \hline
-P1  & 24   & 24     & 8    & 8      \\ 
-P2  & 30   & 30     & 10   & 10     \\ 
-P3  & \textbf{35}   & \textbf{25}     & 10   & 10     \\ 
-P4  & 23   & 23     & 9    & 9      \\ 
-P5  & \textbf{21}   & \textbf{14}     & 7    & 7      \\ 
-P6  & 22   & 22     & 8    & 8      \\ 
-P7  & 21   & 21     & 8    & 8      \\ 
-P8  & 9    & 9      & 5    & 5      \\ 
-P9  & 21   & 21     & 10   & 10     \\
-P10 & 24   & 24     & 9    & 9      \\ 
-P11 & 26   & 26     & 7	   & 7		\\
-P12 & 17   & 17     & 8    & 8		\\
-P13 & 21   & 21	    & 8	   & 8		\\	\hline
+\multirow{2}{*}{PID} & \multirow{2}{*}{Type} &\multicolumn{2}{l|}{Number of Moves} & \multicolumn{2}{l|}{Number of Cars} \\ \cline{3-6} 
+   &  & $P_{observer}$ & $P_{user}$ & $P_{observer}$ & $P_{user}$ \\ \hline
+P1 & E & 24   & 24     & 8    & 8      \\ 
+P2 & C  & 30   & 30     & 10   & 10     \\ 
+P3 & E  & \textbf{35}   & \textbf{25}     & 10   & 10     \\ 
+P4 & C  & 23   & 23     & 9    & 9      \\ 
+P5 & E  & \textbf{21}   & \textbf{14}     & 7    & 7      \\ 
+P6 & C  & 22   & 22     & 8    & 8      \\ 
+P7 & M & 21   & 21     & 8    & 8      \\ 
+P8 & C  & 9    & 9      & 5    & 5      \\ 
+P9 & E  & 21   & 21     & 10   & 10     \\
+P10 & E & 24   & 24     & 9    & 9      \\ 
+P11 & M & 26   & 26     & 7	   & 7		\\
+P12 & M & 17   & 17     & 8    & 8		\\
+P13  & M & 21   & 21	    & 8	   & 8		\\	\hline
 \end{tabular}
 \label{tab:optimals}
 \end{table}
@@ -857,7 +866,7 @@ Figure~\ref{fig:speedrequest} illustrates the request frequency distribution wit
 \caption{Number of times each hint was selected by users in the slow, medium and fast solution groups}
 \begin{tabular}{|l|cccccc|}
 \hline
-\multirow{2}{*}{Speed} & \multicolumn{6}{c|}{Hint} \\ \cline{2-7} 
+\multirow{2}{*}{Speed} & \multicolumn{6}{c|}{Selected Hint} \\ \cline{2-7} 
  & \multicolumn{1}{c|}{Undo} & \multicolumn{1}{c|}{Remaining} & \multicolumn{1}{c|}{Must Move} & \multicolumn{1}{c|}{Next Best} & \multicolumn{1}{c|}{Restart} & Ignore \\ \hline
 Slow & 57 & 36 & 10 & 131 & 14 & 73 \\ \hline
 Medium & 23 & 9 & 17 & 120 & 5 & 42 \\ \hline
@@ -874,8 +883,17 @@ Fast & 18 & 11 & 3 & 90 & 0 & 32 \\ \hline
   \label{fig:speedrequest}
 \end{figure}
 
+We use the Fisher's exact test to verify if the hint selection is related to the puzzle solving speed.
+The chi-squared test of independence can not be used in this situation because our contingency table (Table~\ref{tab:speedsandrequests}) contains a cell with a zero frequency.
+We define the null ($H_0$) and alternative ($H_A$) hypotheses as follows:
+\begin{itemize}
+\item $H_0$ : The two categorical variables, Selected Hint and Speed are independent.
+\item $H_A$ : The two categorical variables, Selected Hint and Speed are dependent. 
+\end{itemize} 
+Given the significance level $\alpha=0.05$, we reject $H_0$ ($p-value = 0.0005$) and conclude that there is a relationship between the hint selection and the speed.
+
 We now analyze the hint request patterns considering the three Rush Hour planning task types E, M, C.
-In Table~\ref{tab:groupsandrequests}, we report the total number of requests for each hint requested for the three planning task types.
+In Table~\ref{tab:groupsandrequests}, we report the sum of requests for the hints considering the three planning task types.
 For each planning task types, the most requested hint is ``Show the next best move''.
 The same was observed when considering user's solution speed.
 The second most requested option is ``Ignore''.
@@ -902,6 +920,15 @@ C & 27 & 25 & 18 & 96 & 5 & 43 \\ \hline
   \caption{Number of requests for each hint in the Rush Hour planning task types E, M, C with error bars.}
   \label{fig:groupandrequest}
 \end{figure}
+
+We perform the chi-square test for independence to verify if the hint selection is related to the type of puzzle.
+We define the null ($H_0$) and alternative ($H_A$) hypotheses as follows:
+\begin{itemize}
+\item $H_0$ : The two categorical variables, Selected Hint and Planning Task Type are independent.
+\item $H_A$ : The two categorical variables, Selected Hint and Planning Task type are dependent. 
+\end{itemize} 
+Given the significance level $\alpha=0.05$, we reject $H_0$ ($p-value= 0.007, \chi^2=24.4, df=10$) and conclude that there is a relationship between the hint selection and the planning task type.
+
 
 \begin{table}[tpb]
 \caption{The total number of hints requested from each type sorted by the request number - part 1}
@@ -967,7 +994,7 @@ The other reason could be that the subjects had difficulty recognizing the forbi
 The Table~\ref{tab:firsthint} in Appendix~\ref{apx:hintsstudy} summarizes the raw data for the solutions produced by the 57 subjects.
 
 Figure~\ref{fig:reqdistribution} further corroborates the finding that the hint ``Show next best move'' is the most requested hint.
-Moreover, it is chosen by the subjects early as well as during the late stages of their planning tasks.
+Moreover, it is selected by the subjects as the early hint choices as well as choices at the end.
 The hint ``Show the remaining number of moves'' is requested less often at first and more often towards the end.
 The hint ``Show the vehicles that must be moved'' is only requested early.
 The hint ``Ignore'' is chosen during all stages of the planning task.
@@ -1047,7 +1074,8 @@ Then the user requested the ``Show the next best move'' hint 3 times and closer 
 \subsection{The Effectiveness of the Interactive Human-aware Intervention}
 In Section~\ref{sec:relationshipavoidingforbidden}, we conclude that in order help the user avoid the forbidden vehicle, the Interactive Human-aware Intervention agent must direct the user toward the cost optimal solution for the planning task.
 In this section, we evaluate how successful the interactive Human-aware Intervention model has been in moving the user's solution closer to the cost optimal solution using the hints.
-Recall that the hints are properties derived from the cost optimal solution and the fact landmarks of $P_{observer}$.
+The hints are properties derived from the cost optimal solution and the fact landmarks of $P_{observer}$.
+Recall that the fact landmarks are state predicates that must be true in any valid solution plan for $P_{observer}$ \cite{hoffman2004lm}.
 We want to address the following:
 
 \textbf{Evaluation Questions}
@@ -1109,6 +1137,8 @@ The cluster $[L1, L2, L3, L4, L5, L6]$ in the planning task P1 appear very early
 The cluster $[L22, L23, L24]$ appear at the end most of the time.
 The cluster $[L15, L16, L17]$ appear together in the middle after $L14$ has been achieved.
 The cluster $[L13, L14]$ appear together in the middle before  the cluster $[L15, L16, L17]$.
+Note that within a cluster there may be permutations of the order in which the individual landmarks are reached.
+For example, in the solutions for P1, the first cluster may be $[L1, L2, L3, L4, L5, L6]$ or $[L5, L1, L2, L3, L4, L6]$.
 The condensed representation applied to the cost optimal plans for the planning tasks P1, P2, P4, P6, P7, P8, P9, P10 are as follows:
 \begin{itemize}
 \item $\langle P1\rangle [L1, L2, L3, L4, L5, L6] (A8) (A7,A9) (A12) [L13, L14] (A10)$ \\ $[L15, L16, L17] (A18, A19, A20, A21) [L22, L23, L24]$
@@ -1199,7 +1229,7 @@ Because the sample size 181 ($113+68$) is greater than the recommended size by t
 %\end{figure}
 
 \subsubsection{Effect on the Number of Moves}
-We address the question ``\textit{Does using the Interactive Human-aware Intervention (i.e., the hints) have an effect on the number of moves between the control and the condition groups''}?
+We address the question ``\textit{Does using the Interactive Human-aware Intervention (i.e., the hints) have an effect on the number of moves between the control and the condition groups?''}
 We propose the following study design.
 \begin{itemize}
 \item \textbf{Dependent variable}: Number of  moves
