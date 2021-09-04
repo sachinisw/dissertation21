@@ -883,14 +883,14 @@ Fast & 18 & 11 & 3 & 90 & 0 & 32 \\ \hline
   \label{fig:speedrequest}
 \end{figure}
 
-We use the Fisher's exact test to verify if the hint selection is related to the puzzle solving speed.
+We use the Fisher's exact test to verify if the hint selection is significantly related to the puzzle solving speed.
 The chi-squared test of independence can not be used in this situation because our contingency table (Table~\ref{tab:speedsandrequests}) contains a cell with a zero frequency.
 We define the null ($H_0$) and alternative ($H_A$) hypotheses as follows:
 \begin{itemize}
 \item $H_0$ : The two categorical variables, Selected Hint and Speed are independent.
 \item $H_A$ : The two categorical variables, Selected Hint and Speed are dependent. 
 \end{itemize} 
-Given the significance level $\alpha=0.05$, we reject $H_0$ ($p-value = 0.0005$) and conclude that there is a relationship between the hint selection and the speed.
+Given the significance level $\alpha=0.05$, we reject $H_0$ ($p-value = 0.0005$) and conclude that there is a significant relationship between the hint selection and the speed.
 
 We now analyze the hint request patterns considering the three Rush Hour planning task types E, M, C.
 In Table~\ref{tab:groupsandrequests}, we report the sum of requests for the hints considering the three planning task types.
@@ -921,13 +921,13 @@ C & 27 & 25 & 18 & 96 & 5 & 43 \\ \hline
   \label{fig:groupandrequest}
 \end{figure}
 
-We perform the chi-square test for independence to verify if the hint selection is related to the type of puzzle.
+We perform the chi-square test for independence to verify if the hint selection is significantly related to the type of puzzle.
 We define the null ($H_0$) and alternative ($H_A$) hypotheses as follows:
 \begin{itemize}
 \item $H_0$ : The two categorical variables, Selected Hint and Planning Task Type are independent.
 \item $H_A$ : The two categorical variables, Selected Hint and Planning Task type are dependent. 
 \end{itemize} 
-Given the significance level $\alpha=0.05$, we reject $H_0$ ($p-value= 0.007, \chi^2=24.4, df=10$) and conclude that there is a relationship between the hint selection and the planning task type.
+Given the significance level $\alpha=0.05$, we reject $H_0$ ($p-value= 0.007, \chi^2=24.4, df=10$) and conclude that there is a significantly relationship between the hint selection and the planning task type.
 
 
 \begin{table}[tpb]
