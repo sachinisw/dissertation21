@@ -506,8 +506,7 @@
 % command to create table of contents
 \renewcommand{\tableofcontents}{%
     \begin{flatcenter}
-        TABLE OF CONTENTS
-
+            TABLE OF CONTENTS
         \vspace{3em}
     \end{flatcenter}
 

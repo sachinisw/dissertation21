@@ -62,6 +62,7 @@
 % citation and reference formatting
 \usepackage{apacite} % apa style citations, also change bibliographystyle below
 %\usepackage{cite} % math and engineering style citations
+%\usepackage[nottoc]{tocbibind}
 \usepackage{algorithmicx}
 \usepackage{times}
 \usepackage{multirow}
@@ -236,19 +237,21 @@ Our solution to address the Intervention Recovery Problem goes beyond the typica
 We propose the \textbf{Interactive Human-aware Intervention} where a human user solves a cognitively engaging planning task with the assistance of an agent that implements the Human-aware Intervention.
 The Interactive Human-aware Intervention is different from typical preventive measures where the agent executes actions to modify the domain such that the undesirable plan can not progress (e.g., block an action).
 Our approach interactively guides the human user toward the solution to the planning task by revealing information about the remaining planning task.
-We evaluate the effectiveness of the Interactive Human-aware Intervention using both subjective and objective measures in a human subject study.
+We evaluate the Interactive Human-aware Intervention using both subjective and objective measures in a human subject study.
 }
 % Acknowledgments 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \acknowledgements{%
-I would like express my deepest gratitude to Prof. Darrell Whitley, Dr. Mark Roberts and Dr. Indrajit Ray for their guidance, encouragement and insightful discussions during my long winded PhD journey, without whom this would not have become a reality.
+I would like express my deepest gratitude to Prof. Darrell Whitley, Dr. Mark Roberts and Dr. Indrajit Ray for their guidance, encouragement and insightful discussions during my long winded PhD journey.
+Had it not been for you, this would not have become a reality.
+To all the faculty members in my dissertation committee, Dr. Francisco Ortega, Dr. Sangmi Pallickara and Dr. Carol Seger, thank you very much for agreeing to be a part of this excursion and helping me succeed in more ways than one.
 
 I fondly remember my late advisor Prof. Adele Howe; my mentor and my friend until 2017.
 Thank you for your courage, patience and above all for being a wonderful human being.
 I miss you.
 May you find peace.
 
-Thank you to my husband for everything you have had to put up with in the past few years, from bringing me late night dinners to listening to my incessant complaints.
+Thank you to my husband for everything you have had to put up with in the past few years, from bringing me late night dinners to my office to listening to my incessant complaints.
 
 Thank you to my parents for getting me this far in life.
 I think I can take things from here.
@@ -307,6 +310,20 @@ Thank you to anyone and everyone who knew that I was doing this and lent a hand 
 \input{ch6}
 
 \input{ch7}
+\newpage
+
+\backmatter
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Bibliography
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% unsorted BibTeX style
+% check here for more:  https://www.sharelatex.com/learn/Bibtex_bibliography_styles
+\bibliographystyle{apacite} % apa style bibliography
+\bibliography{refsicaps19}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  Appendices
 %
@@ -319,13 +336,7 @@ Thank you to anyone and everyone who knew that I was doing this and lent a hand 
 \input{ap4}
 \input{ap5}
 \input{ap6}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Bibliography
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% unsorted BibTeX style
-% check here for more:  https://www.sharelatex.com/learn/Bibtex_bibliography_styles
 \newpage
-\bibliographystyle{apacite} % apa style bibliography
-\bibliography{refsicaps19.bib}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
 \end{document}

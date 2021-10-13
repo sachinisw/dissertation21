@@ -109,11 +109,11 @@ This STRIPS domain model captures the home computer user cyber-security scenario
 \hspace*{35pt}(information-leakage ?anAccount - account $\ldots$ )\\[15pt]
 }
 
-\hspace*{35pt}(\texttt{:action user-visit-antivirus-download-site}\\
-\hspace*{35pt}\texttt{:parameters (?U - user ?aBrowser - browser ?aSite - site \\\hspace*{35pt} ?av - anti-virus)}\\
-\hspace*{35pt}\texttt{:precondition ( and (logged-onto-system ?U) \\\hspace*{35pt} (use-software ?aBrowser) (running ?aBrowser) \\\hspace*{35pt} (= ?aSite antivirus-software-download-site) \\\hspace*{35pt} (not (installed ?av))  (not (running ?av)) )}\\
-\hspace*{35pt}\texttt{:effect (and (user-visits-site ?U ?aSite))}
-)\\[15pt]
+%\hspace*{35pt}(\texttt{:action user-visit-antivirus-download-site}\\
+%\hspace*{35pt}\texttt{:parameters (?U - user ?aBrowser - browser ?aSite - site \\\hspace*{35pt} ?av - anti-virus)}\\
+%\hspace*{35pt}\texttt{:precondition ( and (logged-onto-system ?U) \\\hspace*{35pt} (use-software ?aBrowser) (running ?aBrowser) \\\hspace*{35pt} (= ?aSite antivirus-software-download-site) \\\hspace*{35pt} (not (installed ?av))  (not (running ?av)) )}\\
+%\hspace*{35pt}\texttt{:effect (and (user-visits-site ?U ?aSite))}
+%)\\[15pt]
 
 \hspace*{35pt}\texttt{(:action user-opens-attachment-through-webmail}\\
 \hspace*{35pt}\texttt{:parameters (?U - user ?aBrowser - browser ?WM - webmailer \\\hspace*{35pt}?aSite - site  ?anAccount - account ?Msg - email-ID  ?F - file )}
