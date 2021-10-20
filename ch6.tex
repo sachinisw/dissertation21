@@ -167,6 +167,7 @@ Thus we conclude that the cost optimal solution to the modified Rush Hour planni
 
 \begin{table}[tpb]
 \caption{Solutions for the Rush Hour planning task in Figure~\ref{fig:board}(A) produced by an automated planner (left) and a human user (right). The forbidden vehicle is C2}
+\resizebox{\textwidth}{!}{%
 \begin{tabular}{|c|c|}
 \hline
 A safe, optimal solution (21 moves) & Unsafe solution (43 moves)\\
@@ -174,6 +175,7 @@ A safe, optimal solution (21 moves) & Unsafe solution (43 moves)\\
 \begin{tabular}[c]{@{}l@{}}\texttt{\textsc{move-car c0 l17 l16 l18 we}}\\ \texttt{\textsc{move-car c0 l16 l15 l17 we}}\\ \texttt{\textsc{move-truck t3 l23 l17 l29 l35 ns}}\\ \texttt{\textsc{move-car c7 l20 l21 l19 ew}}\\ \texttt{\textsc{move-car c6 l25 l19 l31 ns}}\\ \texttt{\textsc{move-truck t1 l32 l31 l33 l34 we}}\\ \texttt{\textsc{move-car c5 l28 l34 l22 sn}}\\ \texttt{\textsc{move-truck t3 l17 l11 l23 l29 ns}}\\ \texttt{\textsc{move-car c7 l21 l22 l20 ew}}\\ \texttt{\textsc{move-truck t2 l14 l20 l8 l2 sn}}\\ \texttt{\textsc{move-truck t2 l20 l26 l14 l8 sn}}\\ \texttt{\textsc{move-truck t0 l3 l2 l4 l5 we}}\\ \texttt{\textsc{move-truck t3 l11 l5 l17 l23 ns}}\\ \texttt{\textsc{move-car c7 l22 l23 l21 ew}} \\ \texttt{\textsc{move-car c7 l23 l24 l22 ew}}\\ \texttt{\textsc{move-car c5 l28 l22 l34 ns}}\\ \texttt{\textsc{move-truck t1 l33 l34 l32 l31 ew}}\\ \texttt{\textsc{move-truck t1 l34 l35 l33 l32 ew}}\\ \texttt{\textsc{move-truck t2 l26 l32 l20 l14 sn}}\\ \texttt{\textsc{move-car c0 l15 l14 l16 we}}\\ \texttt{\textsc{move-car c0 l14 l13 l15 we}}\end{tabular} &
   \begin{tabular}[c]{@{}l@{}}\texttt{\textsc{move-car c0 l17 l16 l18 we}}\\ \texttt{\textsc{move-car c0 l16 l15 l17 we}}\\ \texttt{\textsc{move-car c4 l30 l24 l36 ns}}\\ \texttt{\textsc{move-car c4 l24 l18 l30 ns}}\\ \texttt{\textsc{move-truck t3 l23 l17 l29 l35 ns}}\\ \texttt{\textsc{move-truck t3 l17 l11 l23 l29 ns}}\\ \texttt{\textsc{move-truck t1 l34 l35 l33 l32 ew}}\\ \texttt{\textsc{move-truck t1 l35 l36 l34 l33 ew}}\\ \texttt{\textsc{move-car c7 l20 l21 l19 ew}}\\ \texttt{\textsc{move-car c6 l25 l19 l31 ns}}\\ \texttt{\textsc{move-truck t1 l34 l33 l35 l36 we}}\\ \texttt{\textsc{move-truck t1 l33 l32 l34 l35 we}}\\ \texttt{\textsc{move-truck t1 l32 l31 l33 l34 we}}\\ \texttt{\textsc{move-car c5 l28 l34 l22 sn}}\\ \texttt{\textsc{move-car c7 l21 l22 l20 ew}}\\ \texttt{\textsc{move-truck t2 l14 l20 l8 l2 sn}}\\ \texttt{\textsc{move-truck t2 l20 l26 l14 l8 sn}}\\ \colorbox{LightSalmon}{\texttt{\textsc{move-car c2 l9 l8 l10 we}}}\\ \texttt{\textsc{move-truck t0 l3 l2 l4 l5 we}}\\ \texttt{\textsc{move-truck t3 l11 l5 l17 l23 ns}}\\ \texttt{\textsc{move-truck t3 l17 l23 l11 l5 sn}}\\ \texttt{\textsc{move-truck t3 l23 l29 l17 l11 sn}}\\ $\ldots$\end{tabular} \\ \hline
 \end{tabular}
+}%
 \label{tab:plan}
 \end{table}
 
