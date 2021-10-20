@@ -1,0 +1,98 @@
+\documentclass{beamer}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{multirow}
+\usepackage{wrapfig}
+\usepackage{alltt}
+\usepackage{float}
+\usepackage{subfig}
+\usepackage{multirow}
+\usepackage{tabularx}
+
+
+\usetheme{beaver}
+\setbeamertemplate{footline}[page number]
+\setbeamertemplate{navigation symbols}{}
+
+\AtBeginSection{\frame{\sectionpage}}
+\AtBeginSubsection{\frame{\subsectionpage}}
+
+\defbeamertemplate{section page}{mine}[1][]{%
+  \begin{centering}
+    {\usebeamerfont{section name}\usebeamercolor[fg]{section name}#1}
+    \vskip1em\par
+    \begin{beamercolorbox}[sep=12pt,center]{part title}
+      \usebeamerfont{section title}\insertsection\par
+    \end{beamercolorbox}
+  \end{centering}
+}
+
+\defbeamertemplate{subsection page}{mine}[1][]{%
+  \begin{centering}
+    {\usebeamerfont{subsection name}\usebeamercolor[fg]{subsection name}#1}
+    \vskip1em\par
+    \begin{beamercolorbox}[sep=8pt,center,#1]{part title}
+      \usebeamerfont{subsection title}\insertsubsection\par
+    \end{beamercolorbox}
+  \end{centering}
+}
+
+%template for Q&A slide
+\defbeamertemplate{section page}{questions}[1][]{%
+	\begin{centering}
+		{\usebeamerfont{section name}\usebeamercolor[fg]{section name}#1}
+		\vskip1em\par
+		\begin{beamercolorbox}[sep=12pt,center]{part title}
+			\usebeamerfont{section title}\insertsection\par
+		\end{beamercolorbox}
+	\end{centering}
+}
+
+
+
+\title{Helping Human Users With Models of Intervention}
+\author{Sachini Weerawardhana}
+\institute{Dissertation Proposal \\Advisor: Prof. Darrell Whitley}
+\begin{document}
+\maketitle
+
+\input{intro} %#2
+\input{features}  %#4
+\input{features2}  %#4
+\input{rush}	 %#5
+\input{motivation}  %#3
+\input{domains}	 %#6
+\input{problem}	 %#9, 10
+\input{learning}	 %#11
+\input{rq11}	 %#13, 14
+\input{rq12}	 %#15
+\input{rq13}	 %#16
+\input{rq14}	 %#17
+\input{rq15}	 %#18
+\input{rq16}	 %#19
+\input{rq17}	 %#20
+\input{rq18}	 %#21
+\input{rq19}	 %#22
+\input{rq110} 	%#23
+\input{rq111} 	%#24
+\input{rq112} 	%#25
+\input{rq113} 	%#26
+\input{rq114} 	%#27
+\input{rq115} 	%#28
+\input{rq116} 	%#29
+\input{rq117} 	%#30
+\input{rq118} 	%#31
+\input{rq119} 	%#32
+\input{rq120} 	%#33
+\input{rq121} %#34
+\input{rq122} %#35
+\input{rq21} %#36,37
+\input{rq23} %#38
+\input{rq31} %#39
+\input{summary} %#40
+
+
+
+\input{rq22} %#end-hiding slide
+
+\end{document}

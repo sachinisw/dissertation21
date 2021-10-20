@@ -1,0 +1,112 @@
+\documentclass{beamer}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{multirow}
+\usepackage{wrapfig}
+\usepackage{alltt}
+\usepackage{float}
+%\usepackage{subfig}
+\usepackage{multirow}
+\usepackage{tabularx}
+\usepackage{caption}
+\usepackage{subcaption}
+
+\usetheme{beaver}
+\setbeamertemplate{footline}[page number]
+\setbeamertemplate{navigation symbols}{}
+
+\AtBeginSection{\frame{\sectionpage}}
+\AtBeginSubsection{\frame{\subsectionpage}}
+
+\defbeamertemplate{section page}{mine}[1][]{%
+  \begin{centering}
+    {\usebeamerfont{section name}\usebeamercolor[fg]{section name}#1}
+    \vskip1em\par
+    \begin{beamercolorbox}[sep=12pt,center]{part title}
+      \usebeamerfont{section title}\insertsection\par
+    \end{beamercolorbox}
+  \end{centering}
+}
+
+\defbeamertemplate{subsection page}{mine}[1][]{%
+  \begin{centering}
+    {\usebeamerfont{subsection name}\usebeamercolor[fg]{subsection name}#1}
+    \vskip1em\par
+    \begin{beamercolorbox}[sep=8pt,center,#1]{part title}
+      \usebeamerfont{subsection title}\insertsubsection\par
+    \end{beamercolorbox}
+  \end{centering}
+}
+
+%template for Q&A slide
+\defbeamertemplate{section page}{questions}[1][]{%
+	\begin{centering}
+		{\usebeamerfont{section name}\usebeamercolor[fg]{section name}#1}
+		\vskip1em\par
+		\begin{beamercolorbox}[sep=12pt,center]{part title}
+			\usebeamerfont{section title}\insertsection\par
+		\end{beamercolorbox}
+	\end{centering}
+}
+
+
+
+\title{Helping Humans and Agents Avoid Undesirable Consequences with
+Models of Intervention}
+\author{Sachini Weerawardhana}
+\institute{Dissertation Defense \\Advisor: Prof. Darrell Whitley}
+\begin{document}
+\maketitle
+
+\input{agenda} %2
+\input{intro} %3
+\input{intro2} %4
+\input{intro4} %5
+\input{intro5} %6
+\input{intro3} %7
+\input{features}  %8
+\input{rush}	 %9
+\input{intro6} %10
+\input{problem}	 %11
+\input{agenda2}%12
+\input{ch3_1} %13
+\input{ch3_3} %14, 15
+\input{ch3_4} %16
+\input{agenda3} %17
+\input{ch4_1} %18
+\input{ch4_2} %19
+\input{ch4_3} %20, 21
+\input{ch4_4} %22
+\input{ch4_5} %23, 24, 25
+\input{agenda4}%26
+\input{ch5_3} %27
+\input{ch5_1} %28
+\input{ch5_5} %29, 30, 31, 32
+\input{ch5_6} %33, 34
+\input{agenda5}%35
+\input{ch5_7} %36
+\input{ch5_2} %37
+\input{ch5_8} %38
+\input{ch5_9} %39
+\input{ch5_10} %40
+\input{ch5_11} %41
+\input{ch5_13} %42
+\input{agenda6} %43
+\input{ch6_1} %44
+\input{ch6_2} %45
+\input{ch6_3} %46
+\input{ch6_4} %47
+\input{ch6_7} %48
+\input{ch6_8} %49
+\input{ch6_9} %50
+\input{ch6_10} %51, 52, 53, 54
+\input{ch6_11} %55
+\input{ch7_1} %56,57
+
+%\input{ch6_5} %46
+%\input{ch6_6} %47
+
+
+
+
+\end{document}

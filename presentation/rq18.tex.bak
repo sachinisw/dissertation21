@@ -1,0 +1,12 @@
+\begin{frame}
+
+Compute features of critical actions (or sequences)
+\begin{itemize}
+\item \textbf{Risk} - Posterior probability of reaching $G_1$, when the user is trying to reach $G_0$
+\item \textbf{Desirability} - Posterior probability of reaching $G_0$, without passing $G_1$
+\item \textbf{Distance to} $G_0$ - Mean number of edges between the root of the tree and $G_0$, which doesn't pass through $G_1$
+\item \textbf{Distance to} $G_1$ - Mean number of edges between the root of the tree and $G_1$
+\item \textbf{Active attack landmarks\%} - From the total number of predicates that must be true in any valid solution to the planning problem $\langle M,G_1\rangle$, how many are true in the current state?
+\end{itemize}
+
+\end{frame}

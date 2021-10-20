@@ -1,0 +1,19 @@
+\begin{frame}{Unhelpful Plan Prefix Recognition - Sampling the Plan Space}
+\begin{itemize}
+\item Instead of computing exact distances and probabilities compute an \textbf{estimated proximity to $G_0$ and $G_1$}
+\item Use an automated planner to find two sets of solutions for $\langle M, G_0\rangle$ and  $\langle M, G_1\rangle$
+\item Compute a \textit{reference plan} $= \lbrace observations + \pi^*\rbrace$, 
+\begin{itemize}
+\item $\pi^*$ - cost optimal plan from the current state to the goal for $G_0$
+\end{itemize}
+\item Compute the ``distances'' between the \textit{reference plan} and the two solution sets
+
+
+\begin{itemize}
+\item Is the reference plan more similar to sampled $G_0$ plans or $G_1$ plans?
+\item Use plan similarity metrics
+\end{itemize}
+
+\end{itemize}
+
+\end{frame}

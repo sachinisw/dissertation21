@@ -1,0 +1,22 @@
+\begin{frame}{Research Question 1: \\Sources of Salient Characteristics}
+\begin{itemize}
+\item Use an automated planner
+\begin{itemize}
+\item What are the different characteristics between solutions \textbf{ obtained from a planner} that contain undesirable moves and solutions that do not?
+\item Propose two recognition algorithms:
+\begin{itemize}
+\item \textbf{Intervention by unhelpful plan prefix recognition}
+\item \textbf{Intervention by critical action recognition}
+\end{itemize}
+\end{itemize}
+\item Use human solvers
+\begin{itemize}
+\item If the human solver found a solution without making any undesirable move, what did he do differently than someone who made an undesirable move?
+\item Propose one recognition algorithm:
+\begin{itemize}
+\item \textbf{Intervention by user behavior classification}
+\end{itemize}
+\end{itemize}
+\end{itemize}
+
+\end{frame}

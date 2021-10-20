@@ -1,0 +1,46 @@
+\begin{frame} {Classifier Performance}
+Reporting $F-score = \frac{TP}{TP+1/2(FP+FN)}$\\
+Matthews Correlation Coefficient (MCC)
+
+\begin{table}[ptb]
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|l|ll|ll|ll|ll|ll|ll|}
+\hline
+\multicolumn{1}{|c|}{\multirow{3}{*}{Domain}} & \multicolumn{6}{c|}{Logistic Regression} & \multicolumn{6}{c|}{K-Nearest} \\ \cline{2-13} 
+\multicolumn{1}{|c|}{} & \multicolumn{2}{c|}{Test Set 1} & \multicolumn{2}{c|}{Test Set 2} & \multicolumn{2}{c|}{Test Set 3} & \multicolumn{2}{c|}{Test Set 1} & \multicolumn{2}{c|}{Test Set 2} & \multicolumn{2}{c|}{Test Set 3} \\ \cline{2-13} 
+\multicolumn{1}{|c|}{} & \multicolumn{1}{l|}{F-score} & MCC & \multicolumn{1}{l|}{F-score} & MCC & \multicolumn{1}{l|}{F-score} & MCC & \multicolumn{1}{l|}{F-score} & MCC & \multicolumn{1}{l|}{F-score} & MCC & \multicolumn{1}{l|}{F-score} & MCC \\ \hline
+\multicolumn{13}{|c|}{Intervention Graph Method} \\ \hline
+\textbf{Blocks-1} & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 \\ \cline{1-1}
+\textbf{Blocks-2} & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 \\ \cline{1-1}
+\textbf{EasyIPC} & .88 & .87 & .88 & .87 & .86 & .86 & 1 & 1 & 1 & 1 & 1 & 1 \\ \cline{1-1}
+\textbf{Ferry} & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 \\ \cline{1-1}
+\textbf{Navigator} & 1 & 1 & 1 & 1 & .99 & .99 & 1 & 1 & .96 & .96 & .99 & .99 \\ \hline
+
+\multicolumn{13}{|c|}{Plan Space Sampling Method} \\ \hline
+\textbf{Blocks-1} & .25 & .33 & .25 & .33 & .25 & .33 & 1 & 1 & 1 & 1 & 1 & 1 \\ \cline{1-1}
+\textbf{Blocks-2} & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 \\ \cline{1-1}
+\textbf{EasyIPC} & .64 & .63 & .46 & .44 & .67 & .66 & .05 & -.04 & .04 & -.03 & .05 & -.02 \\ \cline{1-1}
+\textbf{Ferry} & .31 & .32 & .23 & .22 & 1 & 1 & .33 & .40 & .13 & .15 & .81 & .82 \\ \cline{1-1}
+\textbf{Navigator} & .60 & .59 & .98 & .94 & .97 & .97 & .61 & .65 & 1 & 1 & 1 & 1 \\ \hline
+\end{tabular}%
+}
+\end{table}
+
+\end{frame}
+
+\begin{frame} {Intervention Using Existing Goal Recognition Algorithms}
+RG (LAMA) - Probabilistic goal recognition using a satisificing planner\\
+
+
+\begin{table}[ptb]
+\begin{tabular}{|l|ll|ll|ll|}
+\hline
+\multicolumn{1}{|c|}{\multirow{2}{*}{Domain}} & \multicolumn{2}{c|}{Test Set 1} & \multicolumn{2}{c|}{Test Set 2} & \multicolumn{2}{c|}{Test Set 3} \\ \cline{2-7} 
+\multicolumn{1}{|c|}{} & \multicolumn{1}{c|}{F-score} & \multicolumn{1}{c|}{MCC} & \multicolumn{1}{c|}{F-score} & \multicolumn{1}{c|}{MCC} & \multicolumn{1}{c|}{F-score} & \multicolumn{1}{c|}{Mcc} \\ \hline
+\textbf{Blocks-1} & .38 & .45 & .43 & .49 & .40 & .47 \\ \cline{1-1}
+\textbf{Blocks-2} & 1 & 1 & .9 & .9 & 1 & 1 \\ \cline{1-1}
+\textbf{EasyIPC} & .13 & .05 & .21 & .17 & .23 & .19 \\ \cline{1-1}
+\textbf{Ferry} & .17 & .18 & .22 & .23 & .15 & .17 \\ \hline
+\end{tabular}
+\end{table}
+\end{frame}
